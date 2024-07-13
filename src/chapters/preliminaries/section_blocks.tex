@@ -1,0 +1,79 @@
+\section{Blocks}
+
+A block, also called multi-dimensional interval, is our generalization of intervals. Blocks will mainly appear in two contexts: As the change-set under our alternative hypothesis and in the context of increments of a random field. The increments of a random field will be part of the characterization of Brownian sheets, just like increments of stochastic processes may be used to characterize Brownian motion.
+
+While the following definitions appear in \cite{[0]BUCCHIA2017344}, most of them seem to have been first introduced in \cite{[11]bulinksi2007limittheorems} Section 2.1.
+
+\begin{defn}[Blocks]
+    We call a set of the form 
+    \[ (\mathbf{s}, \mathbf{t}] \coloneqq \{ \mathbf{x} \in \RR^d \mid \mathbf{s}_i < \mathbf{x}_i \leq \mathbf{t}_i \ \forall i \in \{1, ..., d\} \} \]
+    a \textit{block} (in $\RR^d$). A \textit{discrete block} is the intersection of a block (in $\RR^d$) and $\ZZ^d$. If it is clear that a block $U$ is discrete, we also write $U = (\mathbf{s}, \mathbf{t}] \subset \ZZ^d$ for $\mathbf{s}, \mathbf{t} \in \ZZ^d$.
+\end{defn}
+
+\begin{defn}
+    A discrete block $W = (\mathbf{v}, \mathbf{w}]$ is said to belong standardly to another discrete block $U = (\mathbf{s}, \mathbf{t}]$ if $\mathbf{v} = \mathbf{s}$ and $\mathbf{w} \leq \mathbf{t}$. In that case, we write $W \gls*{lhd} U$.
+\end{defn}
+
+\begin{defn}[Increment]
+    Let $X$ be a random field indexed by $[0, 1]^d$ ($\ZZ^d$).
+    The \textit{increment} $X(B)$ of $X$ around a block $\emptyset \neq B = \prod_{i=1}^d (s_i, t_i] \subset [0, 1]^d$ ($\subset \ZZ^d$) is defined by
+    \[ X(B) = \sum\limits_{{\boldsymbol{\epsilon}} \in \{0, 1\}^d} (-1)^{d-\sum\limits_{i=1}^d \epsilon_i} X(\mathbf{s} + {\boldsymbol{\epsilon}} (\mathbf{t} - \mathbf{s})), \]
+    where the multiplication of the vectors ${\boldsymbol{\epsilon}}$ and $\mathbf{t} - \mathbf{s}$ is to be read componentwise. We define the increment around the empty set to be $0$. If $B$ is the disjoint union of blocks $B_1, ..., B_k$, we define the increment of $X$ around $B$ to be the sum of the increments around the individual blocks:
+    \[ X(B) \coloneqq \sum\limits_{j=1}^k X(B_j). \]
+\end{defn}
+
+\begin{remark}
+    One may convince themselves that the increment around a disjoint union of blocks does not depend on the way one chooses the blocks.
+\end{remark}
+
+\begin{remark}
+    The definition of the increment $X(\mathbf{s}, \mathbf{t}]$ can be thought of as an alternating sum of the values of $X$ at the vertices of the block $(\mathbf{s}, \mathbf{t}]$ where the "uppermost" corner $\mathbf{t}$ receives a positive sign and all other signs are defined such that two adjacent vertices have pairwise different signs. Furthermore, the definition is designed such that the partial sum field 
+    \[ S_n(\mathbf{t}) = \frac{1}{n^{d/2}} \sum\limits_{\usbf[1] \leq \mathbf{j} \leq \floor{\mathbf{t} n}} X_\mathbf{j} \]
+    fulfills
+    \begin{equation} \label{partial sum field increment}
+        \frac{1}{n^{d/2}} \sum\limits_{\mathbf{k} < \mathbf{j} \leq \mathbf{m}} X_\mathbf{j} = S_n(\mathbf{k}/n, \mathbf{m}/n]
+    \end{equation}
+    for two vectors $\usbf[0] \leq \mathbf{k} < \mathbf{m} \leq \usbf[n]$. This is due to the fact that $S_n(\cdot)$, considered as a (random) function on blocks, is finitely additive as noted in \cite{[3]Bickel1971ConvergenceCriteria}.
+
+    Also, increments behave well under induction, see the proof of Lemma \ref{deo lemma 2}.
+\end{remark}
+
+
+\begin{defn}[Strongly separated blocks] \label{defn: strongly separated blocks}
+    A collection $(\mathbf{a}^1, \mathbf{b}^1], ..., (\mathbf{a}^m, \mathbf{b}^m]$ of blocks in $[0, 1]^d$ is called \textit{strongly separated} if there is a dimension $j \in \{1, ..., d\}$ such that, potentially after reordering,
+    \[ \mathbf{a}_j^1 < \mathbf{b}_j^1 < \mathbf{a}_j^2 < ... < \mathbf{b}_j^m. \]
+\end{defn}
+
+\begin{figure} \label{figure:strongly separated blocks}
+    \centering
+    %\incfig{Strongly Separated Blocks}
+    \def\svgwidth{0.5\columnwidth} 
+    \input{Graphiken/strongly separated blocks.pdf_tex}
+    \caption{A family of blocks. The subfamily containing blocks 1, 5 and 6 is strongly separated while the one containing blocks 1, 2 and 4 is not. Using the definition of strongly separated blocks in \cite{[0]BUCCHIA2017344} and \cite{[16]deo1975functional}, any subfamily of the above is strongly separated.}
+\end{figure}
+
+\begin{remark} \label{remark:strongly separated blocks}
+    Definition \ref{defn: strongly separated blocks} of strongly separated blocks does not just ensure that the distance between any two blocks is positive, but that there is a dimension in which no two blocks overlap. This is, however, not true in the original definition of strongly separated blocks introduced in \cite{[16]deo1975functional} and later adopted in \cite{[0]BUCCHIA2017344} which we have adjusted considerably. %where the additional condition that no two blocks share the same limit points in one of the dimensions is not assumed. 
+    This can, for example, be seen by considering a collection of blocks of the form
+    \begin{align*} 
+        \left( \begin{pmatrix}a_1^{(1)}\\a_2^{(1)}\end{pmatrix}, \begin{pmatrix}b_1^{(1)}\\b_2^{(1)}\end{pmatrix} \right], \\
+        \left( \begin{pmatrix}a_1^{(1)}\\a_2^{(2)}\end{pmatrix}, \begin{pmatrix}b_1^{(1)}\\b_2^{(2)}\end{pmatrix} \right], \\
+        \left( \begin{pmatrix}a_1^{(2)}\\a_2^{(1)}\end{pmatrix}, \begin{pmatrix}b_1^{(2)}\\b_2^{(1)}\end{pmatrix} \right],
+    \end{align*}
+    which corresponds to the Blocks 1, 2 and 4 in Figure \ref{figure:strongly separated blocks}. Therefore, the proof of Lemma \ref{lemma:3} (Lemma 3 in \cite{[0]BUCCHIA2017344}) only works with our adjusted definition.
+
+    Furthermore, the original definition implicitly demanded that the blocks do not overlap in any dimension, except when the two endpoints respectively coincide in that dimension. This is an issue as the argument at the end of the proof of Lemma \ref{lemma:2} regarding the independence of increments around any collection of pairwise disjoint blocks would not work in that case.
+
+    Note that we prove the results in \cite{[16]deo1975functional} regarding strongly separated blocks in Section \ref{section strongly separated blocks}. See Remark \ref{remark: on proof using strongly separated} in particular.
+\end{remark}
+
+The following definition is used in Lemma \ref{lemma:7} for the implicit long-run variance estimator.
+\begin{defn}
+    For two sets (usually blocks) $B, B' \subset \RR^d$, we write
+    \[ B \gls*{circleddash} B' \coloneqq \{ \mathbf{s} - \mathbf{t} \mid \mathbf{s} \in B, \mathbf{t} \in B' \} \subset \RR^d.  \] %\gls*{circleddash}
+\end{defn}
+The above product of sets is defined such that the following holds:
+\begin{lemma} \label{lemma regarding set product double sum}
+    For a double-indexed sequence $(x_{\mathbf{a}, \mathbf{b}})_{\mathbf{a} \in B, \mathbf{b} \in B'}$, with $B$ and $B'$ finite, one has
+    \[ \sum\limits_{\mathbf{a} \in B} \sum\limits_{\mathbf{b} \in B'} x_{\mathbf{a}, \mathbf{b}} = \sum\limits_{\mathbf{h} \in B' \circleddash B} \sum\limits_{\substack{\mathbf{a}:\\ \mathbf{a} \in B,\\ \mathbf{a}+\mathbf{h} \in B'}} x_{\mathbf{a}, \mathbf{a}+\mathbf{h}}.\]
+\end{lemma}

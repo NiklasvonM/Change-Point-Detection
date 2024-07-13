@@ -1,0 +1,76 @@
+\section{Dependent Wild Bootstrap}
+
+The dependent wild bootstrap, first introduced in \cite{[46]shao2010dwb}, is a generalization of the wild bootstrap introduced in \cite{[53]wu1986}. In the "usual" bootstrap, it is assumed that the samples are independent or at least that the sample size is large enough that the sample represents the underlying population reasonably well. The wild bootstrap was originally developed to deal with heteroscedasticity in the context of regression analysis and may be better suited in case these assumption are not fulfilled: Instead of resampling with replacement, the wild bootstrap does not resample directly, but rather introduces new independent randomness to the residuals via a multiplier field. As the name suggests, in the case of a dependent wild bootstrap, the multiplier field has a non-trivial dependence structure, in contrast to the wild bootstrap. The dependence structure is described by a kernel function.
+
+The following definition is the multivariate generalization of the definition in \cite{bochner1933monotone} chapter 8.
+\begin{defn}[Positive-definite function]
+    A function $f: \RR^d \to \RR$ is called \textit{positive-definite} if it is bounded, continuous, even (in the sense that $f(\mathbf{x}) = f(-\mathbf{x})$ for all $\mathbf{x} \in \RR^d$) and for any $n \in \NN$ and points $\mathbf{x_1}, ..., \mathbf{x_n} \in \RR^d$, the matrix
+    \begin{equation*}
+        (f(\mathbf{x_i} - \mathbf{x_j}))_{i, j \in \{1, ..., n\}}
+    \end{equation*}
+    is positive-definite.
+\end{defn}
+
+\begin{defn}[Kernel function]
+    We call a function $\omega: \RR^d \to \RR$ a \textit{kernel function} (or \textit{lag window} in \cite{brockwell1991time}) if it is positive-definite, $\omega(\usbf[0])=1$ and it satisfies the growth condition
+    \begin{equation} \label{growth condition kernel function}
+        \sum\limits_{-\usbf[n] \leq \mathbf{j} \leq \usbf[n]} \left| \omega\left(\frac{1}{q} \mathbf{j}\right) \right| = O(q^d).
+    \end{equation}
+\end{defn}
+
+\begin{remark}
+   In \cite{[8]BUCCHIA2015104}, the stronger Assumption (W)
+   \begin{equation*}
+        \omega\left( \mathbf{j} \right) = 0 \text{ if } \| \mathbf{j} \|_\infty \geq 1
+   \end{equation*}
+   instead of \eqref{growth condition kernel function} is imposed on the kernel functions. In \cite{[33]lavancier2008VStest} section 3.1, only the Bartlett-kernel is considered (see Example \ref{ex:kernel}). However, the proofs in \cite{[8]BUCCHIA2015104} and \cite{[33]lavancier2008VStest} remain essentially the same with the weaker assumption \eqref{growth condition kernel function}.
+\end{remark}
+
+The following theorem is a special case of the one in \cite{loomis1953introduction} p. 142. The univariate case was originally proven in \cite{bochner1933monotone} Theorem 19. Note that we assume positive-definite functions to take values in $\RR$ instead of in $\CC$. However, characteristic functions are real-valued iff the associated probability measure is symmetric.
+\begin{thm}[Bochner's theorem]
+    A function $f: \RR^d \to \RR$ with $f(\usbf[0]) = 1$ is positive-definite iff it is the characteristic function (Fourier transform) of a symmetric Borel probability measure.
+\end{thm}
+
+The following definition of a dependent multiplier field will be used to bootstrap the residuals $X_\mathbf{i} - \hat{\mu}(\mathbf{i})$ where $\hat{\mu}$ is an estimator of the mean function, see Section \ref{section:statistical test}.
+\begin{defn}[Dependent multiplier field]
+    Given a random field $X = (X_\mathbf{i})_{\mathbf{i} \in I}$, $I \subset \ZZ^d$, we call a real-valued, centered, Gaussian random field $(V_{n}(\mathbf{i}))_{\mathbf{i} \in I}$ a \textit{dependent multiplier field with bandwith $q=q_n$ and kernel function $\omega$} if it is independent of the observations $X$ and
+    \begin{equation} \label{dependent multiplier field covariance omega}
+        \Cov\left(V_{n}(\mathbf{i}), V_{n}(\mathbf{j})\right) = \omega\left(\frac{1}{q} (\mathbf{i}-\mathbf{j})\right)
+    \end{equation}
+    for all $\mathbf{i}, \mathbf{j} \in I$.
+\end{defn}
+
+\begin{remark} \label{remark:kernel and dependent multiplier field}
+    \begin{aufzii}
+        \item In the definition of the dependent multiplier field, we have $I = \{1, ..., n\}^d$ in mind.
+        \item Later on, we will only be interested in a bandwidth $q_n = o(\sqrt{n})$ with $q_n \to \infty$, see Theorem \ref{theorem2}.
+        \item In both \cite{[8]BUCCHIA2015104} Chapter 3.1 and \cite{[33]lavancier2008VStest} Chapter 4.2 (in the context of testing for long memory in random fields), it is argued that the choice of a smaller bandwith $q_n$ leads to higher rejection rates of the Null Hypothesis. As the simulations in \cite{[0]BUCCHIA2017344} suggest that the here considered bootstrap test seems to overreject the Null Hypothesis for finite samples, it seems that a good choice of bandwidth is $q_n = \Omega(n^{\frac{1}{2}-\delta})$ with $\delta \in (0, \frac{1}{2})$ close to $0$.
+        \item For bandwidth $q_n$ with $O(n) \subset O(q_n)$, the Growth Condition \eqref{growth condition kernel function} is always satisfied as $\omega$, being positive-definite, is assumed to be bounded, hence \[ \sum\limits_{-\usbf[n] \leq \mathbf{j} \leq \usbf[n]} \left|\omega\left(\frac{1}{q} \mathbf{j}\right)\right| \leq \sum\limits_{-\usbf[n] \leq \mathbf{j} \leq \usbf[n]} C = O(n^d) \subset O(q_n^d). \] for some constant $C > 0$.
+        \item Unlike \cite{[8]BUCCHIA2015104} and \cite{[0]BUCCHIA2017344}, we explicitly demand that a kernel function is positive-definite. This assumption ensures and is required so that such Gaussian dependent multiplier field exists, see \cite{schlather2012constructioncovariancefunction}. In fact, the kernel function (together with the mean which we assume to be $0$) characterizes the distribution of the Gaussian random field according to \cite{bishop2006pattern} Section 6.4.1.
+        \item The grf function in the package geoR \cite{geoR} of the R programming language implements sampling from such dependent multiplier field for dimensions $d = 1, 2$.
+    \end{aufzii}
+\end{remark}
+
+\begin{ex}[Kernel functions] \label{ex:kernel}
+    \begin{aufzii}     
+        \item Let
+        \[ \mathrm{si}: \RR \to \RR, x \mapsto \begin{cases} sin(x)/x, & x \neq 0 \\ 0, & x = 0  \end{cases}. \]
+        Then $x \mapsto \mathrm{si}(x/2)$ is the characteristic function of the uniform distribution on $[-1, 1]$.
+        \item The Bartlett-kernel, defined by 
+        \begin{equation*}
+            \mathbf{x} \mapsto \prod_{k = 1}^d \mathbbm{1}_{| \mathbf{x}_k| < 1} (1 - | \mathbf{x}_k|),
+        \end{equation*}
+        is one of the most popular choices (e.g., it is one of the lag windows discussed in \cite{brockwell1991time} p. 360 and the only one considered in \cite{[33]lavancier2008VStest}). In the univariate case, it is the characteristic function of $x \mapsto \mathrm{si}^2(x/2)$.
+        \item Indicator functions of the form $\omega = 1_{[-\usbf[a], \usbf[a]]}$ are in general \emph{not} kernel functions: Consider the case $d=1$, $a = 1$, $n = 3$, $q = \sqrt[4]{n}$. Then one has
+        \[ \left(\omega\left( \frac{1}{q} (i - j) \right)\right)_{i, j = 1, ..., n} = \begin{pmatrix}
+            1  & 1 & 0 \\ 1 & 1 & 1 \\ 0 & 1 & 1
+        \end{pmatrix}. \]
+        This matrix is, however, not positive-definite as it has the eigenvalue $1 - \sqrt{2}$ with corresponding eigenvector $(1, -\sqrt{2}, 1)^t$.
+
+        \item Let $\omega$ be the rescaled density of a multivariate normal distribution with diagonal covariance matrix $\Sigma = \lambda I_{d}$, $\lambda > 0$, i.e.
+        \[ \omega(\mathbf{x}) = \exp\left(-\frac{1}{2} \mathbf{x}^t \Sigma^{-1} \mathbf{x} \right). \]
+        This is the Fourier transform of a multivariate normal distribution. The fact that this function is positive-definite is shown in \cite{schoenberg1938positivedefinite} (without refering to Bochner's theorem). Also $\omega(\usbf[0]) = 1$ and $\omega$ is symmetric.
+        According to \cite{[0]BUCCHIA2017344}, it fulfills the Growth Condition \eqref{growth condition kernel function}.
+    
+    \end{aufzii}
+\end{ex}

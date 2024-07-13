@@ -1,0 +1,99 @@
+\chapter{Tensor Products} \label{appendix:tensorproduct}
+
+This chapter serves to give a brief introduction to tensor products which are needed in order to define the covariance of Hilbert space valued random elements. It is mainly based on \cite{ryan2002banach}, \cite{kadisonringrose1997fundamentalsofoperatoralgebras} and \cite{weidmann1980linear}.
+
+\begin{defn}[Tensor product of vector spaces]
+    Let $V$ and $W$ be two (possibly infinite-dimensional) $\RR$-vector spaces. Let $F(V, W)$ be the $\RR$-vector space spanned by $V \times W$, i.e., every pair $(v, w) \in V \times W$ is a basis element of $F(V, W)$. Furthermore, consider the linear subspace $N$ of $F(V, W)$ spanned by elements of the form
+    \begin{aufzii}
+        \item $(v_1 + v_2, w) - (v_1, w) - (v_2, w)$,
+        \item $(v, w_1 + w_2) - (v, w_1) - (v, w_2)$,
+        \item $(\lambda v, w) - \lambda (v, w)$,
+        \item $(v, \lambda w) - \lambda (v, w)$
+    \end{aufzii}
+    with vectors $v, v_1, v_2 \in V$, $w, w_1, w_2 \in W$ and a scalar $\lambda \in \RR$. The \textit{(algebraic) tensor product} $V \gls*{otimes} W$ is constructed as the quotient vector space $F(V, W) / N$. The image of the projection of $(v, w)$ onto $V \otimes W$ is denoted $v \otimes w$. We call elements of the form $v \otimes w$ \textit{simple tensors}.
+\end{defn}
+
+\begin{remark}
+    \begin{aufzi}
+        \item Every element of a tensor product space is a linear combination of simple tensors.
+        \item The tensor product is constructed so that $\otimes: V \times W \to V \otimes W$ is bilinear in the sense that
+        \begin{aufzii}
+            \item $(v_1 + v_2) \otimes w = v_1 \otimes w + v_2 \otimes w$,
+            \item $v \otimes (w_1 + w_2) = v \otimes w_1 + v \otimes w_2$,
+            \item $(\lambda v) \otimes w = \lambda (v \otimes w) = v \otimes (\lambda w)$
+        \end{aufzii}
+        for $v, v_1, v_2 \in V$, $w, w_1, w_2 \in W$, $\lambda \in \RR$.
+        \item The dimension of the tensor product $V \otimes W$ is the product of the dimensions of $V$ and $W$ as cardinal numbers. In particular, if $V$ and $W$ are separable Hilbert spaces, then $V \otimes W$ is also separable.
+    \end{aufzi}
+\end{remark}
+
+Tensor products of Hilbert spaces themselves carry a Hilbert space structure. The following construction is taken from \cite{weidmann1980linear} Chapter 3.4.
+\begin{defn}[Tensor product of Hilbert spaces] \label{defn:tensor product hilbert}
+    Let $H_1$ and $H_2$ be two Hilbert spaces with respective inner products $\langle \cdot, \cdot \rangle_1$ and $\langle \cdot, \cdot \rangle_2$. Then the inner product $\langle \cdot, \cdot \rangle_{H_1 \otimes H_2}: H_1 \otimes H_2 \times H_1 \otimes H_2 \to \RR$ defined via
+    \[ \left\langle \sum\limits_{i=1}^n c_i f_i \otimes g_i, \sum\limits_{j=1}^m c_j' f_j' \otimes g_j' \right\rangle_{H_1 \otimes H_2} \coloneqq \sum\limits_{i=1}^n \sum\limits_{j=1}^m c_i c_j' \langle f_i, f_j' \rangle_1 \langle g_i, g_j' \rangle_2. \]
+    turns the algebraic tensor product $H_1 \otimes H_2$ into a pre-Hilbert space. The completion of $H_1 \otimes H_2$ under the metric induced by $\langle \cdot, \cdot \rangle_{H_1 \otimes H_2}$, denoted $H_1 \gls*{hatotimes} H_2$, is called the \textit{(complete) tensor product} of the Hilbert spaces $H_1$ and $H_2$.
+\end{defn}
+
+\begin{defn}[Weak Hilbert-Schmidt mapping] \label{defn:weak Hilbert Schmidt mapping}
+    Let $H_1$, $H_2$ and $H$ be Hilbert spaces. A \textit{weak Hilbert-Schmidt mapping} is a bounded bilinear map \[ L: H_1 \times H_2 \to H \] for which a real number $\alpha \in \RR$ exists such that
+    \begin{equation}
+        \sum\limits_{i \in I} \sum\limits_{j \in J} \left| \left\langle L(e_i, f_j), h \right\rangle \right|^2 \leq \alpha^2 \| h \|^2
+    \end{equation}
+    for all $h \in H$ and some orthonormal basis $(e_i)_{i \in I}$ of $H_1$ and $(f_j)_{j \in J}$ of $H_2$.
+\end{defn}
+
+The following theorem is due to \cite{kadisonringrose1997fundamentalsofoperatoralgebras} Theorem 2.6.4.
+\begin{thm}[Universal property of the tensor product] \label{thm:universal_property_tensor_product}
+    There is a weak Hilbert-Schmidt mapping
+    \[ \hat{\otimes}: H_1 \times H_2 \to H_1 \hat{\otimes} H_2 \]
+    such that for any weak Hilbert-Schmidt mapping
+    \[ L: H_1 \times H_2 \to H \]
+    to a Hilbert space $H$, there is a unique bounded linear operator
+    \[ T: H_1 \hat{\otimes} H_2 \to H \]
+    such that the following diagram commutes: \\
+    % https://tikzcd.yichuanshen.de/#N4Igdg9gJgpgziAXAbVABwnAlgFyxMJZABgBpiBdUkANwEMAbAVxiRAAkACAHW7wFt4ndiAC+pdJlz5CKAEzkqtRizZdeEAUJHjJ2PASIK5S+s1aIQvfnRwALAEYPgAJVFilMKAHN4RUABmAE4Q-EhkIDgQSAogDHQOMAwAClIGsiBBWN52OCDUZqqWvDgwAB44wADGEDTuuiDBoeHUUUgAjNTxiSlpMmwMMAF5BSoWVtyaWIIIDU1hiJ2R0Yix3Ump+v2WWTkjyuZsJVgMsMAl5ZU1dfUUokA
+    \adjustbox{scale=1,center}{\begin{tikzcd}%[/tikz/column 4/.append style={nodes={anchor=base west}}]
+        H_1 \times H_2 \arrow[rrdd, "L"'] \arrow[rr, "\hat{\otimes}"] &  & H_1 \hat{\otimes} H_2 \arrow[dd, "T"] \\ % & \ni \Cov(Y, Z)
+                                                                 &  &                                               \\
+                                                                 &  & H                                  
+    \end{tikzcd} \\}
+    Moreover,
+    \begin{equation} \label{equality of norms in universal property}
+        \| T \|_{\mathrm{op}} = \| L \|_2
+    \end{equation}
+    with
+    \[ \| L \|_2 \coloneqq \inf \{ \alpha \geq 0 \mid \sqrt{\sum\limits_{i \in I} \sum\limits_{j \in J} |\langle L(e_i, f_j), u \rangle |^2} \leq \alpha \| u \| \ \forall u \in H \} \]
+    for orthonormal basis $(e_i)_{i \in I}$ of $H_1$ and $(f_j)_{f \in J}$ of $H_2$.
+    If $H = \RR$, this simplifies to
+    \[ \| L \|_2 = \sqrt{\sum\limits_{i \in I} \sum\limits_{j \in J} L(e_i, f_j)^2}. \]
+\end{thm}
+
+\begin{remark}
+    The construction of the tensor product $H_1 \hat{\otimes} H_2$ in the proof of \cite{kadisonringrose1997fundamentalsofoperatoralgebras} Theorem 2.6.4 is not the one we presented in Definition \ref{defn:tensor product hilbert}. However, the equivalence of the two constructions is remarked on page 125 in \cite{kadisonringrose1997fundamentalsofoperatoralgebras}.
+    See also \cite{weidmann1980linear} Exercise 7.15.(b) or \cite{treves2006topological} Theorem 48.3, which state that one may identify $H_1' \hat{\otimes} H_2$ with the space $B_2(H_1, H_2)$ of Hilbert-Schmidt operators from $H_1$ into $H_2$. $H_1'$ here denotes the dual space of $H_1$.
+\end{remark}
+
+\begin{ex} \label{ex:isomorphism tensor product Rp}
+    The algebraic tensor product $\RR^k \otimes \RR^l$ is isomorphic to the vector space $\RR^{k \times l}$ of $k \times l$-matrices. Isomorphisms are given via (the linear continuation of)
+    \begin{equation*}
+        \varphi: \RR^k \otimes \RR^l \to \RR^{k \times l}, a \otimes b \mapsto (a_i b_j)_{i, j}
+    \end{equation*}
+    and
+    \begin{equation*}
+        \varphi^{-}: \RR^{k \times l} \to \RR^k \otimes \RR^l, (x_{ij})_{i, j} \mapsto \sum\limits_{i = 1}^k \sum\limits_{j = 1}^l x_{ij} (e_i \otimes e_j),
+    \end{equation*}
+    see \cite{ryan2002banach} chapter 1.5. 
+    
+    As $\RR^{k \times l}$ is complete, the algebraic tensor product $\RR^k \otimes \RR^l$ and complete tensor product $\RR^k \hat{\otimes} \RR^l$ are equal up to isomorphism.
+
+    By vectorizing matrices, we can calculate their inner product: Let $n=m=kl$, $f_i = f_i' = e_{(i \ \mathrm{mod} \ k)+1}$ and $g_i = g_i' = e_{(i \ \mathrm{mod} \ l)+1}$. Then we have 
+    \[ \left\{(f_i, g_i) \mid i=1,...,n \right\} = \left\{(e_i, e_j) \mid i=1, ..., k, j=1, ..., l\right\}. \]
+    If we identify matrices $A = (a_{i, j}), B = (b_{i, j}) \in \RR^{k \times l}$ with their images under $\varphi^{-}$, their inner product $\langle A, B \rangle$ is
+    \begin{align*} 
+        \langle A, B \rangle 
+        & = \sum\limits_{i=1}^n \sum\limits_{j=1}^m  a_{(i \ \mathrm{mod} \ k)+1, (i \ \mathrm{mod} \ l)+1} b_{(j \ \mathrm{mod} \ k)+1, (j \ \mathrm{mod} \ l)+1} \langle e_i, e_j\rangle \langle e_{i}, e_{j} \rangle \\
+        & = \sum\limits_{i=1}^n a_{(i \ \mathrm{mod} \ k)+1, (i \ \mathrm{mod} \ l)+1} b_{(j \ \mathrm{mod} \ k)+1, (j \ \mathrm{mod} \ l)+1} \\
+        & = \sum\limits_{i=1}^k \sum\limits_{j=1}^l a_{i, j} b_{i, j}.
+    \end{align*}
+    This inner product therefore coincides with the Frobenius inner product, which is an example of a so-called Hilbert-Schmidt inner product.
+\end{ex}

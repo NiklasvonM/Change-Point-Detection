@@ -1,0 +1,14 @@
+\section{Generalization}
+
+\label{section:onedim:generalization}
+
+In the following chapters, we will generalize the previously discussed results in a variety of ways: 
+\begin{aufzi}
+    \item The observations are no longer assumed to be independent but rather weakly dependent, see Assumptions \ref{assumption:rho_mixing}, \ref{assumption:alpha2_summability} and \ref{assumption:alpha1_summability} in Section \ref{section:assumptions}.
+    \item We replace "time" with "space", i.e., the index set of our observations is $\NN^{\gls*{d}}$ instead of $\NN$. For technical reasons, namely to make use of the notion of stationarity, we will assume that the observations come from a random field that lives on $\ZZ^d$. This seems to be standard practice, see, e.g., \cite{brockwell1991time} Chapter 1.3 Remark 3. From now on, if we refer to the "time" $n$, we are not talking about the index of the random field itself; we rather imagine that we have observed the values of $X$ on the index set $\{1, ..., n\}^d$.
+    \item The observations are multivariate, taking values in some $\RR^p$.
+    \item We are no longer only interested in changes in the mean but rather in all changes in the distribution - even in changes in, say, the dependence structure of the marginal distributions.
+\end{aufzi}
+While the third generalization causes relatively few problems, the first two require a lot of machinery. The step from stochastic processes to random fields is not always as straightforward as a simple induction over the dimension $d$.
+
+The last point of the above requires a "trick" which we will explain in Section \ref{subsection:general setup}. This "trick" will have us consider countably-infinite-dimensional Hilbert spaces. These will be approximated by their finite-dimensional subspaces.

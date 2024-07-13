@@ -1,0 +1,140 @@
+\section{Main Results}
+
+In this section, we state the theorems formulated in \cite{[0]BUCCHIA2017344} and their corollaries regarding the convergence of the test statistic and the resulting performance of our test procedure. We will prove the corollaries immediately. The proofs of the two theorems will be prepared and carried out in the next chapter.
+
+\begin{thm}[FCLT] \label{theorem1}
+    Let $X = (X_j)_{j \in \ZZ^d}$ be an $H$-valued random field satisfying the Assumptions \ref{assumption:stationarity}, \ref{assumption:rho_mixing}, \ref{assumption:2+delta_moment} and \ref{assumption:alpha1_summability}. Denote $\EE{X_{\usbf[1]}} = \mu$.
+    Then we have the functional central limit theorem
+    \[
+        S_n \coloneqq \left( \frac{1}{n^{\frac{d}{2}}} \sum\limits_{\usbf[1] \leq \mathbf{i} \leq \floor*{n \mathbf{t}}} (X_{\mathbf{i}} - \mu) \right)_{\mathbf{t} \in [0, 1]^d} \Rightarrow W
+    \]
+    in $D_H[0, 1]^d$, where $W = (W(\mathbf{t}))_{t \in [0, 1]^d}$ is a Brownian sheet in $H$ with covariance operator $\Gamma$% \in \mathscr{S}(H)$
+    , defined by
+    \begin{equation} \label{theorem1: definitionGamma}
+        \left\langle \Gamma x, y \right\rangle
+        = \sum\limits_{\mathbf{v} \in \ZZ^d}
+            \EE{ \langle X_{\usbf[0]} - \mu, x \rangle \left\langle X_{\mathbf{v}} - \mu, y \right\rangle}
+        , \ x, y \in H. 
+    \end{equation}
+    Furthermore, the series in \eqref{theorem1: definitionGamma} converges absolutely.
+\end{thm}
+
+\begin{corollary}[Asymptotic test statistic] \label{corollary:change in mean test}
+    Under the Null Hypothesis \ref{hyp:0_general}, the test statistic $T_n$ converges weakly in $\RR$ to the statistic
+    \[ T \coloneqq \sup\limits_{\usbf[0] \leq \mathbf{s} \leq \mathbf{t} \leq \usbf[1]} \left\| W(\mathbf{s}, \mathbf{t}] - [\mathbf{t} - \mathbf{s}] W(\usbf[1]) \right\| \]
+    where $W$ is the Brownian sheet defined in Theorem \ref{theorem1}. 
+\end{corollary}
+\begin{proof}
+    The Null Hypothesis \ref{hyp:0_general} implies the assumptions of Theorem \ref{theorem1}.
+    Without loss of generality, we may assume that the random field $X$ is centered. By Equation \eqref{partial sum field increment}, we have
+    \begin{align*}
+        T_n
+        & = \frac{1}{n^{d/2}} \max\limits_{\usbf[0] \leq \mathbf{k} < \mathbf{m} \leq \usbf[n]} \left\| \sum\limits_{\mathbf{k} < \mathbf{i} \leq \mathbf{m}} {}_{n}X_\mathbf{i} - \frac{[\mathbf{m}-\mathbf{k}]}{n^d} \sum\limits_{\usbf[1] \leq \mathbf{i} \leq \usbf[n]} {}_{n}X_\mathbf{i} \right\| \\
+        & = \max\limits_{\usbf[0] \leq \mathbf{k} < \mathbf{m} \leq \usbf[n]} \left\| S_n(\mathbf{k}/n, \mathbf{m}/n] - \frac{[\mathbf{m}-\mathbf{k}]}{n^d} S_n(0, 1] \right\| \\
+        & = \sup\limits_{\usbf[0] \leq \mathbf{s} < \mathbf{t} \leq \usbf[1]} \left\| S_n(\floor{\mathbf{s} n}/n, \floor{\mathbf{t} n}/n] - \frac{\floor{\mathbf{t} n} - \floor{\mathbf{s} n }}{n^d} S_n(1) \right\|
+    \end{align*}
+    To formally verify the weak convergence
+    \begin{equation} \label{corollary test statistic convergence proof: one weak convergence}
+        S_n(\floor{\mathbf{s} n}/n, \floor{\mathbf{t} n}/n] \Rightarrow W(\mathbf{s}, \mathbf{t}] 
+    \end{equation}
+    in $H$, let $f: H \to \RR$ be any continuous, bounded function.
+    Note that as blocks are characterized by two points (their lower and upper corner), the block-valued random elements $S_n(\cdot)$ and $W(\cdot)$ can be seen as random fields indexed by the subset 
+    \[ I \coloneqq \{ \mathbf{i} \in [0, 1]^{2d} \mid \mathbf{i}_j \leq \mathbf{i}_{j+1} \text{ if } i \text{ is odd} \} \]
+    of $[0, 1]^{2d}$ in which the odd indices represent the lower corner and the even ones represent the upper corner.
+    Define the (deterministic) functions
+    \begin{align*}
+        g_n: \ & I \to \RR, x \mapsto \EE{f(S_n(x))}, \\
+        g\ :  \ & I \to \RR, x \mapsto \EE{f(W(x))}.
+    \end{align*}
+    As $W$ has almost surely continuous sample paths (both the original Brownian sheet by definition and the incremental version as a finite linear combination of the original one), $g$ is continuous. Furthermore, due to the weak convergence of $S_n$ to $W$, $g_n$ converges uniformly to $g$.
+    Identifying blocks with elements of the index-set $I$, the sequence of blocks 
+    \[ a_n \coloneqq (\floor{\mathbf{s} n}/n, \floor{\mathbf{t} n}/n] \]
+    converges to the block $a \coloneqq (\mathbf{s}, \mathbf{t}]$. Combining these facts, we get the convergence
+    \[ \lim\limits_{n \to \infty} g_n(a_n) = g(a). \]
+    As $f$ was an arbitrary continuous and bounded function, this shows the weak convergence \eqref{corollary test statistic convergence proof: one weak convergence}.
+    
+    The weak convergence 
+    \[ \frac{\floor{\mathbf{t} n} - \floor{\mathbf{s} n }}{n^d} S_n(1) \Rightarrow [\mathbf{t} - \mathbf{s}] W(\usbf[1]) \]
+    is a simple application of Slutsky's theorem together with Theorem \ref{theorem1}.
+    The claim finally follows from the continuous mapping theorem.
+\end{proof}
+
+The following result applies Corollary \ref{corollary:change in mean test} to the procedure introduced in Section \ref{subsection:general setup}.
+\begin{corollary} \label{corollary:change in distribution test}
+    Let $X$ take values in $\RR^p$. Under the Null Hypothesis \ref{hyp:0_general}, the test statistic
+    \begin{equation}
+        T_{n}^w \coloneqq \frac{1}{n^{d/2}} \max\limits_{\usbf[0] \leq \mathbf{k} \leq \mathbf{m} \leq \usbf[n]} \sqrt{\int\limits_{\RR^p}  \left( \sum\limits_{\mathbf{k} < \mathbf{i} \leq \mathbf{m}} \mathbbm{1}_{\{{}_{n}X_\mathbf{i} \leq \mathbf{x}\}}  - \frac{[\mathbf{m} - \mathbf{k}]}{n^d} \sum\limits_{\usbf[1] \leq \mathbf{i} \leq \usbf[n]} \mathbbm{1}_{\{{}_{n}X_\mathbf{i} \leq \mathbf{x}\}} \right)^2 w(\mathbf{x}) d\mathbf{x}  } 
+    \end{equation}
+    converges weakly in $\RR$ to
+    \[ T^w \coloneqq \sup\limits_{\usbf[0] \leq \mathbf{s} \leq \mathbf{t} \leq \usbf[1]} \left\| W(\mathbf{s}, \mathbf{t}] - [\mathbf{t} - \mathbf{s}] W(\usbf[1]) \right\| \]
+    where $W$ is a Brownian sheet in $L^2(\RR^p, w)$ with covariance operator $\Gamma$ defined by
+    \[ \left\langle \Gamma x, y \right\rangle
+    = \sum\limits_{\mathbf{k} \in \ZZ^d}
+        \EE{ \int\limits_{\RR^p} \left( \mathbbm{1}_{\{ X_{\usbf[0]} \leq \mathbf{t} \}} - F(\mathbf{t}) \right) x(\mathbf{t}) w(\mathbf{t}) d\mathbf{t} \int\limits_{\RR^p} \left( \mathbbm{1}_{ \{ X_{\mathbf{k}} \leq \mathbf{t} \}} - F(\mathbf{t}) \right) y(\mathbf{t}) w(\mathbf{t}) d\mathbf{t} } \]
+    for $x, y \in L^2(\RR^p, w)$.
+\end{corollary}
+\begin{proof}
+    We need to show that the $L^2(\RR^p, w)$-valued random field 
+    \[ \mathbbm{1}_{ \{ X \leq \cdot \}} = (\mathbbm{1}_{ \{ X_{\mathbf{i}} \leq \cdot \}})_{\mathbf{i}} \]
+    satisfies the assumptions of the Null Hypothesis \ref{hyp:0_general}. Assumptions \ref{assumption:stationarity}, \ref{assumption:rho_mixing}, \ref{assumption:alpha1_summability} and \ref{assumption:alpha2_summability} regarding stationarity, the $\rho$-mixing condition and the summability of the $\alpha$-mixing coefficients are fulfilled as $\mathbbm{1}_{ \{ X \leq \cdot \}}$ is a function of $X$ and $X$ satisfies these assumptions.
+    The existence of moments condition \ref{assumption:4+2delta_moment} is satisfied even if it is not satisfied by $X$ because
+    \[ \EE{\| \mathbbm{1}_{ \{ X_{\mathbf{i}} \leq \cdot \}} \|^{k} } = \EE{\left( \ \int\limits_{\RR^p} {\mathbbm{1}_{ \{ X_{\mathbf{i}} \leq \mathbf{t} \}}}^2 w(\mathbf{t}) d\mathbf{t} \right)^{k/2}} \leq \left( \ \int\limits_{\RR^p} w(\mathbf{t}) d\mathbf{t} \right)^{k/2} < \infty \]
+    for any moment $k$ due to the integrability assumption of the positive weight function $w$.
+\end{proof}
+
+
+\begin{remark}
+    The test statistic $T^w_n$ in Corollary \ref{corollary:change in distribution test} resembles both the Cramér-von Mises test statistic as an integral over a squared difference as well as the two-sided Kolgmorov-Smirnov test as the maximum of the distance between two empirical distribution functions.
+    See Remark \ref{remark:onedim_KolmogorovSmirnov} and \cite{vaart_1998} Chapter 19.3.
+\end{remark}
+
+The following is \cite{[0]BUCCHIA2017344} Theorem 2.
+\begin{thm}[Bootstrap FCLT] \label{theorem2}
+    Let Assumptions \ref{assumption:stationarity}, \ref{assumption:rho_mixing}, \ref{assumption:4+2delta_moment} and \ref{assumption:alpha2_summability} hold. Let
+    \[ (V_{n, 1}(\mathbf{i}))_{\usbf[1] \leq \mathbf{i} \leq \usbf[n]}, \ldots, (V_{n, K}(\mathbf{i}))_{\usbf[1] \leq \mathbf{i} \leq \usbf[n]}, \ K \in \NN, \]
+    be independent copies of the same dependent multiplier field. Assume that the bandwidth $q = q_n$ fulfills $q_n \to \infty$ and $q_n = o(\sqrt{n})$. Then the bootstrapped partial sum fields $S_{n, 1}^{*}, \ldots, S_{n, K}^{*}$ satisfy
+    \begin{equation*} 
+        (S_n, S_{n, 1}^{*}, \ldots S_{n, K}^{*}) \Rightarrow (W, W_1^{*}, \ldots, W_K^{*})
+    \end{equation*}
+    in $\left(D_H[0, 1]^d\right)^{K+1}$ where $S_n$ is the partial sum field of $X$ and $W_1^{*}, \ldots, W_K^{*}$ are independent copies of the Hilbert space valued Brownian sheet $W$ from Theorem \ref{theorem1}.
+\end{thm}
+
+The following two corollaries capture the asymptotic properties of the test procedure.
+\begin{corollary}[Type I error rate] \label{corollary type I error rate}
+    For any given significance level $0 < \alpha < 1$, the type I error rate of the test approaches $\alpha$ in the sense that
+    \[ \lim\limits_{K \to \infty} \lim\limits_{n \to \infty} \PP(T_n \geq q_{n, K}^{\star}(1-\alpha)) = \alpha \]
+    under the Null Hypothesis \ref{hyp:0_general}.
+\end{corollary}
+\begin{proof}
+    Using Theorem \ref{theorem2}, this will follow immediately from Proposition \ref{proposition: type I error bootstrap}.
+\end{proof}
+
+\begin{corollary}[Statistical power] \label{statistical power of the test}
+    For any number of bootstraps $K$, the power of the test defined in Section \ref{section:statistical test} approaches $1$ as $n$ approaches infinity.
+\end{corollary}
+\begin{proof}
+    Assume the Alternative \ref{hyp:a_general}. One can bound the test statistic from below via
+    \begin{align*}
+        T_n
+        &= \frac{1}{n^{d/2}} \max\limits_{\usbf[0] \leq \mathbf{k} < \mathbf{m} \leq \usbf[n]} \left\| \sum\limits_{\mathbf{k} < \mathbf{i} \leq \mathbf{m}} {}_{n}X_\mathbf{i} - \frac{[\mathbf{m}-\mathbf{k}]}{n^d} \sum\limits_{\usbf[1] \leq \mathbf{i} \leq \usbf[n]} {}_{n}X_\mathbf{i} \right\| \\
+        & \geq \frac{1}{n^{d/2}} \left\| \sum\limits_{{}_{n}\mathbf{l} < \mathbf{i} \leq {}_{n}\mathbf{u}} {}_{n}X_\mathbf{i} - \frac{[{}_{n}\mathbf{u}-{}_{n}\mathbf{l}]}{n^d} \sum\limits_{\usbf[1] \leq \mathbf{i} \leq \usbf[n]} {}_{n}X_\mathbf{i} \right\|.
+    \end{align*}
+    By rewriting ${}_{n}X$ in terms of the stationary version $\Tilde{X}$ and the shift $\Delta$ and using the reverse triangle inequality, we see that this is bounded from below by
+    \begin{align*}
+        \frac{1}{n^{\frac{d}{2}}} \left(1 - \frac{c(n)}{n^d}\right) c(n) \| \Delta \|_w - \frac{1}{n^{\frac{d}{2}}} \left\| \sum\limits_{\mathbf{k} < \mathbf{i} \leq \mathbf{m}} \Tilde{X}_\mathbf{i} - \frac{[\mathbf{m}-\mathbf{k}]}{n^d} \sum\limits_{\usbf[1] \leq \mathbf{i} \leq \usbf[n]} \Tilde{X}_\mathbf{i} \right\| \eqqcolon Y_n - U_n.
+    \end{align*}
+    %The right term $U_n$ is bounded from above by $T_n\left(\Tilde{X}\right)$. 
+    Ap\-ply\-ing Corol\-lary \ref{corollary:change in mean test}, $(U_n)_n$ is a sequence that is bounded from above by the weakly converging sequence $\left(T_n\left(\Tilde{X}\right)\right)_n$. Rewriting the left term as 
+    \[ Y_n = \frac{c(n)}{n^d} \left(1 - \frac{c(n)}{n^d}\right) \| \Delta \|_w n^{d/2} \]
+    and applying the change set size convergence assumption \eqref{change set size restriction}, this behaves asymptotically like
+    \begin{equation} \label{asymptotic lower bound Tn}
+        \gamma (1 - \gamma) \| \Delta \|_w n^{d/2}
+    \end{equation}
+    which diverges to infinity. Now let $0 < \alpha < 1$ be an arbitrary significance level. Using Lemma \ref{lemma: probability one diverging sequence}, this shows
+    \[ \lim\limits_{n \to \infty} \PP(T_n \geq g_{n, K}^\star(1-\alpha)) \geq \lim\limits_{n \to \infty} \PP(Y_n \geq g_{n, K}^\star(1-\alpha) + U_n) = 1. \]
+\end{proof}
+
+\begin{remark} \label{remark:convergence n-d2 Tn}
+    Using \eqref{asymptotic lower bound Tn}, it is possible to see that $n^{-d/2} T_n$ has the asymptotic lower bound \[ \gamma (1-\gamma) \| \Delta \|_w \] under the Alternative \ref{hyp:a_general}.
+    This suggests that the test has the greatest power if $\gamma = 0.5$, i.e., if the size of the change set is half the number of observations, as this value maximizes the function $\gamma \mapsto \gamma (1-\gamma)$.
+\end{remark}

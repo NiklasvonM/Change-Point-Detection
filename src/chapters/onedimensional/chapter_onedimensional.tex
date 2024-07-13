@@ -1,0 +1,22 @@
+\chapter{Change in Mean Detection for Univariate Independent Observations}
+
+\label{chapter:onedim}
+
+This chapter serves to give an intuition behind the topics covered. Therefore, we are for now considering the case $d=p=1$, i.e., the random field is a stochastic process taking values in $\RR$. Furthermore, we impose the strong condition that the observations are independent and we only test for changes in the mean.
+
+It turns out that this special case of Theorem \ref{theorem1} can be thought of as an extension of Donsker's theorem \ref{thm:donsker} which itself can be thought of as a generalization of the central limit theorem.
+
+\begin{thm}[Donsker's Theorem] \label{thm:donsker}
+    Let $X = (X_i)_{i \in \NN}$ be a sequence of i.i.d. random variables that take values in $\RR$ with mean $\mu$ and variance $\sigma^2 > 0$. Define the partial sum process
+    \[ S_n \coloneqq \frac{1}{\sqrt{n}} \sum_{i=1}^n (X_i - \mu) \]
+    and the rescaled random walk $W_n$ via
+    \[ W_n(t) \coloneqq \frac{1}{\sqrt{n}} S_{\floor*{nt}}, \ t \in [0, 1]. \]
+    Then, for each $n$, $W_n$ is a random variable in the Skorokhod space $\mathcal{D}[0, 1]$ and the sequence $(\frac{1}{\sigma}W_n)_n$ converges in distribution to a standard Brownian motion $W$ on $[0, 1]$.
+\end{thm}
+\begin{proof}
+    The original proof may be found in \cite{donsker1951invariance}.
+\end{proof}
+
+\input{chapters/onedimensional/section_model_and_results.tex}
+
+\input{chapters/onedimensional/section_generalization.tex}

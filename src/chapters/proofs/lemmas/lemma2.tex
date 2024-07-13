@@ -1,0 +1,83 @@
+This lemma is \cite{[0]BUCCHIA2017344} Lemma 2. 
+The assumptions were originally based off of those of \cite{[4]billingsley1968convergence} Theorem 19.2.
+\begin{lemma} \label{lemma:2}
+    Let $\Sigma \in \RR^{k \times k}$ be a symmetric, positive-semidefinite matrix and let $W_n = (W_n(\mathbf{t}))_{\mathbf{t} \in [0, 1]^d}$ be a sequence of random fields with càdlàg sample paths in $\RR^k$, i.e., they are elements of $D_{\RR^k}([0, 1]^d)$. Assume additionally
+    \begin{aufzi}
+        \item $\lim\limits_{n \to \infty} \EE{W_n(\mathbf{t})} = \usbf[0]$,
+        \item $\lim\limits_{n \to \infty} \Cov(W_n(\mathbf{t})) = [\mathbf{t}] \Sigma \ \forall \mathbf{t} \in [0, 1]^d,$
+        \item $\{ \|W_n(\mathbf{t})\|^2 \mid n \in \NN \}$ is uniformly integrable for all $\mathbf{t} \in [0, 1]^d$,
+        \item for any collection of strongly separated blocks $B_1, ..., B_p$, the increments of $W_n$ around these blocks are asymptotically independent.
+        \item  
+        \begin{equation} \label{lemma2:tightness assumption}
+            \forall \epsilon > 0 \ \forall \eta > 0 \ \exists \delta > 0 \ \exists n_0 \in \NN \ \forall n \geq n_0: \PP(w(W_n, \delta) > \epsilon) < \eta
+        \end{equation}
+    \end{aufzi}
+    Then $W_n$ converges weakly in $D_{\RR^k}([0, 1]^d)$ to a Brownian sheet in $\RR^k$ with covariance operator (i.e., covariance matrix) $\Sigma$.
+\end{lemma}
+\begin{proof}
+    We first show that for any vector ${\boldsymbol{\gamma}} \in \RR^k$, the real-valued random fields $W_n^{\boldsymbol{\gamma}}$ defined by
+    \[ W_n^{\boldsymbol{\gamma}}(\mathbf{t}) \coloneqq {\boldsymbol{\gamma}}^T W_n(\mathbf{t}) \]
+    converge weakly to a Brownian sheet $W^{\boldsymbol{\gamma}}$ in $\RR$ with covariance operator (i.e., variance) ${\boldsymbol{\gamma}}^T \Sigma {\boldsymbol{\gamma}} \in \RR$. As $\Sigma$ is positive-semidefinite by assumption, we either have ${\boldsymbol{\gamma}}^T \Sigma {\boldsymbol{\gamma}} = 0$ or ${\boldsymbol{\gamma}}^T \Sigma {\boldsymbol{\gamma}} > 0$. The first case is trivial. For the second case, we will apply Lemma \ref{deo lemma 3} to the normed random field \[ N_n^{\boldsymbol{\gamma}} \coloneqq \left({\boldsymbol{\gamma}}^T \Sigma {\boldsymbol{\gamma}} \right)^{-1/2} W_n^{\boldsymbol{\gamma}}. \] 
+    \begin{aufzii}
+        \item By linearity of the expectation, we have
+        \[ \EE{N_n^{\boldsymbol{\gamma}}(\mathbf{t})} = \left({\boldsymbol{\gamma}}^T \Sigma {\boldsymbol{\gamma}} \right)^{-1/2} {\boldsymbol{\gamma}}^T \EE{W_n(\mathbf{t})} \]
+        which converges to $0$ by assumption. For the variance, we have
+        \begin{align*}
+            \Var(N_n^{\boldsymbol{\gamma}}(\mathbf{t})) 
+            & = \left({\boldsymbol{\gamma}}^T \Sigma {\boldsymbol{\gamma}} \right)^{-1} \Var({\boldsymbol{\gamma}}^T W_n(\mathbf{t})) \\
+            & =  \left({\boldsymbol{\gamma}}^T \Sigma {\boldsymbol{\gamma}} \right)^{-1} {\boldsymbol{\gamma}}^T \Cov(W_n(\mathbf{t})) {\boldsymbol{\gamma}} \\
+            & \to \left({\boldsymbol{\gamma}}^T \Sigma {\boldsymbol{\gamma}} \right)^{-1} {\boldsymbol{\gamma}}^T ([\mathbf{t}]\Sigma) {\boldsymbol{\gamma}} \\
+            & = [\mathbf{t}].
+        \end{align*}
+        \item Using Cauchy-Schwarz, we get
+        \[ \|N_n^{\boldsymbol{\gamma}}(\mathbf{t})\|^2 \leq \left({\boldsymbol{\gamma}}^T \Sigma {\boldsymbol{\gamma}} \right)^{-1} \| {\boldsymbol{\gamma}} \|^2 \| W_n(\mathbf{t}) \|^2. \]
+        The uniform integrability of the set $\{ \|N_n^{\boldsymbol{\gamma}}(\mathbf{t})\|^2 \mid n \in \NN \}$ for all $\mathbf{t}$ therefore follows from the uniform integrability of $\{ W_n(\mathbf{t})\|^2 \mid n \in \NN  \}$ which holds by assumption.
+        \item Now let $H_1, ..., H_p$ be a collection of Borel sets in $\RR$. Denote left multiplication with ${\boldsymbol{\gamma}}^T$ by $f_{\boldsymbol{\gamma}}$ and write
+        \[ {\boldsymbol{\gamma}}' \coloneqq \left({\boldsymbol{\gamma}}^T \Sigma {\boldsymbol{\gamma}} \right)^{-1/2} {\boldsymbol{\gamma}}. \]
+        Due to the continuity of $f_{{\boldsymbol{\gamma}}'}$, the sets $f_{{\boldsymbol{\gamma}}'}^{-1}(H_i)$ are Borel sets in $\RR^k$. Let $B_1, ..., B_p$ be a collection of strongly separated blocks in $[0, 1]^d$. Then we have
+        \begin{align*}
+            & \PP(N_n^{\boldsymbol{\gamma}}(B_i) \in H_i \forall i) - \prod\limits_{i=1}^p \PP(N_n^{\boldsymbol{\gamma}}(B_i) \in H_i) \\
+            & = \PP(W_n(B_i) \in f_{{\boldsymbol{\gamma}}'}^{-1}(H_i) \forall i) - \prod\limits_{i=1}^p \PP(W_n(B_i) \in f_{{\boldsymbol{\gamma}}'}^{-1}(H_i)).
+        \end{align*}
+        The above converges to $0$ by assumption, meaning that the increments of $N_n^{\boldsymbol{\gamma}}$ around the blocks $B_i$ are asymptotically independent.
+        \item Condition (iv) of Lemma \ref{deo lemma 3} follows from Assumption \eqref{lemma2:tightness assumption} together with
+        \[ | N_n^{\boldsymbol{\gamma}}(\mathbf{t}) - N_n^{\boldsymbol{\gamma}}(\mathbf{s}) | = | {\boldsymbol{\gamma}}'^T (W_n(\mathbf{t}) - W_n(\mathbf{s})) | \leq \| {\boldsymbol{\gamma}}' \| \| W_n(\mathbf{t})-W_n(\mathbf{s})\| \]
+        where we have once more used Cauchy-Schwarz.
+    \end{aufzii}
+    As $f_{{\boldsymbol{\gamma}}'}$ is a continuous function, it maps $D_{\RR^k}[0,1]^d$ to $D_{\RR}[0,1]^d$. Hence we may apply Lemma \ref{deo lemma 3} to see that $N_n^{\boldsymbol{\gamma}}$ converges weakly in $D_{\RR}[0,1]^d$ to the Brownian sheet $({\boldsymbol{\gamma}}^T \Sigma {\boldsymbol{\gamma}}) W^{\boldsymbol{\gamma}}$ with covariance operator $1 \in \RR$.
+
+    \cite{[4]billingsley1968convergence} Theorem 15.5 tells us that \eqref{lemma2:tightness assumption} ensures the tightness of the sequences $(W_n^{e_i})_n$, meaning that for every $\epsilon > 0$, there is a $M_\epsilon > 0$ such that
+    \begin{equation} \label{lemma2:tightness condition of coordinate processes} 
+        \PP(\|W_n^{e_i}\|_\infty > M_\epsilon/\sqrt{k}) \leq \epsilon/k 
+    \end{equation}
+    for every $i = 1, ..., k$. Define the norm $\| \cdot \|_{\infty, 2}$ on $D_{\RR^k}[0,1]^d$ by
+    \[ \| x \|_{\infty, 2} \coloneqq \left( \sum\limits_{i=1}^k \|x_i\|_\infty^2 \right)^{1/2}. \]
+    The Skorokhod metric $d_S$ on $D_{\RR^k}[0,1]^d$ is bounded from above by the metric induced by $\| \cdot \|_{\infty, 2}$ and therefore sets that are compact with respect to $\| \cdot \|_{\infty, 2}$ are compact with respect to $d_S$. Hence if the sequence $W_n$ is tight with respect to $\| \cdot \|_{\infty, 2}$, it is also tight with respect to the Skorokhod metric $d_S$. And it is indeed tight with respect to $\| \cdot \|_{\infty, 2}$ as we have
+    \begin{align*} 
+        \PP(\| W_n \|_{\infty, 2} > M_\epsilon) 
+        & = \PP\left( \left( \sum\limits_{i=1}^k \|W_n^{e_i}\|_\infty^2 \right)^{1/2} > M_\epsilon \right) \\
+        & \leq \PP\left( \max\limits_{i} \|W_n^{e_i}\|_\infty^2 > M^2_\epsilon/k \right) \\
+        & \leq \sum\limits_{i=1}^k \PP\left( \|W_n^{e_i}\|_\infty > M_\epsilon/\sqrt{k}  \right) \\
+        & \leq \epsilon
+    \end{align*}
+    where we have used Boole's inequality and \eqref{lemma2:tightness condition of coordinate processes}. Using Prokhorov's theorem, we may find a weakly convergent subsequence $(W_{n_m})_m$. Call the weak limit of this subsequence $W$. On the one hand, we know $W_{n_m}^{\boldsymbol{\gamma}} \Rightarrow W^{\boldsymbol{\gamma}}$. On the other hand, the continuous mapping theorem ensures $W_{n_m}^{\boldsymbol{\gamma}} \Rightarrow {\boldsymbol{\gamma}}^T W$. Therefore, $W^{\boldsymbol{\gamma}}$ and ${\boldsymbol{\gamma}}^T W$ coincide in distribution.
+
+    We now only need to show that $W$ is a Brownian sheet in $\RR^k$ with covariance operator $\Sigma$ because any converging subsequence of $(W_n)_n$ has the same weak limit. $W$ is almost surely continuous because the same holds for its coordinate processes $W^{e_i}$. The same reasoning shows that if one of the components of $\mathbf{t} \in [0,1]^d$ is zero, then $W(\mathbf{t})$ is zero.
+    As $W$ has almost surely continuous sample paths, the projection maps
+    \[ \pi_{\mathbf{t}^1, ..., \mathbf{t}^l}: C_{\RR^k}[0,1]^d \to \left(\RR^k\right)^l, x \mapsto \left(x\left(\mathbf{t}^1\right), ...x\left(\mathbf{t}^l\right)\right) \]
+    are almost surely continuous. By the continuous mapping theorem, this shows the convergence of the finite-dimensional distributions of $W_{n_m}$ and therefore the convergence of the increments of $W_{n_m}$ around blocks.
+    Any increment $W(B)$ of $W$ around a block $B$ has a centered Gaussian distribution with covariance $\lambda(B) \Sigma$ since the coordinates of $W(B)$ are centered Gaussian and
+    \[ \sum\limits_{i=1}^k {\boldsymbol{\gamma}}_i W^{e_i}(B) = W^{{\boldsymbol{\gamma}}}(B) \]
+    is centered Gaussian with variance $\lambda(B) {\boldsymbol{\gamma}}^T \Sigma {\boldsymbol{\gamma}}$. To show that $W$ is a Brownian sheet in $\RR^k$, it only remains to show that the increments of $W$ around disjoint blocks $B_1, ..., B_l$ are independent. In the case that the blocks are strongly separated, from the weak convergence
+    \[ (W_{n_m}(B_1), ..., W_{n_m}(B_l)) \stackrel{m}{\Rightarrow} (W(B_1), ..., W(B_l))   \]
+    it follows for vectors $\mathbf{y}_1, ..., \mathbf{y}_l \in \RR^k$ that
+    \begin{align*}
+        \PP(W(B_j) \leq \mathbf{y}_j \, \forall j) 
+        & = \lim\limits_{m \to \infty} \PP(W_{n_m}(B_j) \leq \mathbf{y}_j \, \forall j) \\
+        & = \lim\limits_{m \to \infty} \left( \PP(W_{n_m}(B_j) \leq \mathbf{y}_j \, \forall j) - \prod\limits_{j=1}^l \PP(W_{n_m}(B_j) \leq \mathbf{y}_j) \right) \\
+        & + \prod\limits_{j=1}^l \lim\limits_{m \to \infty} \PP(W_{n_m}(B_j) \leq \mathbf{y}_j).
+    \end{align*}
+    Since the increments of $W_n$ around strongly separated blocks are asymptotically independent by Assumption d), the first term is $0$. The second term is
+    \[ \prod_{j=1}^l \PP(W(B_j) \leq \mathbf{y}_j). \]
+    Therefore, the increments of $W$ around strongly separated blocks are independent. The almost sure continuity of $W$ yields the independence of increments around any collection of pairwise disjoint blocks, see also the proof of \cite{[4]billingsley1968convergence} Theorem 19.2.
+\end{proof}

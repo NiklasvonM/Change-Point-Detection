@@ -1,0 +1,147 @@
+
+\begin{proof}[Proof of Theorem \ref{theorem1}]
+    We first show that the series
+    \[ \sum\limits_{\mathbf{v} \in \ZZ^d} \EE{ \left\langle X_{\usbf[0]} - \mu, x \right\rangle \left\langle X_{\mathbf{v}} - \mu, y \right\rangle}
+    , \ x, y \in H \]
+    defined in \eqref{theorem1: definitionGamma} converges absolutely.
+    By replacing $X$ with $X - \mu$, we may assume $\mu = 0$ without loss of generality.
+    We may choose an orthonormal basis 
+    \[ E_{x, y} = E = (e_i)_{i \in I} \] 
+    of $H$ such that the set
+    \[ J = \{ i \in I \mid \langle x, e_i \rangle \neq 0 \lor \langle y, e_i \rangle \neq 0 \} \]
+    is finite. By writing
+    \begin{align*}
+        & \frac{1}{\|x\| \|y\|} \sum\limits_{\mathbf{v} \in \ZZ^d} | \EE{\langle X_{\usbf[0]}, x \rangle \langle X_\mathbf{v}, y \rangle }| \\
+        & \leq \frac{1}{\|x\| \|y\|} \sum\limits_{\mathbf{v} \in \ZZ^d} \sum\limits_{i \in J} \sum\limits_{j \in J} | \EE{\langle X_{\usbf[0]}, \langle x, e_i \rangle e_i \rangle \langle X_\mathbf{v}, \langle y, e_j \rangle e_j \rangle }| \\
+        & \leq \sum\limits_{i \in J} \sum\limits_{j \in J} \sum\limits_{\mathbf{v} \in \ZZ^d}  | \EE{\langle X_{\usbf[0]}, e_i \rangle \langle X_\mathbf{v}, e_j \rangle }|,
+    \end{align*}
+    we can see that it suffices to show that \eqref{theorem1: definitionGamma} converges absolutely for the case $x = e_i$, $y = e_j$. To this end, let $k \in \NN$ be large enough such that $j \leq k$ for all $e_j \in J$ and define the $\RR^k$-valued random field 
+    \[ X^{(k)} \coloneqq (p^{(k)}(X_\mathbf{j}))_{\mathbf{j} \in \ZZ^d} \] 
+    where
+    \[ p^{(k)}: H \to \RR^k, h \mapsto \begin{pmatrix} \langle h, e_1 \rangle \\ ... \\ \langle h, e_k \rangle \end{pmatrix}. \]
+    Because of 
+    \begin{align*}
+        \EE{X^{(k)}_\mathbf{j}} 
+         = \EE{\begin{pmatrix} \langle X_\mathbf{j}, e_1 \rangle \\ ... \\ \langle X_\mathbf{j}, e_k \rangle \end{pmatrix}} %\\
+         = \begin{pmatrix} \langle \EE{X_\mathbf{j}}, e_1 \rangle \\ ... \\ \langle \EE{X_\mathbf{j}}, e_k \rangle \end{pmatrix} %\\
+         =  \begin{pmatrix} \langle 0, e_1 \rangle \\ ... \\ \langle 0, e_k \rangle \end{pmatrix} %\\
+         =  0_{\RR^k},
+    \end{align*}
+    $X^{(k)}$ is centered. As a measurable transform of $X$, the random field $X^{(k)}$ also satisfies Assumptions \ref{assumption:rho_mixing} and \ref{assumption:alpha1_summability}, see Remark \ref{rem:mixing coefficients smaller for transform}.
+    $X^{(k)}$ is also (both strictly and weakly) stationary, satisfying Assumption \ref{assumption:weak_stationarity}: Let $\mathbf{t}_1, ..., \mathbf{t}_k$ index time, $k \in \NN$, let ${\boldsymbol{\tau}} \in \ZZ^d$ be a shift in time and let $B_1, ..., B_k$ be arbitrary Borel-sets in $\RR$. Then we have, due to the measurability of $p^{(k)}$ and the stationarity of $X$:
+    \begin{align*}
+        \PP\left( (X^{(k)}_{\mathbf{t}_1+{\boldsymbol{\tau}}}, ..., X^{(k)}_{\mathbf{t}_k+{\boldsymbol{\tau}}}) \in \prod\limits_{i}^k B_i \right)
+        & = \PP\left( (p^{(k)}(X_{\mathbf{t}_1+{\boldsymbol{\tau}}}), ..., p^{(k)}(X_{\mathbf{t}_k+{\boldsymbol{\tau}}})) \in \prod\limits_{i}^k B_i \right) \\
+        & = \PP\left( (X_{\mathbf{t}_1+{\boldsymbol{\tau}}}, ..., X_{\mathbf{t}_k+{\boldsymbol{\tau}}}) \in \prod\limits_{i}^k (p^{(k)})^{-1}(B_i) \right) \\
+        & = \PP\left( (X_{\mathbf{t}_1}, ..., X_{\mathbf{t}_k}) \in \prod\limits_{i}^k (p^{(k)})^{-1}(B_i) \right) \\
+        & = \PP\left( (X^{(k)}_{\mathbf{t}_1}, ..., X^{(k)}_{\mathbf{t}_k}) \in \prod\limits_{i}^k B_i \right).
+    \end{align*}
+    Lastly, $X^{(k)}$ has finite $(\delta+2)$-moments, in particular satisfying Assumption \ref{assumption:2+delta_moment_sup}, because of Cauchy-Schwarz and the fact that $X$ has finite $(2+\delta)$-moments:
+    \begin{align*}
+        \EE{\|X^{(k)}_\mathbf{j}\|^{2+\delta}} 
+        & = \EE{\left( \sum\limits_{i=1}^k \langle X_\mathbf{j}, e_i \rangle^2 \right)^{\frac{2+\delta}{2}}} \\
+        & \leq \EE{\left( \sum\limits_{i \in I} \langle X_\mathbf{j}, e_i \rangle^2 \right)^{\frac{
+        2+\delta}{2}}} \\
+        & = \EE{\|X_\mathbf{j}\|^{2+\delta}} \\
+        & < \infty.
+    \end{align*}
+    We have now shown all the conditions of Lemma \ref{lemma:3}. Hence we may conclude that $X^{(k)}$ satisfies the functional central limit theorem
+    \[ \left( \frac{1}{n^{d/2}} \sum\limits_{\usbf[1] \leq \mathbf{j} \leq \floor{n \mathbf{t}}} X^{(k)}_\mathbf{j} \right)_{\mathbf{t} \in [0,1]^d} \Rightarrow W^{(k)} \]
+    in $D_{\RR^k}[0,1]^d$ for a Brownian sheet $W^{(k)}$ in $\RR^k$ with covariance operator
+    \begin{align*}
+        \Gamma^{(k)}
+        & = \sum\limits_{\mathbf{v} \in \ZZ^d} \Cov(X^{(k)}_{\usbf[0]}, X^{(k)}_{\mathbf{v}}) \\
+        & = \sum\limits_{\mathbf{v} \in \ZZ^d} \left(\EE{\langle X_{\usbf[0]}, e_i \rangle \langle X_\mathbf{v}, e_j \rangle}\right)_{i,j=1, ..., k}
+    \end{align*}
+    and this series converges absolutely. As it sufficed to show the case $x = e_i$, $y = e_j$, we have shown that the series defined in \eqref{theorem1: definitionGamma} converges absolutely.
+
+    For the second part of the proof let $k \in \NN$ be arbitrary. We will apply Lemma \ref{lemma:4} in order to show that
+    \[ P_k S_n \stackrel{n}{\Rightarrow} P_k W \stackrel{k}{\Rightarrow} W \]
+    implies our claim
+    \[ S_n \stackrel{n}{\Rightarrow} W. \]
+    The following table shows the correspondence between the variable names of that lemma and the ones we will use in this proof:
+    \begin{center}
+        \begin{tabular}{|c | c|} 
+         \hline
+         Lemma \ref{lemma:4} & Theorem \ref{theorem1} \\ [0.5ex] 
+         \hline\hline
+         $K$ & $1$ \\ 
+         \hline
+         $X_n = (X_{n, 1}, ..., X_{n, K})$ & $S_n(\mathbf{t})$ \\
+         \hline
+         $r$ & $2+\delta$ \\
+         \hline
+         $X_i^k$, $i = 1, ..., K$ & $W^{(k)}$ \\ 
+         \hline
+         $X_i$, $i = 1, ..., K$ & $W$ \\ 
+         \hline
+         $S_i^k$, $i = 1, ..., K$ & $\Gamma^{(k)}$ \\ 
+         \hline
+         $S_i$, $i = 1, ..., K$ & $\Gamma$ \\  %[1ex] 
+         \hline
+        \end{tabular}
+    \end{center}
+
+    By identifying the two Hilbert spaces $H_k \coloneqq P_k H$ and $\RR^k$, we can reuse the FCLT of $X^{(k)}$ that we have just proven, showing Condition \eqref{lemma 4: first convergence} of \ref{lemma:4}
+    \begin{equation*} %\label{theorem 1: weak convergence projected partial sum field} 
+        S_n^{(k)} \coloneqq P_k S_n \stackrel{n}{\Rightarrow} W^{(k)} = P_k W
+    \end{equation*}
+    in $D_{H_k}[0,1]^d$. 
+
+    %By Lemma \ref{lemma covariance operator of projected brownian sheet}, $W^{(k)}$ has the covariance operator $S_k = P_k S P_k$.
+    We now show Condition \eqref{lemma 4: second convergence}. Define $W^i \coloneqq (\langle W_\mathbf{t}, e_i \rangle)_{\mathbf{t} \in [0,1]^d}$. Using Parseval's identity, we have
+    \begin{align*}
+        \sup\limits_{\mathbf{t} \in [0,1]^d} \| W_\mathbf{t}-W^{(k)}_\mathbf{t}\|^2
+        & = \sup\limits_{\mathbf{t} \in [0,1]^d} \sum\limits_{i \geq k+1} \langle W_\mathbf{t}, e_i \rangle^2 = \sup\limits_{\mathbf{t} \in [0,1]^d} \sum\limits_{i \geq k+1} W^i_\mathbf{t}
+    \end{align*}
+    and therefore
+    \begin{align*}
+        \EE{\sup\limits_{\mathbf{t} \in [0,1]^d} \| W_\mathbf{t}-W^{(k)}_\mathbf{t}\|^2} 
+        & = \EE{\sup\limits_{\mathbf{t} \in [0,1]^d} \sum\limits_{i \geq k+1} (W^i_\mathbf{t})^2} \\
+        & \leq \sum\limits_{i \geq k+1} \EE{\sup\limits_{\mathbf{t} \in [0,1]^d} (W^i_\mathbf{t})^2}.
+    \end{align*}
+    Since $W^i$ is a Brownian sheet in $\RR$, we may apply Cairoli's Strong $(2, 2)$ Inequality, found in \cite{[30]khoshnevisan2002multiparameter} Theorem 2.3.2 in Chapter 7, (using Theorem 2.4.1 in that same chapter to see that $W^i$ is a martingale with respect to its history) to the nonnegative submartingale $|W^i|$ to get
+    \begin{align*}
+        \sum\limits_{i \geq k+1} \EE{\sup\limits_{\mathbf{t} \in [0,1]^d} (W^i_\mathbf{t})^2}
+        & \leq \sum\limits_{i \geq k+1} \left( \frac{2}{2-1} \right)^{2d} \EE{ (W^i_{\usbf[1]})^2} \\
+        & = 4^d \sum\limits_{i \geq k+1} \EE{ (W^i_{\usbf[1]})^2}.
+    \end{align*}
+    The fact that $\Gamma$ is the covariance operator of $W$ implies
+    \[ \EE{\langle W_{\usbf[1]}, e_i \rangle \langle W_{\usbf[1]}, e_i \rangle} = \langle \Gamma e_i, e_i \rangle. \]
+    Combining the above, we get
+    \[ \EE{\sup\limits_{\mathbf{t} \in [0,1]^d} \| W_\mathbf{t}-W^{(k)}_\mathbf{t}\|^2} \leq 4^d \sum\limits_{i \geq k+1} \langle \Gamma e_i, e_i \rangle. \]
+    As the series in \eqref{theorem1: definitionGamma} converges absolutely, the above right-hand side is finite and thus
+    \[ \lim\limits_{k \to \infty} \EE{\sup\limits_{\mathbf{t} \in [0,1]^d} \| W_\mathbf{t}-W^{(k)}_\mathbf{t}\|^2} = 0, \]
+    i.e.,
+    \[ \sup\limits_{\mathbf{t} \in [0,1]^d} \| W_\mathbf{t}-W^{(k)}_\mathbf{t}\|^2 \to 0 \]
+    in probability and in particular $W^{(k)} \Rightarrow W$ in $D_H[0,1]^d$, showing \eqref{lemma 4: second convergence}.
+
+    Let $X^{(-k)}_\mathbf{j} \coloneqq X_\mathbf{j} - X^{(k)}_\mathbf{j}$. We have 
+    \begin{align*}  
+        \|X^{(-k)}_\mathbf{j}\|
+        & = \| \sum\limits_{i \geq k+1} \langle X_\mathbf{j}, e_i \rangle e_i  \| \\
+        & = \sqrt{\sum\limits_{i \geq k+1} \| \langle X_\mathbf{j}, e_i \rangle e_i \|^2} \\
+        & = \sqrt{\sum\limits_{i \geq k+1} \langle X_\mathbf{j}, e_i \rangle^2} \\
+        & \to 0 
+    \end{align*}
+    almost surely and therefore, using the dominated convergence theorem with the dominating random variable $\| X_{\usbf[1]} \|$ which is integrable by Assumption \ref{assumption:2+delta_moment},
+    \begin{equation} \label{proof thm 1: convergence max -k X to 0} 
+        \max(\EE{\| X^{(-k)}_{\usbf[1]} \|^{2+\delta}}, \EE{\| X^{(-k)}_{\usbf[1]} \|^2}) \to 0. 
+    \end{equation}
+    We can apply \eqref{lemma1:(9)} in Lemma \ref{lemma:1} to the random field $X^{(-k)}$ and the block $U = (\usbf[0], \usbf[n]]$ to obtain that
+    \begin{align*}
+        \EE{\sup\limits_{\mathbf{t} \in [0,1]^d} \| S_n(\mathbf{t})-S^{(k)}_n(\mathbf{t})\|^{2+\delta}}
+        & = \EE{\sup\limits_{\mathbf{t} \in [0,1]^d} \left\| \frac{1}{n^{d/2}} \sum\limits_{\usbf[1] \leq \mathbf{j} \leq \floor*{n \mathbf{t}}} X_\mathbf{j}^{(-k)} \right\|^{2+\delta}} \\
+        & = \left(\frac{1}{n^{d/2}}\right)^{2+\delta} \EE{\max\limits_{W \lhd U} \left\| \sum\limits_{\mathbf{j} \in W} X_\mathbf{j}^{(-k)} \right\|^{2+\delta}}
+    \end{align*}
+    is bounded from above by
+    \[ D_{d, 2+\delta} B_{d, 2+\delta, \rho_{X^{(-k)}}} \left( \sup\limits_{\mathbf{j} \in \NN^d} \EE{\| X^{(-k)}_\mathbf{j}\|^{2+\delta}} + \left( \sup\limits_{\mathbf{j} \in \NN^d} \EE{\|X^{(-k)}_\mathbf{j}\|^2} \right)^\frac{2+\delta}{2} \right). \]
+    As $X$, and therefore also $X^{(-k)}$, is stationary, we can leave out the suprema and see that the above equals
+    \begin{align*} 
+        & D_{d, {2+\delta}} B_{d, 2+\delta, \rho_{X^{(-k)}}} \left( \EE{\| X^{(-k)}_{\usbf[1]}\|^{2+\delta}} + \left( \EE{\|X^{(-k)}_{\usbf[1]}\|^2} \right)^\frac{{2+\delta}}{2} \right) \\
+        & \leq D_{d, {2+\delta}} B_{d, 2+\delta, \rho_{X}} \left( \EE{\| X^{(-k)}_{\usbf[1]}\|^{2+\delta}} + \left( \EE{\|X^{(-k)}_{\usbf[1]}\|^2} \right)^\frac{{2+\delta}}{2} \right),
+    \end{align*}
+    which converges to $0$ according to \eqref{proof thm 1: convergence max -k X to 0}.
+    Having now shown all conditions of Lemma \ref{lemma:4}, the proof is finished.
+\end{proof}
+

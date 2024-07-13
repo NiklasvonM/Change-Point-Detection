@@ -1,0 +1,15 @@
+The following result is Proposition F.1 in \cite{[9]}.
+
+\begin{proposition} \label{proposition: type I error bootstrap}
+    For any integer $K \geq 1$, assume that there exists random variables $T_{n}, T_{n, 1}^{\star}, ..., T_{n, K}^{\star}$ such that
+    \[ (T_{n}, T_{n, 1}^{\star}, ..., T_{n, K}^{\star}) \overset{w}{\to} (T, T_1^\star, ..., T_K^\star), \]
+    where $T$, the weak limit of $T_n$, is a continuous random variable and $T_1^\star, ..., T_K^\star$ are independent copies of $T$. 
+    Then, for any significance level $\alpha \in (0, 1)$,
+    \begin{equation}
+        \lim\limits_{K \to \infty} \lim\limits_{n \to \infty} \PP(T_n \geq q_{n, K}^\star(1-\alpha)) = \alpha.
+    \end{equation}
+    where $q_{n, K}^\star$ denotes the sample quantile function defined in \eqref{defn:sample quantile}.
+\end{proposition}
+\begin{proof}[Proof Idea]
+    Firstly, one only considers the case that $\alpha$ is irrational as the empirical distribution functions $\hat{F}_{n, K}$ are not continuous in $\alpha = k/K$, $k = 1, ..., K$. Due to the right-continuity of empirical distribution functions, it suffices to show the weak convergence of $\hat{F}_{n, K}$ to to empirical distribution function $\hat{F}_{K}$ calculated from $T_1^\star, ..., T_K^\star$. This is accomplished using the continuous mapping theorem and the Portmanteau theorem. The convergence of $\hat{F}_K$ is shown using the Glivenko-Cantelli theorem. The case $\alpha \in \QQ$ then follows by continuity.
+\end{proof}

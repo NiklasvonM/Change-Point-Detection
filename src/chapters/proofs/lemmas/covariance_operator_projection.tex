@@ -1,0 +1,27 @@
+\begin{lemma} \label{lemma covariance operator of projected brownian sheet}
+    Let $W$ be a Brownian sheet in $H$ with covariance operator $S$. For any $k \in \NN$, the $\RR^k$-valued Brownian sheet
+    \[ W^{(k)} = (P_k W(\mathbf{t}))_{\mathbf{t} \in [0,1]^d} \]
+    then has covariance operator
+    \[ S^{(k)} \coloneqq P_k S P_k: \RR^k \to \RR^k. \]
+\end{lemma}
+\begin{proof}
+    Let $B$ be any block in $[0, 1]^d$. We only need to show that the increment $W^{(k)}(B)$ has covariance operator $\lambda(B) S^{(k)}$, i.e.,
+    \[ \EE{\langle W^{(k)}(B), h_1 \rangle \langle W^{(k)}(B), h_2 \rangle} = \langle \lambda(B) S^{(k)} h_1, h_2 \rangle \]
+    for all vectors $h_1, h_2 \in \RR^k$. Using the fact $P_k$ is linear, the increments $(P_k W)(B)$ and $P_k (W(B))$ coincide. Therefore
+    \begin{align*}
+        \EE{\langle W^{(k)}(B), h_1 \rangle \langle W^{(k)}(B), h_2 \rangle}
+        & = \EE{\langle (P_k W)(B), h_1 \rangle \langle (P_k W)(B), h_2 \rangle} \\
+        & = \EE{\langle P_k (W(B)), h_1 \rangle \langle P_k (W(B)), h_2 \rangle} \\
+        & = \EE{\langle P_k (W(B)), h_1 \rangle \langle P_k (W(B)), h_2 \rangle}.
+    \end{align*}
+    As orthonogal projections are self-adjoint, the above is equal to
+    \begin{align*}
+        \EE{\langle W(B), P_k h_1 \rangle \langle W(B), P_k h_2 \rangle}.
+    \end{align*}
+    Because $S$ is the covariance operator of $W$, we get
+    \begin{align*}
+        \EE{\langle W(B), P_k h_1 \rangle \langle W(B), P_k h_2 \rangle} 
+        & = \langle \lambda(B) S (P_k h_1), P_k h_2 \rangle \\
+        & = \langle \lambda(B) (P_k S P_k) h_1, h_2 \rangle.
+    \end{align*}
+\end{proof}

@@ -1,0 +1,99 @@
+The following result is \cite{[0]BUCCHIA2017344} Lemma 1. It is a type of Rosenthal inequality, cf. \cite{rosenthal1970} Theorem 3.
+It will allow us to, in some sense, uniformly bound the expected values of rescaled averages over blocks from above. This fact will be used in Lemma \ref{lemma:3} to show uniform integrability of higher moments of the partial sum fields. As an exception, we for now consider the random field $X$ to be indexed by $\NN^d$ as one does not need the technical assumption that there are negative-indexed observations.
+We will show a similar inequality for the bootstrapped partial sum process later on in Lemma \ref{lemma:6}.
+
+\begin{lemma} \label{lemma:1}
+    Let $(X_{\mathbf{k}})_{\mathbf{k} \in \NN^d}$ an $H$-valued centered (i.e., $\EE{X_\mathbf{k}} = 0_{H}$ for all $\mathbf{k}$) random field satisfying Assumption \ref{assumption:rho limit smaller 1}.
+    Then for all $r \geq 2$, there exists some constant $B_{d, r, \rho} > 0$ that does not depend on $X$ and is monotonously increasing in the third argument such that for any finite set $S \subset \NN^d$
+    \begin{equation} \label{equation:lemma1:6}
+        \EE{\left\| \sum\limits_{\mathbf{k} \in S} X_\mathbf{k} \right\|^r} \leq B_{d, r, \rho} \left( \sum\limits_{\mathbf{k} \in S} \EE{\| X_\mathbf{k} \|^r} + \left( \sum\limits_{\mathbf{k} \in S} \EE{\| X_\mathbf{k} \|^2} \right)^\frac{r}{2} \right).
+    \end{equation}
+    If 
+    \begin{equation} 
+        \sup\limits_{\mathbf{k} \in \NN ^d} \EE{\| X_\mathbf{k} \|^r} < \infty,
+    \end{equation}
+    corresponding to Assumption \ref{assumption:2+delta_moment_sup}, let
+    \begin{equation} \label{definition:lemma1:7}
+        C_{d, r, \rho} \coloneqq B_{d, r, \rho} \left( \sup\limits_{\mathbf{k} \in \NN^d} \EE{\| X_\mathbf{k}\|^r} + \left( \sup\limits_{\mathbf{k} \in \NN^d} \EE{\|X_\mathbf{k}\|^2} \right)^\frac{r}{2} \right).
+    \end{equation}
+    In that case
+    \begin{equation} \label{lemma1:(7)}
+        \EE{\left\| \sum\limits_{\mathbf{k} \in S} X_\mathbf{k} \right\|^r} \leq C_{d, r, \rho} |S|^\frac{r}{2}
+    \end{equation}
+    and, if also $r > 2$, then
+    \begin{equation} \label{lemma1:(9)}
+        \EE{M(U)^r} \leq D_{d, r} C_{d, r, \rho} |U|^{r/2}
+    \end{equation}
+    for any discrete block $U$ in $\NN^d$ with
+    \begin{equation} \label{lemma1:(8)}
+         M(U) \coloneqq \max\limits_{W \lhd U} \left\| \sum\limits_{\mathbf{j} \in W} X_\mathbf{j} \right\|
+    \end{equation}
+    and
+    \[ D_{d, r} \coloneqq \frac{5^d}{2^d} \left( 1- \frac{1}{2^{\frac{r/2-1}{r}}} \right)^{-dr}. \]
+\end{lemma}
+
+\begin{proof}
+    We prove \eqref{equation:lemma1:6} by induction over the dimension $d$. In the case $d=1$, the Inequality \eqref{equation:lemma1:6} follows directly from Theorem 2 in \cite{[56]zhang1998rosenthal}. To see that we can apply that theorem, note that its Condition (b) is fulfilled as any Hilbert space is a reflexive Banach space %and that any reflexive Banach space has the Radon-Nikodym property (see corollary 5.45 in \cite{ryan2002banach}).
+    and that any Hilbert space is of type $p=2$ which follows from the parallelogram identity, see \cite{jordan1935innerproduct} Theorem 1.
+    
+    It can be seen from the proofs of \cite{[56]zhang1998rosenthal} Theorem 1 and Theorem 2 that $B(1, r, \cdot)$ is increasing since the constant 
+    \[ C(p, \rho) = \frac{2}{1-4\rho^{2/p \wedge 2/q}} \]
+    used in the proof of \cite{[56]zhang1998rosenthal} Theorem 1 is monotone in $\rho$ (note $0 \leq \rho^{2/p \wedge 2/q} < 1/4$ in that context) and the constant $B_{1, r \rho}$ does not introduce new dependence on $\rho$.
+
+    For the induction step, assume that $d \geq 2$ is fixed and that \eqref{equation:lemma1:6} is true for all dimensions smaller than $d$. For any set $M \subset \NN^d$ and index $j \in \NN$, write \[ M[j] \coloneqq \{ \mathbf{k} \in M \mid \mathbf{k}_1 = j \}, \]
+    \[ J[M] \coloneqq \{ i \in \NN \mid M[i] \neq \emptyset \}. \]
+    Fix a finite, nonempty set $S \subset \NN^d$ and define
+    \[ Y_j \coloneqq \sum\limits_{\mathbf{k} \in S[j]} X_\mathbf{k}, \]
+    \[ \zeta^{[j]} \coloneqq (\mathbbm{1}_{\{\mathbf{k} \in \NN^d[j]\}} X_\mathbf{k})_{\mathbf{k} \in \NN^d}.  \]
+    $Y = (Y_j)_{j \in \NN}$ and $\zeta^{[j]}$, $j \in \NN$, can be seen as random fields on $\NN$ and $\NN^{d-1} \cong \NN^d[j]$ respectively that satisfy the Mixing Condition \ref{assumption:rho limit smaller 1} as they are measurable transforms of $X$ and $X$ satisfies Assumption \ref{assumption:rho limit smaller 1} (see Remark \ref{rem:mixing coefficients smaller for transform}).
+    Applying the induction hypothesis shows
+    \begin{align*}
+        \EE{\left\| \sum\limits_{\mathbf{k} \in S} X_\mathbf{k} \right\|^r}
+        & = \EE{\left\| \sum\limits_{j \in J[S]} Y_j \right\|^r} \\
+        & \leq B_{1, r, \rho_{Y}} \left( \sum\limits_{j \in J[S]} \EE{\left\| Y_j \right\|^r} + \left( \sum\limits_{j \in J[S]} \EE{\left\| Y_j \right\|^2} \right)^{r/2} \right) \\
+        & \leq B_{1, r, \rho_{X}} \left( \sum\limits_{j \in J[S]} \EE{\left\| Y_j \right\|^r} + \left( \sum\limits_{j \in J[S]} \EE{\left\| Y_j \right\|^2} \right)^{r/2} \right).
+    \end{align*}
+    The above can be written as
+    \begin{align*}
+        B_{1, r, \rho_X} \sum\limits_{j \in J[S]} \EE{\left\| \sum\limits_{\mathbf{k} \in S[j]} \zeta_\mathbf{k}^{[j]} \right\|^r} + B_{1, r} \left( \sum\limits_{J[S]} \EE{\left\| \sum\limits_{\mathbf{k} \in S[j]} \zeta_\mathbf{k}^{[j]} \right\|^2} \right)^{r/2},
+    \end{align*}
+    which is, due to the induction hypothesis, bounded from above by
+    \begin{equation} \label{lemma1:inequality step 2} \begin{split}
+        & \ B_{1, r, \rho_X} \sum\limits_{j \in J[S]} B_{d-1, r, \rho_{\zeta^{(j)}}} \left( \sum\limits_{\mathbf{k} \in S[j]} \EE{\left\| \zeta_\mathbf{k}^{(j)} \right\|^r} + \left( \sum\limits_{\mathbf{k} \in S[j]} \EE{\left\| \zeta_\mathbf{k}^{(j)} \right\|^2} \right)^{r/2} \right)  \\
+        + & \ B_{1, r, \rho_X} \left( \sum\limits_{j \in J[S]} B_{d-1, 2, \rho_{\zeta^{(j)}}} \left( \sum\limits_{\mathbf{j} \in S[j]} \EE{\left\| \zeta_\mathbf{k}^{(j)} \right\|^2} + \left( \sum\limits_{\mathbf{j} \in S[j]} \EE{\left\| \zeta_\mathbf{k}^{(j)} \right\|^2} \right)^{2/2} \right) \right)^{r/2}.
+    \end{split} \end{equation}
+    Plugging in definitions and using the convention that sums over the empty set vanish, we get the following equality:
+    \[ \sum\limits_{j \in J[S]} \sum\limits_{\mathbf{k} \in S[j]} \| \zeta_\mathbf{k}^{(j)} \|^r = \sum\limits_{j \in \NN} \sum\limits_{\substack{\mathbf{k} \in S \\ \mathbf{k}_1 = j}} \| \mathbbm{1}_{\{\mathbf{k}_1 = j \}} X_\mathbf{k} \|^r = \sum\limits_{\mathbf{k} \in S} \| X_\mathbf{k} \|^r \]
+    Therefore we can write \eqref{lemma1:inequality step 2} as
+    \begin{equation} \label{lemma1:inequality step 3} \begin{split}
+        & \ B_{1, r, \rho_X} B_{d-1, r, \rho_{\zeta^{(j)}}} \left( \sum\limits_{\mathbf{k} \in S} \EE{\|X_\mathbf{k}\|^r} + \sum\limits_{j \in J[S]} \left( \sum\limits_{\mathbf{k} \in S[j]} \EE{\| \zeta_\mathbf{k}^{(j)} \|^2} \right)^{r/2} \right) \\
+        + & \ B_{1, r, \rho_X} B_{d-1, 2, \rho_{\zeta^{(j)}}}^{r/2} \left(2 \sum\limits_{\mathbf{k} \in S} \EE{\|X_\mathbf{k}\|^2} \right)^{r/2}.
+    \end{split} \end{equation}
+    Using
+    \[ \sum\limits_{j \in J[S]} \left( \sum\limits_{\mathbf{k} \in S[j]}\EE{\| \zeta_\mathbf{k}^{(j)} \|^2} \right)^{r/2} \leq \left( \sum\limits_{j \in J[S]} \sum\limits_{\mathbf{k} \in S[j]}\EE{\| \zeta_\mathbf{k}^{(j)} \|^2} \right)^{r/2} = \left( \sum\limits_{\mathbf{k} \in S}\EE{\| X \|^2} \right)^{r/2} \]
+    and the fact that the constants are increasing in the third argument by the induction hypothesis, \eqref{lemma1:inequality step 3} is bounded from above by
+    \begin{align*}
+        B_{d, r, \rho_X} \left(\sum\limits_{\mathbf{k} \in S} \EE{\|X_\mathbf{k}\|^r} + \left( \sum\limits_{\mathbf{k} \in S} \EE{\|X_\mathbf{k}\|^2} \right)^{r/2} \right)
+    \end{align*}
+    with
+    \[ B_{d, r, \rho_X} \coloneqq B_{1, r, \rho_X} B_{d-1, r, \rho_X} + 2^{r/2} B_{1, r, \rho_X} B_{d-1, 2, \rho_X}^{r/2}. \]
+    This concludes the induction and shows \eqref{lemma1:(7)}. Assuming 
+    \[ \sup\limits_{\mathbf{k} \in \NN ^d} \EE{\| X_\mathbf{k} \|^r} < \infty, \]
+    \eqref{lemma1:(8)} follows directly from \eqref{lemma1:(7)}.
+
+    Now assume $r > 2$. Using \eqref{lemma1:(8)}, \eqref{lemma1:(9)} follows directly from \cite{[37]moricz1983general} Corollary 1 for $\alpha = r/2$, $\gamma = r$ and the (super-)additive function of blocks
+    \[ f(U) = C_{d, r}^{1/\alpha} |U|. \]
+\end{proof}
+
+
+\begin{remark}
+    While this has not been made clear in \cite{[0]BUCCHIA2017344}, the argument that $B_{d, r, \cdot}$ is increasing is important to show that the constant does not depend on $X$ as one can not argue that if $f$ is a function mapping random fields to (possibly lower-dimensional) random fields, there is a function $g$ that maps $\rho$-coefficients to $\rho$-coefficients such that the following assignments of mixing coefficients are equal:
+    \[ \rho_{f(\cdot)} = g(\rho_{\cdot}). \]
+    The following counterexample shows that this does not hold for general $f$: Consider the (trivial) $\RR^2$-valued stochastic processes
+    \[ X = \left( \begin{pmatrix} +N \\ -N \end{pmatrix} \right)_{j \in \ZZ}, \ Y = \left( \begin{pmatrix} +N \\ +N \end{pmatrix} \right)_{j \in \ZZ} \]
+    with a non-constant, real random variable $N$ and the function $f$ that maps an $\RR^2$-valued stochastic process to the $\RR$-valued stochastic process that has the sum of the two components as its values, i.e.,
+    \[ f(X) = (0)_{j \in \ZZ}, \ f(Y) = (2N)_{j \in \ZZ}. \]
+    It is easy to check that $X$ and $Y$ both have $\rho$-coefficients of $1$, but $\rho_{f(X)} = -\infty$ (or $\rho_{f(X)} = 0$, depending on how one defines the supremum of the empty set) and $\rho_{f(Y)} = 1$. Therefore, there is no function that maps both $\rho_{X}$ to $\rho_{f(X)}$ and $\rho_{Y}$ to $\rho_{f(Y)}$.
+
+    The fact that $B_{d, r, \rho}$ does not depend on $X$ is important as we will apply Lemma \ref{lemma:1} in the proof of Theorem \ref{theorem1} to a sequence $X^{(-k)}$, $k=1, ...$ of random fields whose moments we want to bound uniformly.
+\end{remark}

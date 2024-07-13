@@ -1,0 +1,23 @@
+\section{Conventions}
+
+We usually write vectors $\mathbf{x} \in \RR^d$ in boldface. For a real number $x \in \RR$, $\gls*{usbfx} \in \RR^d$ denotes the $d$-dimensional vector that has $x$ in each of its components. We define $\gls*{multiplicationx} \coloneqq \prod_i \mathbf{x}_i$. When we write $\mathbf{x}_i$, $i \in \{1, ..., d\}$, we mean the $i$-th component $\langle \mathbf{x}, e_i \rangle$ of $\mathbf{x}$. Similarly, for a matrix $A \in \RR^{k \times l}$, $A_{i, j}$ denotes the entry in the $i$-th row and $j$-th column.
+If $f$ is a function $\RR \to \RR$, e.g., the floor function \gls*{floor}, with $f(\mathbf{x})$ and $f(\mathbf{A})$ we mean the vector $(f(\mathbf{x}_1), ..., f(\mathbf{x}_d))$ and the matrix $(f(A_{i, j}))_{i, j}$ respectively. We denote the transpose of matrices and vectors by $\cdot^T$. However, we usually do not distinguish between row and column vectors.
+For two normed vector spaces $V$ and $W$, $\gls*{LVW}$ is the set of bounded linear operators $V \to W$.
+For a finite set $U$, $|U|$ denotes the number of elements in $U$.
+
+Let $\gls*{H}$ be a separable real Hilbert space throughout unless stated otherwise.
+We denote the scalar product $H \times H \to \RR$ by $\left\langle \cdot, \cdot \right\rangle$ and the associated norm by $\| \cdot \|$. We equip $H$ with the topology induced by $\| \cdot \|$ and the associated Borel-$\sigma$-algebra.
+When writing $H^K$ for some integer $K$, we mean the direct sum of Hilbert spaces
+\[ H^K \coloneqq \bigoplus\limits_{i=1}^K H. \]
+Interpreting $H$ as a metric space, this is the same as equipping the cartesian product $\prod_{i} H$ with the $2$ product metric. Hence we generally equip products of metric spaces with the $2$ product metric.
+
+As $H$ is separable, its dimension is at most countably infinite. Therefore, it has an orthonormal basis $(e_i)_{i \in I}$, $I \subset \NN$, i.e., $\langle e_i, e_j \rangle = \gls{deltaij}$ and $\text{span}(e_i)_{i} = H$. We fix this orthonormal basis. In the case $H = \RR^p$, we consider the canonical basis. We let
+\[ P_k: H \to H_k \coloneqq \mathrm{span}(e_1, ..., e_k) \subset H, h \mapsto \sum\limits_{i=1}^k \langle h, e_i \rangle e_i \]
+stand for the orthogonal projections.
+For a (possibly random) vector $Y \in H$, we usually write $Y^{(k)} = P_k Y \in H_k$ for the projection onto $H_k$.
+
+Random elements in $H$ live on some probability space $(\Omega, \mathcal{F}, \PP)$. We usually do not mention this probability space. For a random element $Y$, we set
+\[ \|Y\|_p \coloneqq \EE{\|Y\|^p}^{1/p}. \]
+If a sequence of random variables $Y_n$ converges weakly to a random variable $Y$, we write $Y_n \gls*{weakconvergence} Y$. If we want to make clear that this convergence is to be understood with respect to $n$, we write $Y_n \stackrel{n}{\Rightarrow} Y$.
+
+If we call $X_\mathbf{j}$ a random field, we mean the random field $X = (X_\mathbf{j})_{\mathbf{j}}$ where $\mathbf{j}$ usually indexes $\ZZ^d$. We use a similar convention for random fields of the form $S_n = (S_n(\mathbf{t}))_{\mathbf{t} \in [0,1]^d}$. We usually write observations in "space" $\mathbf{t}$ using a subscript, i.e., $X_\mathbf{t}$. However, in some occasions, in particular if we want to write out the components of the vector $\mathbf{t}$, we may write $X(\mathbf{t})$ instead.

@@ -1,0 +1,264 @@
+\section{Hilbert Space Valued Random Elements}
+
+\subsection{Expected Value and Covariance}
+
+As I have been unable to find a source in which the expected value and covariance of Hilbert space valued random elements is defined rigorously, I have decided to cover these two concepts, especially the covariance, relatively indepth. As a result of this, some of the following results and proofs are original.
+
+\begin{thm}[Riesz-Fréchet] \label{thm:riesz}
+    Let $H$ be a (not necessarily separable) Hilbert space. For every bounded linear functional $\varphi: H \to \RR$, there exists a unique vector $\mu_\varphi \in H$, called the Riesz representation of $\varphi$, such that
+    \begin{equation} \label{Riesz representation characterization} \varphi(h) = \langle \mu_\varphi, h \rangle \ \forall h \in H. \end{equation}
+    The Riesz representation is given by
+    \begin{equation} \label{Riesz representation explicit}
+        \mu_\varphi = \sum\limits_i \varphi(e_i) e_i. 
+    \end{equation}
+    Furthermore the operator norm of $\varphi$ and the norm of $\mu_\varphi$ are equal:
+    \begin{equation} \label{Riesz-Frechet equality of norms}
+        \gls*{operatornormvarphi} = \| \mu_\varphi \|_H.
+    \end{equation}
+\end{thm}
+\begin{proof}
+    The first part and \eqref{Riesz-Frechet equality of norms} are proven in \cite{conway2019course} Theorem 3.4. To see that $\mu_\varphi$ defined as in \eqref{Riesz representation explicit} fulfills \eqref{Riesz representation characterization} is an easy calculation using the continuity of the inner product.
+\end{proof}
+
+For a random element $Y$ in $H$ with $\EE{\|Y\|^2} < \infty$ define the linear functional 
+\begin{equation} \label{defn:expected value varphi}
+    \varphi: H \to \RR, h \mapsto \EE{\left\langle Y, h \right\rangle}.
+\end{equation}
+This is well-defined as Cauchy-Schwarz tells us 
+\begin{equation} \label{operator norm}
+        \EE{| \left\langle Y, h \right\rangle |^2} \leq \EE{\|Y\|^2}\|h\|^2 < \infty
+\end{equation} 
+which implies, using Jensen's inequality, 
+\begin{equation*}
+    \EE{| \left\langle Y, h \right\rangle |} \leq \sqrt{\EE{| \left\langle Y, h \right\rangle |^2}} < \infty.
+\end{equation*}
+\eqref{operator norm} also shows that the operator norm 
+\begin{equation*}
+        \| \varphi \| = \sup\limits_{\| h \| \leq 1} |\varphi(h)| \leq \sup\limits_{\| h \| \leq 1} \EE{| \langle Y, h \rangle |}
+\end{equation*}
+of $\varphi$ is finite which means that $\varphi$ is a bounded functional. We can therefore apply Theorem \ref{thm:riesz} to define the expected value of the Hilbert space valued random element $Y$:
+
+\begin{defn}[Expected value]
+    Let $Y$ be a random element in $H$ with $\EE{\|Y\|^2} < \infty$. The \textit{expected value} $\EE{Y}$ of $Y$ is the Riesz representation of $\varphi$, defined as in \eqref{defn:expected value varphi}.
+\end{defn}
+
+\begin{remark}
+    The expected value $\EE{Y}$ satisfies
+    \[ \EE{\langle Y, h \rangle} = \left\langle \EE{Y}, h \right\rangle \ \forall h \in H \]
+    by definition and is given by
+    \[ \EE{Y} = \sum\limits_i \EE{Y^i} e_i \in H. \]
+    Additionally, the above definition of the expected value in $H$ gives rise to a linear operator
+    \[ \mathbb{E}: L^2(H)  \to H, \ Y \mapsto \EE{Y} \]
+    where 
+    \[ L^2(H) \coloneqq L^2((\Omega, \mathcal{F}, \PP),  H) \coloneqq \{ Y: (\Omega, \mathcal{F}, \PP) \to H \mid Y \text{ msbl.}, \ \EE{\|Y\|^2} < \infty \}. \]
+\end{remark}
+\begin{proof}
+    Apply Theorem \ref{thm:riesz} to obtain the first two claims. Using the linearity of the expectation in $\RR$, a straightforward calculation shows
+    \[ \EE{a Y_1 + Y_2} = \sum\limits_i \EE{(a Y_1 + Y_2)^i} e_i = a \EE{Y_1} + \EE{Y_2}  \]
+    for a scalar $a \in \RR$ and random elements $Y_1, Y_2 \in L^2((\Omega, \mathcal{F}, \PP),  H)$.
+\end{proof}
+
+\begin{remark}
+    The definition of the expected value of the $H$-valued random variable $Y$ can also be read as a Bochner-integral (see \cite{bochner1933integration}):
+    \begin{equation} \label{eq:bochner_expected_value}
+        \EE{Y} = \int\limits_{\Omega} Y d\PP.
+    \end{equation}
+\end{remark}
+The following proof is original.
+\begin{proof}
+    From the Petti measurability theorem (\cite{pettis1938integration} Theorem 1.1.) together with the fact the we equip $H$ with the Borel-$\sigma$-algebra and that we assume $H$ to be separable, it follows that $Y$ is measurable in the Bochner-sense. Now, if $Y$ is a step function of the form
+    \[ Y(\omega) = \sum\limits_{i=1}^m \mathbbm{1}_{A_i}(\omega) h_i \]
+    for a partition $(A_i)_i$ of $H$ and vectors $h_i \in H$, then we have
+    \begin{align*}
+        \left\langle \int\limits_{\Omega} Y d\PP, h \right\rangle
+        & = \left\langle \sum\limits_{i=1}^m \PP(A_i) h_i, h \right\rangle \\
+        & = \left\langle \sum\limits_{i=1}^m \EE{\mathbbm{1}_{A_i}} h_i, h \right\rangle
+    \end{align*}
+    for all $h \in H$. By definition we may exchange the expectation and the inner product. Therefore, the above is equal to
+    \begin{align*}
+        \EE{\sum\limits_{i=1}^m \mathbbm{1}_{A_i} \left\langle h_i, h \right\rangle}
+        & = \EE{\left\langle \sum\limits_{i=1}^m \mathbbm{1}_{A_i} h_i, h \right\rangle} \\
+        & = \EE{\left\langle Y, h \right\rangle}.
+    \end{align*}
+    This means that \ref{eq:bochner_expected_value} holds by Riesz-Fréchet \ref{thm:riesz} for step functions $Y$.
+
+    Now let $Y$ be any element in $L^2(H)$. As $Y$ is measurable in the Bochner-sense, there is a sequence of step functions $s_n: \Omega \to H$ that converge almost surely and in the $L^2$-norm to $Y$. Therefore, by the definition of the Bochner integral, we have for any element $h \in H$
+    \begin{align*}
+        \left\langle \int\limits_\Omega Y d\PP, h \right\rangle
+        & = \left\langle \lim\limits_{n \to \infty} \int\limits_\Omega s_n d\PP, h \right\rangle.
+    \end{align*}
+    By the continuity of the inner product, this is equal to
+    \begin{align*}
+        \lim\limits_{n \to \infty} \left\langle \int\limits_\Omega s_n d\PP, h \right\rangle.
+    \end{align*}
+    Using the fact that the Bochner integral and the definition of the expected value using Riesz-Fréchet \ref{thm:riesz} coincide for the step functions $s_n$ as we have shown, the above is equal to
+    \begin{align*}
+        \lim\limits_{n \to \infty} \left\langle \EE{s_n}, h \right\rangle = \lim\limits_{n \to \infty} \EE{\left\langle s_n, h \right\rangle}.
+    \end{align*}
+    Due to the convergence of $(s_n)_n$ to $Y$ in the $L^2$-sense and the contiuinity of the inner product, we get
+    \begin{align*}
+        \lim\limits_{n \to \infty} \EE{\left\langle s_n, h \right\rangle}
+        & = \EE{\left\langle Y, h \right\rangle}
+    \end{align*}
+    which finally shows that the Bochner integral $\int_\Omega Y d\PP$ and the expected value $\EE{Y}$ are equal for general $Y \in L^2(H)$.
+\end{proof}
+
+
+The following version of the Riesz-Fréchet representation theorem is \cite{rudin1991functionalanalysis} Theorem 12.8.
+\begin{thm}[Riesz-Fréchet, bilinear case] \label{thm: Riesz bilinear}
+    Let $f: H \times H \to \RR$ be a bounded bilinear form. Then there exists a unique $S \in \mathcal{L}(H, H)$ that satisfies
+    \[ f(x, y) = \langle x, S(y) \rangle \ \forall x, y \in H. \]
+    Moreover, $\| S \|_{\mathrm{op}} = \| f \|_{\mathrm{op}}$.
+\end{thm}
+
+In order to define the covariance operator of two $H$-valued random elements $Y, Z$, first note that if $Y$ and $Z$ are random vectors in $\RR^p$, the (cross-)covariance matrix is a nonnegative definite matrix $\Cov(Y, Z) \in \RR^{p \times p}$ defined by
+\begin{equation} \label{defn:covariance matrix}
+    \Cov(Y, Z) \coloneqq \EE{(Y - \EE{Y})(Z - \EE{Z})^t}.
+\end{equation}
+This matrix can be seen as a linear operator 
+\[ \RR^p \to \RR^p, \ x \mapsto Cov(Y, Z) x \]
+or as a bilinear form
+\[ \RR^p \times \RR^p \to \RR, (x, y) \mapsto x^t \Cov(Y, Z) y = \langle \Cov(Y, Z) x, y \rangle \]
+where the equality comes from the fact that the covariance matrix is symmetric. The generalization of the covariance of Hilbert space valued random elements as a bilinear form is straightforward. However, in order to regard the covariance as some kind of "matrix", one needs the notion of a tensor product. % because Riesz-Fréchet \ref{thm:riesz} can, in the form stated here, only be applied to \emph{linear} maps, not bilinear ones. 
+See Appendix \ref{appendix:tensorproduct} for details.
+
+We begin the definition of the covariance operator of two Hilbert space valued random elements $Y, Z \in L^2(H)$ by the defining the bilinear covariance form 
+\[ \mathrm{cov} \coloneqq \mathrm{cov}(Y, Z): H \times H \to \RR, \ (h_1, h_2) \mapsto \EE{\left\langle Y - \EE{Y}, h_1  \right\rangle\left\langle Z - \EE{Z}, h_2 \right\rangle}.\]
+A simple calculation using Cau\-chy-Schwarz shows that $\mathrm{cov}$ is a bounded bilinear form. For any element $h \in \RR$ we have, applying the Cauchy-Schwarz inequality twice and then Parseval's identity,
+\begin{align*}
+    \sum\limits_{i \in I} \sum\limits_{j \in I} \left| \left\langle \mathrm{cov}(e_i, e_j), h \right\rangle_{\RR} \right|^2
+    & \leq \sum\limits_{i \in I} \sum\limits_{j \in I} \left\| \EE{\left\langle Y - \EE{Y}, e_i \right\rangle_H \left\langle Z - \EE{Z}, e_j \right\rangle_H} \right\|_{\RR}^2 \|h\|_{\RR}^2 \\
+    & \leq \sum\limits_{i \in I} \EE{\left\langle Y - \EE{Y}, e_i \right\rangle_H^2} \sum\limits_{j \in I} \EE{\left\langle Z - \EE{Z}, e_i \right\rangle_H^2} \|h\|_{\RR}^2 \\
+    & = \EE{\sum\limits_{i \in I} \left\langle Y - \EE{Y}, e_i \right\rangle_H^2} \EE{\sum\limits_{j \in I} \left\langle Z - \EE{Z}, e_i \right\rangle_H^2} \|h\|_{\RR}^2 \\
+    & = \EE{\left\|Y - \EE{Y} \right\|_H^2} \EE{\left\| Z - \EE{Z} \right\|_H^2} \|h\|_{\RR}^2.
+\end{align*}
+Therefore, $\mathrm{cov}(Y, Z)$ is a weak Hilbert-Schmidt mapping (see Definition \ref{defn:weak Hilbert Schmidt mapping}) for 
+\[ \alpha = \EE{\left\|Y - \EE{Y} \right\|_H^2} \EE{\left\| Z - \EE{Z} \right\|_H^2}. \]
+Hence we may apply the universal property \ref{thm:universal_property_tensor_product} to get a unique bounded linear functional
+\[ \Tilde{\mathrm{cov}} \coloneqq \Tilde{\mathrm{cov}}(Y, Z): H \hat{\otimes} H \to \RR \]
+such that
+\[ \mathrm{cov} = \Tilde{\mathrm{cov}} \circ \hat{\otimes}. \]
+
+\begin{defn}[Covariance operator] \label{defn:covariance operator}
+    We define the \textit{(cross-)co\-variance operator} $\Cov(Y, Z) \in H \hat{\otimes} H$ of $Y$ and $Z$ as the Riesz representation of $\Tilde{\mathrm{cov}}$.
+
+    The \textit{(auto-)covariance operator} $\Cov(Y)$ of $Y$ is defined as the cross-covariance operator $\Cov(Y, Y)$.
+\end{defn}
+
+\begin{proposition} \label{covariance is continuous}
+    The cross-covariance
+    \[ \Cov(\cdot, \cdot): L^2(H) \times L^2(H) \to H \hat{\otimes} H, (Y, Z) \mapsto \Cov(Y, Z) \]
+    is a bilinear continuous map with operator norm $\| \Cov \|_{\mathrm{op}} = 1$.
+\end{proposition}
+The following proof is original.
+\begin{proof}
+    We show that $\Cov(\cdot, \cdot)$ is bounded. Let $Y, Z \in L^2(H)$. Due to the equality of norms in \eqref{Riesz-Frechet equality of norms} and \eqref{equality of norms in universal property}, we have
+    \[ \| \Cov(Y, Z) \|_{H \hat{\otimes} H} = \| \Tilde{\mathrm{cov}}(Y, Z) \|_{\mathrm{op}} = \| \mathrm{cov}(Y, Z) \|_2. \]
+    The above is equal to (see Theorem \ref{thm:universal_property_tensor_product})
+    \begin{align*}
+        \sqrt{\sum\limits_{i \in I} \sum\limits_{j \in J} \mathrm{cov}(Y, Z)(e_i, e_j)^2 }
+        & = \sqrt{\sum\limits_{i \in I} \sum\limits_{j \in J} \EE{\left\langle Y - \EE{Y}, e_i \right\rangle  \left\langle Z - \EE{Z}, e_j \right\rangle }^2 }.
+    \end{align*}
+    As shown previously, this is bounded from above by
+    \begin{align*}
+        \sqrt{ \EE{\left\|Y - \EE{Y} \right\|_H^2} \EE{\left\| Z - \EE{Z} \right\|_H^2} } 
+        & \leq \sqrt{ \EE{\left\|Y \right\|_H^2} \EE{\left\| Z \right\|_H^2} } \\
+        & = \| Y \|_{L^2(H)}  \| Z \|_{L^2(H)}.
+    \end{align*}
+    Hence $\Cov(\cdot, \cdot)$ is bounded with operator norm $\| \Cov \|_{\mathrm{op}} \leq 1$. $\Cov$ indeed reaches this upper bound as one can see by considering $Y = Z$ with $\EE{Y} = 0$, $\EE{\| Y \|^2} = 1$ and $\langle Y, e_i \rangle = 0$ for all $i > 1$.
+\end{proof}
+
+
+\begin{remark}
+    Another definition of the covariance operator $\Cov(Y, Z)$ is given by using Riesz-Fréchet \ref{thm: Riesz bilinear} for bilinear forms which lets us define
+    \[ \Cov_{\mathrm{op}}(Y, Z): H \to H \]
+    via
+    \[ \langle h_1, \Cov_{\mathrm{op}}(Y, Z)(h_2) \rangle = \mathrm{cov}(Y, Z)(h_1, h_2). \]
+    In the following, we will identify the bilinear form 
+    \[ \mathrm{cov}(Y, Z): H \times H \to \RR, \]
+    the linear functional
+    \[ \Tilde{\mathrm{cov}}(Y, Z): H \hat{\otimes} H \to \RR, \]
+    the element of the tensor space
+    \[ \Cov(Y, Z) \in H \hat{\otimes} H \]
+    and the linear operator
+    \[ \Cov_{\mathrm{op}}(Y, Z): H \to H \]
+    with each other and use the one which fits our needs the best. In \cite{[0]BUCCHIA2017344}, the linear operator $\Cov_{\mathrm{op}}$ is used and defined via the bilinear form $\mathrm{cov}$.
+\end{remark}
+
+\begin{remark} \label{remark: covariance matrix and operator relation finite-dimensional}
+    \begin{aufzii}
+        \item In the finite-dimensional case $H = \RR^p$, one has $\RR^p \otimes \RR^p \cong \RR^{p \times p}$ and
+        \begin{align*}
+            \mathrm{cov}(Y, Z)(e_i, e_j) 
+            & = \EE{(\langle Y - \EE{Y}, e_i \rangle)(\langle Z - \EE{Z}, e_j \rangle)} \\
+            & = \Cov(Y, Z)_{i, j}
+        \end{align*}
+        where $\Cov(Y, Z)$ denotes the usual covariance matrix. See also Example \ref{ex:isomorphism tensor product Rp}.
+        \item The definition of the covariance operator can be extended to random elements that take values in two different Hilbert spaces.
+    \end{aufzii}
+\end{remark}
+
+\begin{defn}[Asymptotic independence] \label{defn: asymptotic independence}
+    Let $k \in \NN$ be fixed and let $Y^i_n$, $n \in \NN$, $i = 1, ..., k$, be random elements in $H$. We say the $Y^i_n$, $i=1, ..., k$, are asymptotically independent if
+    \[ \lim\limits_{n \to \infty} \left( \PP(Y^i_n \in H_i \ \forall i = 1, ..., k) - \prod\limits_{i=1}^k \PP(Y^i_n \in H_i)  \right) = 0 \]
+    for all Borel sets $H_i$ in $H$.
+\end{defn}
+
+\subsection{Hilbert Space Valued Random Fields}
+
+We define the direct extension of Brownian motion to random fields. Note that the following definition at the same time effortlessly generalizes the codomain from $\RR$ to separable Hilbert spaces.
+\begin{defn}[Brownian sheet]
+    A \textit{$d$-parameter Brownian sheet in $H$ with covariance operator $S$} is an $H$-valued random field $W = (W_\mathbf{t})_{\mathbf{t} \in [0, 1]^d}$ that satisfies the following properties:
+    \begin{aufzi}
+        \item $W$ has continuous paths almost surely,
+        \item $W_\mathbf{t} = 0$ almost surely if one of the components of $\mathbf{t} \in [0, 1]^d$ is $0$,
+        \item the increments $W(B_1), \ldots, W(B_m)$ are independent Gaussian random elements in $H$ with mean zero and covariance operator $\gls{lambda}(B_i) S$ for pairwise disjoint blocks $B_1, \ldots, B_m \subset [0, 1]^d$, $m \in \NN$.
+    \end{aufzi}
+\end{defn}
+
+\begin{figure}%[BrownianSheet]
+    \centering
+    \incfig{BrownianSheet}
+    \caption{Sample path of a two-dimensional Brownian sheet in $\RR$}
+\end{figure}
+
+\begin{defn}[Stationarity] \label{def:stationarity}
+    Let $X = (X_\mathbf{k})_{\mathbf{k} \in \ZZ^d}$ be a random field with values in $H$. $X$ is said to be 
+    \begin{aufzi}
+        \item \textit{weakly stationary}, or alternatively \textit{covariance stationary}, if 
+            \begin{aufzii}
+                \item $X$ has constant mean ($\EE{X_\mathbf{k}} = \mu$ for all $\mathbf{k}$),
+                \item $X$ has second moments ($\EE{\|X_k\|^2} < \infty$),
+                \item The covariance of $X$ is invariant under index shifts, i.e.,
+                \begin{equation*}
+                    \Cov\left( X_{\mathbf{i} + \mathbf{l}}, X_{\mathbf{j} + \mathbf{l}} \right) = \Cov\left( X_{\mathbf{i}}, X_{\mathbf{j}} \right) \ \forall \mathbf{i}, \mathbf{j}, \mathbf{l}.
+                \end{equation*}
+            \end{aufzii}
+            In that case we define the \textit{auto-covariance function}, also called \textit{covariogram},
+            \begin{equation}
+                \gls*{gamma}: \ZZ^d \to H \otimes H, \mathbf{v} \mapsto \gamma(\mathbf{v}) \coloneqq \Cov(X_{\usbf[0]}, X_{\mathbf{v}})
+            \end{equation}
+            and the \textit{long-run variance}
+            \[ \gls*{Gamma} \coloneqq \sum\limits_{\mathbf{v} \in \ZZ^d} \gamma(\mathbf{v}) \]
+            in case the above series converges unconditionally (in particular if it converges absolutely).
+            %, i.e., \[ \sum\limits_{\mathbf{v} \in \ZZ^d} \|\gamma(\mathbf{v})\|_{H \otimes H} < \infty. \]
+            In the case $H = \RR^k$, we also write $\gamma_{i, j}(\mathbf{v}) \coloneqq (\gamma(\mathbf{v}))_{i, j}$ for the indices of the auto-covariance matrices.
+        \item \textit{strictly stationary} if the finite-dimensional distributions are invariant under index shifts, i.e., the joint distributions of
+        \[ X_{\mathbf{t}^{(1)} + \boldsymbol{\tau}}, ..., X_{\mathbf{t}^{(k)} + \boldsymbol{\tau}} \]
+        do not depend on $\boldsymbol\tau \in \ZZ^d$.
+    \end{aufzi}
+    For continuous-time random fields, weak and strict stationarity and the covariogram are defined analogously.
+\end{defn}
+
+\begin{ex}[Stationarity]
+    \begin{aufzi} 
+        \item Any strictly stationary random field with finite first moment is weakly stationary. For Gaussian random fields, the converse is also true. This has been proven for Gaussian stochastic processeses in \cite{lapidoth09} Proposition 25.5.1. However, the proof remains almost the same when replacing Gaussian stochastic processeses with Gaussian random fields.
+        \item Brownian sheets are not stationary as their covariance is not constant in space.
+    \end{aufzi}
+\end{ex}
+
+\begin{defn}[Partial sum field] \label{defn: partial sum field}
+    Let $X$ be an $H$-valued random field. The partial sum field $S_n$, $n \in \NN$, is defined via
+    \[ S_n(\mathbf{t}) \coloneqq \frac{1}{n^{d/2}} \sum\limits_{\usbf[1] \leq \mathbf{j} \leq \floor{n \mathbf{t}}} (X_\mathbf{j} - \EE{X_\mathbf{j}}). \]
+    $\mathbf{t} \in [0,1]^d$.
+\end{defn}

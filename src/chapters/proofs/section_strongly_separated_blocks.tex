@@ -1,0 +1,57 @@
+
+\section{Strongly Separated Blocks}
+\label{section strongly separated blocks}
+
+In this section, we aim to verify that the proofs in \cite{[16]deo1975functional} still work with our adjusted definition of strongly separated blocks, see Remark \ref{remark:strongly separated blocks}.
+
+The following is a slightly differently worded version of \cite{[16]deo1975functional} Lemma 2.
+\begin{lemma} \label{deo lemma 2}
+    Let $X = (X(\mathbf{t}))_{\mathbf{t} \in [0,1]^d}$ be an $\RR$-valued random field with sample paths in $D_\RR[0,1]^d$ such that
+    \begin{aufzii}
+        \item $\EE{X(\mathbf{t})} = 0$, $\Var(X(\mathbf{t})) = [\mathbf{t}]$ for $\mathbf{t} \in [0,1]^d$,
+        \item $X$ has continuous sample paths almost surely,
+        \item the increments of $X$ around any collection of strongly separated blocks are independent random variables.
+    \end{aufzii}
+    then $X$ is a $d$-parameter Brownian sheet in $\RR$ with covariance operator $1 \in \RR$.
+\end{lemma}
+In \cite{[16]deo1975functional}, the proof only mentions that "it suffices to prove that $X_\mathbf{t}$ is normally distributed for each $\mathbf{t}$ and that this can be easily accomplished by induction on $d$ in conjunction with Theorem 19.1. of \cite{[4]billingsley1968convergence}". We carry out this proof:
+\begin{proof}
+    We prove the statement by induction over $d$. The base case is the aforementioned \cite{[4]billingsley1968convergence} Theorem 19.1. For the induction hypothesis, assume $d \geq 2$ and that $X'(\mathbf{t})$ is normally distributed for any $(d-1)$-parameter random field $X'$ that satisfies the assumptions of this lemma. Fix $\mathbf{t} \in [0,1]^d$. Without loss of generality, we may assume $\mathbf{t}_d > 0$ since for any $\mathbf{t}$ with $\mathbf{t}_d = 0$, $X(\mathbf{t})$ has no variance by assumption and is therefore trivially normally distributed. We define the $(d-1)$-parameter random field 
+    \[ X' \coloneqq \left( \frac{1}{\sqrt{\mathbf{t}_d}} X\begin{pmatrix} \mathbf{s} \\ \mathbf{t}_d \end{pmatrix}\right)_{\mathbf{s} \in [0, 1]^{d-1}}. \]
+    As $X$ satisfies these assumptions, we also have $\EE{X'_\mathbf{s}} = 0$ for all $\mathbf{s}$ and $X'$ has continuous sample paths almost surely. Furthermore,
+    \[ \Var(X'(\mathbf{s})) = \Var\left( \frac{1}{\sqrt{\mathbf{t}_d}} X\begin{pmatrix}\mathbf{s} \\ \mathbf{t}_d \end{pmatrix}\right) = \frac{1}{\mathbf{t}_d} \left[ \begin{pmatrix} \mathbf{s} \\ \mathbf{t}_d \end{pmatrix} \right] = \mathbf{s}. \]
+    The increments of $X'$ around a block $B' = \left( \mathbf{a}, \mathbf{b} \right]$ in $[0, 1]^{d-1}$ can be calculated as follows:
+    \begin{align*}
+        X'(B')
+        & = \sum\limits_{{\boldsymbol{\epsilon}} \{0, 1\}^{d-1}} (-1)^{d-1 - \sum\limits_{i=1}^{d-1} {\boldsymbol{\epsilon}}_i} X'\left( \mathbf{a} + {\boldsymbol{\epsilon}} (\mathbf{b}-\mathbf{a}) \right) \\
+        & = \frac{1}{\sqrt{\mathbf{t}_d}} \sum\limits_{{\boldsymbol{\epsilon}} \{0, 1\}^{d-1}} (-1)^{d-1 - \sum\limits_{i=1}^{d-1} {\boldsymbol{\epsilon}}_i}  X\left( \begin{pmatrix} \mathbf{a}_1 \\ ... \\ \mathbf{a}_{d-1} \\ 0 \end{pmatrix} + \begin{pmatrix} {\boldsymbol{\epsilon}} \\ 1 \end{pmatrix} \left(\begin{pmatrix} \mathbf{b}_1 \\ ... \\ \mathbf{b}_{d-1} \\ \mathbf{t}_d \end{pmatrix}-\begin{pmatrix} \mathbf{a}_1 \\ ... \\ \mathbf{a}_{d-1} \\ 0 \end{pmatrix}\right) \right) \\
+        & = \frac{1}{\sqrt{\mathbf{t}_d}} \sum\limits_{\substack{{\boldsymbol{\epsilon}} \{0, 1\}^{d} \\ {\boldsymbol{\epsilon}}_d = 1}} (-1)^{d - \sum\limits_{i=1}^{d} {\boldsymbol{\epsilon}}_i}  X\left( \begin{pmatrix} \mathbf{a}_1 \\ ... \\ \mathbf{a}_{d-1} \\ 0 \end{pmatrix} + {\boldsymbol{\epsilon}} \left(\begin{pmatrix} \mathbf{b}_1 \\ ... \\ \mathbf{b}_{d-1} \\ \mathbf{t}_d \end{pmatrix}-\begin{pmatrix} \mathbf{a}_1 \\ ... \\ \mathbf{a}_{d-1} \\ 0 \end{pmatrix}\right) \right).
+    \end{align*}
+    This is just the increment of $\frac{1}{\mathbf{t}_{d}} X$ around the block in $[0,1]^d$ that we get by attaching a $0$ to the bottom of $\mathbf{a}$ and $\mathbf{t}_d$ to the bottom of $\mathbf{b}$ because the part of the increment where ${\boldsymbol{\epsilon}}_d$ is $0$ vanishes since, due to Assumption (i), $X(\mathbf{s})$ vanishes almost surely if one of the components of $\mathbf{s}$ is $0$.
+
+    Now let $B'_1, ..., B'_k$ be a collection of strongly separated blocks in $[0,1]^{d-1}$. The blocks $B_1, ..., B_k$ that we get by attaching $0$ and $\mathbf{t}_d$ respectively, are also strongly separated. We may therefore conclude that the increments of $X$ around the blocks $B'_1, ..., B'_k$ are independent since they are equal to a constant multiple of the increments of $X$ around the blocks $B_1, ..., B_k$ and they are independent by assumption.
+    Hence $X'(\mathbf{s})$ is normally distributed by the induction hypothesis and so is
+    \[ X(\mathbf{t}) = \sqrt{\mathbf{t}_d} X'(\mathbf{s}), \]
+    choosing $\mathbf{s} = (\mathbf{t}_1, ..., \mathbf{t}_{d-1})$.
+\end{proof}
+
+\begin{remark} \label{remark: on proof using strongly separated}
+    The above proof shows why we demand that strongly separated blocks only need to not have coinciding endpoints in one of the dimensions (and therefore have positive distance in this dimension): Attaching $0$ and $\mathbf{t}_d$ to the bottom of each of the blocks $B'_1, ..., B'_k$ would make them not strongly separated if we demanded that the blocks have positive distance in every dimension.
+\end{remark}
+
+The following is \cite{[16]deo1975functional} Lemma 3.
+\begin{lemma} \label{deo lemma 3}
+    Let $X_n = (X_n(\mathbf{t}))_{\mathbf{t} \in [0,1]^d}$, $n \in \NN$, be a sequence of $d$-parameter real-valued random fields with sample paths in $D_\RR[0,1]^d$ such that
+    \begin{aufzii}
+        \item $\EE{X_n(\mathbf{t})} \to 0$, $\Var(X_n(\mathbf{t})) \to [\mathbf{t}]$ for all $\mathbf{t} \in [0,1]^d$,
+        \item the set $\{ (X_n(\mathbf{t}))^2 \mid n \in \NN \}$ is uniformly integrable for all $\mathbf{t}$,
+        \item for any collection $B_1, ..., B_k$ of strongly separated blocks, the increments of $X_n$ around these blocks are asymptotically independent,
+        \item for each $\epsilon > 0$, $\eta > 0$, we can find a $\delta > 0$ such that \[ \PP(w(X_n, \delta) > \epsilon) < \eta \] for all sufficiently large $n$.
+    \end{aufzii}
+    Then $(X_n)_n$ converges weakly to a $d$-parameter Brownian sheet $W$ in $\RR$ with covariance operator $1$.
+\end{lemma}
+\begin{proof}
+    As mentioned in \cite{[16]deo1975functional}, we mimic the proof of \cite{[4]billingsley1968convergence} Theorem 19.2:
+    Since $\Var(X_n(0)) \to 0$, $\{X_n(0)\}$ is tight. It follows from Condition (iv) and \cite{[4]billingsley1968convergence} Theorem 15.5. that $\{X_n\}$ is tight and that, if $X$ is the limit of a subsequence, then $X$ has continuous paths almost surely. It is enough to show that any such $X$ must be distributed as $W$.
+    Conditions (i) and (ii) imply $\EE{X(\mathbf{t})} = 0$ and $\Var(X(\mathbf{t})) = [\mathbf{t}]$ by \cite{[4]billingsley1968convergence} Theorem 5.4. Now the increments of $X$ around strongly separated blocks are independent because of Condition (iii). Thus the result follow from Lemma \ref{deo lemma 2}.
+\end{proof}

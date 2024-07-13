@@ -1,0 +1,15 @@
+The following result is \cite{[0]BUCCHIA2017344} Lemma 7. The covariance estimator $\hat{\Sigma}_n(B)$ is the one proposed in \cite{[8]BUCCHIA2015104} Chapter 3.
+\begin{lemma} \label{lemma:7}
+    Assume the Assumptions \ref{assumption:stationarity}, \ref{assumption:rho_mixing}, \ref{assumption:4+2delta_moment} and \ref{assumption:alpha2_summability}. Let $B \subseteq (0, 1]^d$ be a finite union of disjoint blocks.
+    For any index $\mathbf{a} \in \ZZ^d$, estimate the centered version of $X$ in $\mathbf{a}$ via
+    \[ \Tilde{X}(\mathbf{a}) \coloneqq X_{\mathbf{a}} - \hat{\mu}(\mathbf{a}). \]
+    with $\hat{\mu}(\mathbf{a})$ defined as in \eqref{def:mean estimator}. Let $k \in \NN$ be fixed. Define the estimator
+    \[ \hat{\Sigma}_n(B) \coloneqq \frac{1}{n^d} \sum\limits_{\mathbf{h} \in B_n \circleddash B_n} \omega\left(\frac{\mathbf{h}}{q} \right) 
+    \sum\limits_{\substack{\mathbf{a}:\\ \mathbf{a} \in B_n,\\ \mathbf{a}+\mathbf{h} \in B_n}} \Tilde{X}(\mathbf{a})^{(k)}  \left(\Tilde{X}(\mathbf{a}+\mathbf{h})^{(k)} \right)^T \]
+    of the long-run variance matrix $\Sigma$ of $X^{(k)} = P_k X$.
+    Then
+    \[ \hat{\Sigma}_n(B) \overset{\mathrm{Pr}}{\to} \lambda(B) \Sigma. \]
+\end{lemma}
+\begin{proof}
+    We refer to the proof presented in \cite{[0]BUCCHIA2017344}.
+\end{proof}

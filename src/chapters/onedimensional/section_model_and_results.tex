@@ -1,0 +1,177 @@
+\section{Model and Results}
+
+For each $n \in \NN$, let ${}_{n}X = ({}_{n}X_i)_{i \in \NN}$ be a process with values in $\RR$ and independent elements with constant variance $\Var({}_{n}X_i) = \sigma^2$.
+For a given $n \in \NN$, we are interested in testing:
+%\setcounter{hyp}{-1}
+\begin{hyp}{\ensuremath{H_0'}} \label{hyp:0_onedim} The random variables ${}_{n}X_j$, $j \in \NN$, are identically distributed and do not depend on $n$. \end{hyp}
+\begin{hyp}{\ensuremath{H_A'}} \label{hyp:a_onedim} There are change points ${}_{n}l < {}_{n}u \in \{0, ..., n\}$ and a change parameter $\Delta \in \RR \setminus \{0\}$ such that the process $(\Tilde{X}_j)_{j \in \NN}$ defined by
+\[ 
+    \Tilde{X}_j \coloneqq \left\{
+    \begin{array}{ll}
+    {}_{n}X_j - \Delta, & j \in ({}_{n}l, {}_{n}u] \\
+    {}_{n}X_j, & j \notin ({}_{n}l, {}_{n}u] \\
+    \end{array}
+    \right.  \ \forall j \in \NN 
+\]
+consists of identically distributed elements and does not depend on $n$. Furthermore, the change set sizes ${}_{n}u-{}_{n}l \eqqcolon c(n)$ are asymptotically proportional to the number of observations:
+\begin{equation} \label{change set size bounds one dimensional case}
+    \lim\limits_{n \to \infty} \frac{c(n)}{n} = \gamma
+\end{equation} 
+for a constant $\gamma \in (0, 1)$. \end{hyp}
+
+\begin{figure}
+    \centering
+    \def\svgwidth{0.5\columnwidth} 
+    \input{Graphiken/H_A Notations Visualization.pdf_tex}
+    %\incfig{H_A Notations Visualization}
+    \caption{Notations under the Alternative \ref{hyp:a_onedim}.}
+\end{figure}
+
+
+\begin{remark}
+    In order to derive asymptotic results as we will in Theorem \ref{thm:main results one dimensional case} b) and later on in Corollary \ref{statistical power of the test}, one needs to model the Alternative \ref{hyp:a_onedim} (later \ref{hyp:a_general}) using a family of stochastic processes ${}_{n}X$ indexed by time $n$ because if one only considers a single process $X$ that has a fixed change set of size $c \in \NN$, this size vanishes as a fraction of the number of observations $n$. See Figure \ref{figure:prozess drei mal} for an illustration of this phenomenon.
+\end{remark}
+
+
+\begin{figure} 
+   \centering
+   \incfig{Drei Ausschnitte vom selben Prozess CPD} 
+   \caption{The same stochastic process with a change set (indicated by the vertical lines), sampled until three different points in time. While it seems plausible that one can detect the changes in the beginning, the change set of fixed size increasingly resembles random noise the more data is collected.}
+   \label{figure:prozess drei mal}
+\end{figure}
+
+Define the test statistic
+\begin{equation} \label{def:Tn onedim}
+    T_n \coloneqq T_n({}_{n}X) \coloneqq \frac{1}{\sqrt{n}} \max\limits_{0 \leq k < m \leq n} (m-k) \left| \frac{1}{m-k} \sum\limits_{k < j \leq m} {}_{n}X_j - \frac{1}{n} \sum\limits_{1 \leq j \leq n} {}_{n}X_j \right|.
+\end{equation}
+For the exact test procedure we refer to Section \ref{section:statistical test}.
+
+Unfortunately, the asymptotic behaviour of the this test under the Alternative \ref{hyp:a_onedim} was not discussed in \cite{[0]BUCCHIA2017344}. We have settled for this alternative in order to exploit the results we will develop under the Null Hypothesis \ref{hyp:0_onedim}.
+
+\begin{remark}
+    The intuition behind this test statistic is that one tries find a subinterval in which the mean deviates from the overall mean as much as possible while weighing the difference of means by the size of that subinterval.
+\end{remark}
+
+\begin{lemma} \label{lemma: probability one diverging sequence}
+    Let $(Y_n)_{n \in \NN}$ be a sequence of real-valued random variables that diverges to infinity in probability in the sense that
+    \[ \forall \lambda > 0 \lim\limits_{n \to \infty} \PP(Y_n \geq \lambda) = 1. \]
+    Then, for any nonnegative sequence $(U_n)_{n \in \NN}$ of $\RR$-valued random variables that is bounded from above by a weakly converging sequence $(U'_n)_n$, we have 
+    \[ \lim\limits_{n \to \infty} \PP(Y_n \geq U_n) = 1. \]
+\end{lemma}
+\begin{proof}
+    Let $\epsilon > 0$ be arbitrarily small and choose $\lambda > 0$ large enough such that 
+    \[ \lim\limits_{n \to \infty} \PP(U_n > \lambda) \leq \lim\limits_{n \to \infty} \PP(U'_n > \lambda) < \epsilon. \] Then
+    \begin{align*}
+        \PP(Y_n < U_n)
+        & = \PP((Y_n < U_n \land U_n > \lambda) \lor (Y_n < U_n \land U_n \leq \lambda)) \\
+        & \leq \PP(Y_n < U_n \land U_n > \lambda) + \PP(Y_n < U_n \land U_n \leq \lambda) \\
+        & \leq \PP(U_n > \lambda) + \PP(Y_n < \lambda).
+    \end{align*}
+    By choice of $\lambda$, we have $\lim\limits_{n\to \infty} \PP(U_n > \lambda) < \epsilon$ and $\lim\limits_{n \to \infty} \PP(Y_n < \lambda) = 0$ holds by assumption. Consequently $\lim\limits_{n \to \infty} \PP(Y_n < U_n) < \epsilon$. As $\epsilon$ was chosen arbitrarily, $\lim\limits_{n \to \infty} \PP(Y_n < U_n) = 0$ is shown.
+\end{proof}
+
+
+\begin{thm} \label{thm:main results one dimensional case}
+    \begin{aufzi}
+        \item Under the Null Hypothesis \ref{hyp:0_onedim}, the test statistic $T_n$ converges in distribution to 
+        \begin{equation} \label{Tn convergence under null hypothesis one dimensional case}
+             T \coloneqq \sigma \sup\limits_{0 \leq s < t \leq 1} \left| W(t) - W(s) - (t-s) W(1) \right| 
+        \end{equation}
+        where $W$ denotes a standard Brownian motion on $[0, 1]$.
+        \item Under the Alternative \ref{hyp:a_onedim}, the test statistic $T_n$ diverges in the sense that
+        \begin{equation} \label{T_n alternative one dimensional case}
+            \lim\limits_{n \to \infty} \PP(T_n \geq Q_n) = 1
+        \end{equation}
+        for any weakly converging sequence $(Q_n)_n$ of $\RR$-valued random variables.
+    \end{aufzi}
+\end{thm}
+
+
+\begin{figure}
+    \centering
+    \incfig{Histogram pdf cdf test statistic T}
+    \caption{Histogram estimation of the density and empirical distribution function of a discrete approximation of the test statistic $T$, using approxmimately 2,250,000 samples. Note that the true test statistic is slightly larger as the supremum was only taken over 1,000 equidistant points.}
+\end{figure}
+
+\begin{proof}
+    \begin{aufzi}
+        \item In the following, we will apply Theorem \ref{thm:donsker}, also using its notations. Without loss of generality, we can assume $\EE{{}_{n}X_j} = 0$ as the test statistic $T_n$ doesn't change when we replace ${}_{n}X_j$ with ${}_{n}X_j - \mu$. Note that by replacing $m$ and $k$ with $\floor{s n}$ and $\floor{t n}$ respectively, one has
+        \begin{align*}
+            T_n 
+            & = \frac{1}{\sqrt{n}} \max\limits_{0 \leq k < m \leq n} \left| \sum\limits_{k < j \leq m} {}_{n}X_j - \frac{m - k}{n} \sum\limits_{1 \leq j \leq n} {}_{n}X_j \right| \\
+            & = \frac{1}{\sqrt{n}} \sup\limits_{0 \leq s < t \leq 1} \left| S_{\floor{t n}} - S_{\floor{s n}} - \frac{\floor{t n} - \floor{s n}}{n} S_{n} \right| \\
+            & = \sup\limits_{0 \leq s < t \leq 1} \left| W_n(t) - W_n(s) - \frac{\floor{t n} - \floor{s n}}{n} W_n(1) \right|.
+        \end{align*}
+        We apply Theorem \ref{thm:donsker} to get the convergence of the $W_n$-terms. Applying Slutsky's theorem, we get the weak convergence
+        \[ \frac{\floor{tn} - \floor{sn}}{n} W_n(1) \Rightarrow (t-s)W(1). \]
+        Finally, apply the continuous mapping theorem to get the stated convergence.
+        \item
+        We have
+        \begin{align*}
+            T_n
+            & = \frac{1}{\sqrt{n}} \max\limits_{0 \leq k < m \leq n} \left| \sum\limits_{k < j \leq m} {}_{n}X_j - \frac{m - k}{n} \sum\limits_{1 \leq j \leq n} {}_{n}X_j \right| \\
+            & \geq \frac{1}{\sqrt{n}} \left| \sum\limits_{{}_{n}l < j \leq {}_{n}u} {}_{n}X_j - \frac{{}_{n}u - {}_{n}l}{n} \sum\limits_{1 \leq j \leq n} {}_{n}X_j \right| \\
+            & = \frac{1}{\sqrt{n}} \left| \sum\limits_{j={}_{n}l+1}^{{}_{n}u} \Tilde{X}_j - \frac{c(n)}{n} \sum\limits_{j = 1}^{n} \Tilde{X_j} + \left( 1 - \frac{c(n)}{n} \right)c(n) \Delta \right|. \\
+        \end{align*}
+        By the reverse triangle inequality, the above is greater than or equal to $Y_n - V_n$ with
+        \begin{align*}
+            Y_n & \coloneqq  \frac{1}{\sqrt{n}} \left( 1 - \frac{c(n)}{n} \right)c(n) |\Delta|, \\
+            V_n & \coloneqq \frac{1}{\sqrt{n}} \left| \sum\limits_{j = {}_{n}l +1}^{{}_{n}u} \Tilde{X}_j - \frac{c(n)}{n} \sum\limits_{j=1}^{n} \Tilde{X_j} \right|.
+        \end{align*}
+        Because $V_n$ is bounded from above by $T_n(\Tilde{X})$, we have for any weakly converging sequence $Q_n$
+        \begin{align*} \label{eindim Tn Yn Un}
+            \PP(T_n({}_{n}X) \geq Q_n) 
+            & \geq \PP(Y_n - V_n \geq Q_n) \\
+            & \geq \PP(Y_n \geq Q_n + T_n(\Tilde{X})).
+        \end{align*}
+        Applying Lemma \ref{lemma: probability one diverging sequence} to the weakly converging sequence $U_n = Q_n + T_n(\Tilde{X})$, we therefore have
+        \[ \lim\limits_{n \to \infty} \PP(T_n({}_{n}X) \geq Q_n) \geq \lim\limits_{n \to \infty} \PP(Y_n \geq Q_n + T_n(\Tilde{X})) = 1. \]
+    \end{aufzi}
+\end{proof}
+
+The following table describes the empirical quantiles from our simulations where we have replaced the supremum with a maximum over 1,000 equidistant points.
+\begin{center}
+    \begin{tabular}{|c | c|} 
+     \hline
+     percentile & value \\ [0.5ex] 
+     \hline\hline
+     $50$ & $1.186597$ \\ 
+     \hline
+     $60$ & $1.257144$ \\
+     \hline
+     $70$ & $1.337206$ \\
+     \hline
+     $80$ & $1.436288$ \\ 
+     \hline
+     $90$ & $1.582738$ \\ 
+     \hline
+     $95$ & $1.710000$ \\
+     \hline
+     $99$ & $1.964733$ \\ 
+     \hline
+     $99.9$ & $2.271218$ \\
+     \hline
+     $99.99$ & $2.526544$ \\  %[1ex] 
+     \hline
+    \end{tabular}
+\end{center}
+
+\begin{remark} \label{remark:onedim_KolmogorovSmirnov}
+    As a standard Brownian bridge $B = (B(t))_{t \in [0, 1]}$ is given by
+    \begin{equation*}
+        B(t) = W(t) - t W(1)
+    \end{equation*}
+    in distribution, we have for the limiting test statistic
+    \begin{equation*}
+        T = \sigma \sup\limits_{0 \leq s < t \leq 1} \left| W(t) - W(s) - (t-s) W(1) \right| = \sigma \sup\limits_{0 \leq s < t \leq 1} \left| B(t) - B(s) \right|.
+    \end{equation*}
+    This asymptotic distribution is similar to that of the Kolmogorov-Smirnov statistic which is used to test whether or not a sample comes from a given distribution. Assuming the given distribution has a continuous cdf, the Kolmogorov-Smirnov statistic has the asymptotic distribution $D = \sup\limits_{0 \leq t \leq 1} |B(t)|$, called the Kolmogorov distribution. See \cite{vaart_1998} Corollary 19.21.
+\end{remark}
+
+
+\begin{figure}
+    \centering
+    \incfig{Heatmap maximizing s t}
+    \caption{Histogram estimation of the joint distribution of the $s$ and $t$ maximizing the (discrete approximation) of the test statistic $T$, using approximately 100,000 samples.}
+\end{figure}
+

@@ -1,0 +1,235 @@
+
+
+\begin{proof}[Proof of Theorem \ref{theorem2}]
+    We will once more use Lemma \ref{lemma:4} with the following correspondence of variables:
+    \begin{center}
+        \begin{tabular}{|c | c|} 
+            \hline
+            Lemma \ref{lemma:4} & Theorem \ref{theorem2} \\ [0.5ex] 
+            \hline\hline
+            $K$ & $K+1$ \\ 
+            \hline
+            $X_n = (X_{n, 1}, ..., X_{n, K})$ & $(S_n, S_{n, 1}^\star, ..., S_{n, K}^\star)$ \\
+            \hline
+            $P_k X_{n, 1}, ..., P_k X_{n, K}$ & $S_n^{(k)}, S_{n, 1}^{\star, (k)}, ..., S_{n, K}^{\star, (k)}$ \\
+            \hline
+            $r$ & $2+\delta$ \\
+            \hline
+            $X_i^k$, $i = 1, ..., K$ & $W^{(k)}, W_1^{\star, (k)}, ..., W_K^{\star, (k)}$ \\ 
+            \hline
+            $X_i$, $i = 1, ..., K$ & $W, W_1^\star, ..., W_K^\star$ \\
+            \hline
+            $S_i$, $i = 1, ..., K$ & $\Gamma, ..., \Gamma$ \\  %[1ex] 
+            \hline
+        \end{tabular}
+    \end{center}
+    To show Condition (i), i.e.,
+    \[ (S_n^{(k)}, S_{n, 1}^{\star, (k)}, ..., S_{n, K}^{\star, (k)}) \stackrel{n}{\Rightarrow} (W^{(k)}, W_1^{\star, (k)}, ..., W_K^{\star, (k)}) \]
+    in $(D_{H_k}[0,1]^d)^{K+1}$ for all $k$, we will proceed as described in \cite{[11]bulinksi2007limittheorems} Chapter 5 after Definition 1.2.:  We show the tightness of the above left-hand sequence and the weak convergence of the finite-dimensional distributions. Note that the notions of sequential tightness as defined in \cite{[11]bulinksi2007limittheorems} and tightness are equivalent as the process we are considering is not multiindexed.
+
+    To show the tightness of the process
+    \[ (S_n^{(k)}, S_{n, 1}^{\star, (k)}, ..., S_{n, K}^{\star, (k)})_n, \]
+    note that the tightness of $S_n^{(k)}$ was established as part of the proof of Theorem \ref{theorem1}. To show the tightness of the above sequence, it therefore suffices to show the tightness of the process
+    \[ (S_{n, 1}^{\star, (k)}, ..., S_{n, K}^{\star, (k)})_n. \]
+    We will show this by proving that it satisfies Assumption (e) of Lemma \ref{lemma:2} regarding its modulus of continuity.
+    For any $j =1, ..., K$ and $\mathbf{t} \in [0,1]^d$, we may write
+    \begin{align*}
+        S_{n, j}^{\star, (k)}(\mathbf{t})
+        & = \frac{1}{n^{d/2}} \sum\limits_{\usbf[1] \leq \mathbf{i} \leq \floor{n \mathbf{t}}} \left( X_{\mathbf{i}}^{(k)} - \hat{\mu}^{(k)}(\mathbf{i}) \right) V_{n, j}(\mathbf{i}) \\
+        & = \frac{1}{n^{d/2}} \sum\limits_{\usbf[1] \leq \mathbf{i} \leq \floor{n \mathbf{t}}} \left( X_{\mathbf{i}}^{(k)} - \mu^{(k)} \right) V_{n, j}(\mathbf{i}) + \frac{1}{n^{d/2}} \sum\limits_{\usbf[1] \leq \mathbf{i} \leq \floor{n \mathbf{t}}} \left( \mu^{(k)} - \hat{\mu}^{(k)}(\mathbf{i}) \right) V_{n, j}(\mathbf{i}).
+    \end{align*}
+    Analogously to the end of the proof of Lemma \ref{lemma:3}, using Lemma \ref{lemma:6} and \cite{[11]bulinksi2007limittheorems} Theorem 1.3. in Chapter 5, it can be seen that the first summand
+    \[ \left(\frac{1}{n^{d/2}} \sum\limits_{\usbf[1] \leq \mathbf{i} \leq \floor{n \mathbf{t}}} \left( X_{\mathbf{i}}^{(k)} - \mu^{(k)} \right) V_{n, j}(\mathbf{i})\right)_{n \in \NN} \]
+    is tight. For the second summand
+    \[ Y_n(\cdot) \coloneqq \frac{1}{n^{d/2}} \sum\limits_{\usbf[1] \leq \mathbf{i} \leq \floor{n \cdot}} \left( \hat{\mu}^{(k)}(\mathbf{i}) - \mu^{(k)} \right) V_{n, j}(\mathbf{i}), \]
+    we bound the modulus of continuity via
+    \begin{align*}
+        \PP\left(\omega_{Y_n}(\eta) \geq \epsilon\right)
+        & = \PP\left(\sup\limits_{\|\mathbf{t}-\mathbf{s} \|_2 < \eta} \| Y_n(\mathbf{t}) - Y_n(\mathbf{s}) \| \geq \epsilon\right) \\
+        & \leq \PP\left(\sup\limits_{\|\mathbf{t}-\mathbf{s} \|_\infty < \eta} \| Y_n(\mathbf{t}) - Y_n(\mathbf{s}) \| \geq \epsilon\right).
+    \end{align*}
+    Letting only one component vary between $\mathbf{t}$ and $\mathbf{s}$ but compensating with the factor $d$, this may be bounded from above by
+    \[
+        \PP\left(d \max\limits_{h = 1, ..., d} \sup\limits_{\substack{\mathbf{t} \in [0,1]^d \\ \mathbf{t}_h \leq 1 - \eta \\ \gamma \in (0,\eta)}} \| Y_n(\mathbf{t}_1, ..., \mathbf{t}_{h-1}, \mathbf{t}_h + \gamma, \mathbf{t}_{h+1}, ..., \mathbf{t}_d) - Y_n(\mathbf{t}) \| \geq \epsilon\right).
+    \]
+    Using Boole's inequality, this probability is dominated by
+    \begin{align*}
+        & \sum\limits_{h=1}^d \PP\left(d \sup\limits_{\substack{\mathbf{t} \in [0,1]^d \\ \mathbf{t}_h \leq 1 - \eta \\ \gamma \in (0,\eta)}} \| Y_n(\mathbf{t}_1, ..., \mathbf{t}_{h-1}, \mathbf{t}_h + \gamma, \mathbf{t}_{h+1}, ..., \mathbf{t}_d) - Y_n(\mathbf{t}) \| \geq \epsilon\right) \\
+        & = \sum\limits_{h=1}^d \PP\left(d \sup\limits_{\substack{\mathbf{t} \in [0,1]^d \\ \mathbf{t}_h \leq 1 - \eta \\ \gamma \in (0,\eta)}} \frac{1}{n^{d/2}} \left\| \sum\limits_{\substack{\usbf[1] \leq \mathbf{i} \leq \floor{n \mathbf{t}} \\ \floor{n \mathbf{t}_h < \mathbf{i}_h \leq \floor{n(\mathbf{t}_h+\gamma)}}}} \left( \hat{\mu}^{(k)}(\mathbf{i}) - \mu^{(k)} \right) V_{n, j}(\mathbf{i}) \right\| \geq \epsilon\right) \\
+        & \leq \sum\limits_{h=1}^d \PP\left(d \sup\limits_{\substack{\mathbf{t} \in [0,1]^d \\ \mathbf{t}_h \leq 1 - \eta \\ \gamma \in (0,\eta)}} \frac{1}{n^{d/2}}  \sum\limits_{\substack{\usbf[1] \leq \mathbf{i} \leq \floor{n \mathbf{t}} \\ \floor{n \mathbf{t}_h < \mathbf{i}_h \leq \floor{n(\mathbf{t}_h+\gamma)}}}} \left\| \hat{\mu}^{(k)}(\mathbf{i}) - \mu^{(k)} \right\| \left| V_{n, j}(\mathbf{i}) \right|  \geq \epsilon\right) \\
+        & \leq \sum\limits_{h=1}^d \PP\left( \max\limits_{\usbf[1] \leq \mathbf{i} \leq \usbf[n]} n^{d/2} \left\| \hat{\mu}^{(k)}(\mathbf{i}) - \mu^{(k)} \right\| \sup\limits_{\substack{\mathbf{t} \in [0,1]^d \\ \mathbf{t}_h \leq 1 - \eta \\ \gamma \in (0,\eta)}} \frac{1}{n^{d}} \sum\limits_{\substack{\usbf[1] \leq \mathbf{i} \leq \floor{n \mathbf{t}} \\ \floor{n \mathbf{t}_h < \mathbf{i}_h \leq \floor{n(\mathbf{t}_h+\gamma)}}}}  \left| V_{n, j}(\mathbf{i}) \right|  \geq \frac{\epsilon}{d}\right).
+    \end{align*}
+    Due to the independence of the dependent multiplier field and the mean estimator $\hat{\mu}$, introducing a new variable $C > 0$, we may bound this from above by
+    \begin{align*}
+        & d \cdot \PP\left( \max\limits_{\usbf[1] \leq \mathbf{i} \leq \usbf[n]} n^{d/2} \left\| \hat{\mu}^{(k)}(\mathbf{i}) - \mu^{(k)} \right\| > C \right) \\
+        & + \sum\limits_{h=1}^d \PP\left(\sup\limits_{\substack{\mathbf{t} \in [0,1]^d \\ \mathbf{t}_h \leq 1 - \eta \\ \gamma \in (0,\eta)}} \frac{1}{n^{d}} \sum\limits_{\substack{\usbf[1] \leq \mathbf{i} \leq \floor{n \mathbf{t}} \\ \floor{n \mathbf{t}_h < \mathbf{i}_h \leq \floor{n(\mathbf{t}_h+\gamma)}}}}  \left| V_{n, j}(\mathbf{i}) \right|  \geq \frac{\epsilon}{dC} \right).
+    \end{align*}
+    Note that the term 
+    \[ \left\| \hat{\mu}^{(k)}(\mathbf{i}) - \mu^{(k)} \right\| \]
+    only takes two values for each $n$. Applying Theorem \ref{theorem1} to each of the two subsets, we see that the term
+    \[ d \cdot \PP\left( \max\limits_{\usbf[1] \leq \mathbf{i} \leq \usbf[n]} n^{d/2} \left\| \hat{\mu}^{(k)}(\mathbf{i}) - \mu^{(k)} \right\| > C \right) \]
+    approaches $0$ uniformly in $n$ as $C$ grows to infinity.
+    To show the convergence of the second term to $0$, partition $(0,1]^d$ into the blocks
+    \[ A_m(h, \eta) \coloneqq (0, 1]^{h-1} \times ((m-1)\eta, m\eta \wedge 1] \times (0, 1]^{d-h}  \]
+    for $m=1, ..., p$ with $p \coloneqq p(\eta) \coloneqq \floor{\eta^{-1}}+1$ and let
+    \[ Z_n(\cdot) \coloneqq \frac{1}{n^d} \sum\limits_{\usbf[1] \leq \mathbf{i} \leq \floor{n \cdot}} |V_{n, j}(\mathbf{i})|. \]
+    Then
+    \begin{align*}
+        & \sum\limits_{h=1}^d \PP\left(\sup\limits_{\substack{\mathbf{t} \in [0,1]^d \\ \mathbf{t}_h \leq 1 - \eta \\ \gamma \in (0,\eta)}} \frac{1}{n^{d}} \sum\limits_{\substack{\usbf[1] \leq \mathbf{i} \leq \floor{n \mathbf{t}} \\ \floor{n \mathbf{t}_h < \mathbf{i}_h \leq \floor{n(\mathbf{t}_h+\gamma)}}}}  \left| V_{n, j}(\mathbf{i}) \right|  \geq \frac{\epsilon}{dC} \right) \\
+        & = \sum\limits_{h=1}^d \PP\left(\sup\limits_{\substack{\mathbf{t} \in [0,1]^d \\ \mathbf{t}_h \leq 1 - \eta \\ \gamma \in (0,\eta)}} \left| Z_n(\mathbf{t}_1, ..., \mathbf{t}_{h-1}, \mathbf{t}_h+\gamma, \mathbf{t}_{h+1}, ..., \mathbf{t}_d) - Z_n(\mathbf{t}) \right| \geq \frac{\epsilon}{dC} \right) \\
+        & \leq \sum\limits_{h=1}^d \sum\limits_{m=1}^p \PP\left(\sup\limits_{\substack{\mathbf{s}, \mathbf{t} \in A_m(h, \eta) \\ \mathbf{s}_a = \mathbf{t}_a \text{ for } a \neq h}} \left| Z_n(\mathbf{s}) - Z_n(\mathbf{t}) \right| \geq \frac{\epsilon}{2dC} \right)
+    \end{align*}
+    where the $2$ in the denominator compensates for the fact that we are no longer allowing the supremum to go over intervals that contain some $m \eta$.
+    Let
+    \[ A_{m, n}(h, \eta) \coloneqq nA_m(h, \eta) \cap \ZZ^d \subset \{1, ...,n \}^d. \]
+    We continue to estimate from above via
+    \begin{align*}
+        & \sum\limits_{h=1}^d \sum\limits_{m=1}^p \PP\left(\sup\limits_{\substack{\mathbf{s}, \mathbf{t} \in A_m(h, \eta) \\ \mathbf{s}_a = \mathbf{t}_a \text{ for } a \neq h}} \left| Z_n(\mathbf{s}) - Z_n(\mathbf{t}) \right| \geq \frac{\epsilon}{2dC} \right) \\
+        & \leq \sum\limits_{h=1}^d \sum\limits_{m=1}^p \PP\left( \frac{1}{n^d} \sum\limits_{\mathbf{i} \in A_{m, n}(h, \eta)} \left| V_{n, j}(\mathbf{i}) \right| \geq \frac{\epsilon}{4dC} \right) \\
+        & =  \sum\limits_{h=1}^d \sum\limits_{m=1}^p \PP\left( \left| \frac{1}{n^d} \sum\limits_{\mathbf{i} \in A_{m, n}(h, \eta)} \left| V_{n, j}(\mathbf{i}) \right| \right|^r \geq \left(\frac{\epsilon}{4dC}\right)^r \right).
+    \end{align*}
+    with $r \geq 2$. Using Markov's inequality, this is bounded from above by
+    \begin{align*}
+        \sum\limits_{h=1}^d \sum\limits_{m=1}^p \EE{\left| \frac{1}{n^d} \sum\limits_{\mathbf{i} \in A_{m, n}(h, \eta)} \left| V_{n, j}(\mathbf{i}) \right| \right|^r} \frac{4^rd^rC^r}{\epsilon^r}.
+    \end{align*}
+    Due to the Gaussian distribution of the dependent multiplier field, there is a constant $C_r > 0$ such that this is bounded from above by
+    \begin{align*}
+        \sum\limits_{h=1}^d \frac{1}{n^{dr}} \sum\limits_{m=1}^p C_r |A_{m, n}(h, \eta)|^r \frac{4^rd^rC^r}{\epsilon^r}
+        & \leq \sum\limits_{h=1}^d \frac{1}{n^{dr}} \sum\limits_{m=1}^p C_r (n^d \eta)^r \frac{4^rd^rC^r}{\epsilon^r} \\
+        & = d (1 + \floor{\eta^{-1}}) \frac{1}{n^{dr}} C_r n^{dr} \eta^r \frac{4^rd^rC^r}{\epsilon^r} \\
+        & \leq d (\delta + 1) C_r \eta^{r-1} \frac{4^rd^rC^r}{\epsilon^r} \\
+        & \stackrel{\eta \to 0}{\longrightarrow} 0
+    \end{align*}
+    where we have used $|A_{m, n}(h, \eta)| \leq n^d \eta$. Hence we have finally shown that the processes $\left(S_{n, j}^{\star, (k)}\right)_n$, $j = 1, ..., K$, are tight. Therefore, the processes 
+    \[ \left(S_{n, 1}^{\star, (k)}, ..., S_{n, K}^{\star, (k)}\right)_n \]
+    is tight as well.
+
+
+    Next, we show the convergence of the finite-dimensional distributions. Using Prokhorov's theorem, the tightness of the sequence
+    \[ \left( S_{n, 1}^{\star, (k)}, ..., S_{n, K}^{\star, (k)} \right)_n \]
+    implies that it is sequentially compact with respect to the topology of weak convergence, i.e., any subsequence has a further subsequence that converges weakly. We only need to show that this further subsequence converges to the correct limit. Let $(n_m)_{m \in \NN}$ index some subsequence and let $(n_m)_{m \in M}$ be a further subsequence with an infinite subset $M \subset \NN$ such that all finite-dimensional distributions of the form
+    \[ \mathbf{W}_{m, j}^{\star, (k)} \coloneqq \left( S_{n_m, j}^{\star, (k)}(B_1), ..., S_{n_m, j}^{\star, (k)}(B_l) \right) \]
+    converge weakly to some limit for all indices $j = 1, ..., K$ and collections of disjoint blocks $B_1, ..., B_l$ with rational corners (i.e., with corners in $[0,1]^d \cap \QQ^d$). We may choose such subsequence by a diagonal sequence argument as we only consider countably many blocks.
+    We need to show that the above converges to the following "correct" limit:
+    \[ \mathbf{W}_j^{\star, (k)} \coloneqq \left( W_{j}^{\star, (k)}(B_1), ..., W_{j}^{\star, (k)}(B_l) \right) \]
+    Note that the $\mathbf{W}_{m, j}^{\star, (k)}$, $j = 1, ..., K$, are centered since the dependent multiplier field is centered and it is independent of the random field $X$. Furthermore, conditioned on $X_\mathbf{i}$, $\usbf[1] \leq \mathbf{i} \leq \usbf[n]$, the $\mathbf{W}_{m, j}^{\star, (k)}$ are independent and have a Gaussian distribution. Hence the weak limit has independent components and is Gaussian as well. Therefore, to characterize the distribution of the limit, it suffices to show the convergence of the covariance operators
+    \begin{equation} \label{thm 2 proof convergence covariance}
+        \lim\limits_{n \to \infty} \Cov\left( S_{n, j}^{\star, (k)}(B_{l_1}), S_{n, j}^{\star, (k)}(B_{l_2}) \right) = \left\{
+        \begin{array}{ll}
+        \lambda(B_{l_1}) \Gamma & l_1 = l_2 \\
+        0 & l_1 \neq l_2 
+        \end{array}
+        \right. ,
+    \end{equation}
+    $l_1, l_2, = 1, ..., l$, where $\Gamma$ is the long-run variance of $X$.
+    To do this, we will apply the law of total covariance to the $(p, q)$-components, $p, q = 1, ..., k$. We simplify the notation and write
+    \[ U_s \coloneqq S_{n, j}^{\star, (k)}(B_{l_s}), \ s = 1, 2, \]
+    for the increments of the bootstrapped, projected partial sum fields and write
+    \[ \mathcal{A}_n \coloneqq \sigma\left(X_{\mathbf{i}}, \usbf[1] \leq \mathbf{i} \leq \usbf[n] \right) \]
+    for the $\sigma$-algebra that contains all information on $X$ until time $n$.
+    Then we have by the law of total covariance
+    \begin{align*}
+        \Cov\left( U_1, U_2 \right)_{p, q} = \EE{\Cov(U_1, U_2 \mid \mathcal{A}_n)_{p, q} + \Cov(\EE{U_1 \mid \mathcal{A}_n}, \EE{U_2 \mid \mathcal{A}_n})_{p, q}}.
+    \end{align*}
+    The $U_s$ are linear combinations of elements of the form
+    \[ \left(X^{(k)}_{\mathbf{i}} - \hat{\mu}^{(k)}(\mathbf{i})\right) V_{n, j}(\mathbf{i}) \]
+    of which the first factor is $\mathcal{A}_n$-measurable and the second factor is independent of $\mathcal{A}_n$ by definition of the dependent multiplier field. Hence the conditional expectations $\EE{U_s \mid \mathcal{A}_n}$ as linear combinations of elements of the form
+    \begin{align*}
+        \EE{\left(X^{(k)}_{\mathbf{i}} - \hat{\mu}^{(k)}(\mathbf{i})\right) V_{n, j}(\mathbf{i}) \mid \mathcal{A}_n} 
+        & = \left(X^{(k)}_{\mathbf{i}} - \hat{\mu}^{(k)}(\mathbf{i})\right) \EE{ V_{n, j}(\mathbf{i}) \mid \mathcal{A}_n} \\
+        & = \left(X^{(k)}_{\mathbf{i}} - \hat{\mu}^{(k)}(\mathbf{i})\right) \EE{ V_{n, j}(\mathbf{i})} \\
+        & = 0
+    \end{align*}
+    vanish since dependent multiplier fields are centered. Therefore we can write the covariance operators as
+    \[ \Cov\left( U_1, U_2 \right) = \EE{\Cov(U_1, U_2 \mid \mathcal{A}_n)}. \]
+    We will thus examine the asymptotic behaviour of
+    \begin{align*}
+        \Cov(U_1, U_2 \mid \mathcal{A}_n) 
+        & = \EE{(U_1 - \EE{U_1 \mid \mathcal{A}_n}) (U_2 - \EE{U_2 \mid \mathcal{A}_n})^T \mid \mathcal{A}_n} \\
+        & = \EE{U_1 U_2 ^T \mid \mathcal{A}_n}.
+    \end{align*}
+    We remember the definition
+    \[ B_n \coloneqq n B \cap \ZZ^d \]
+    for a block $B \subset [0,1]^d$. Using Equation \eqref{partial sum field increment}, we may write
+    \[  \EE{U_1 U_2 ^T \mid \mathcal{A}_n} = \EE{S_{n, j}^{\star, (k)}(B_{l_1}) S_{n, j}^{\star, (k)}(B_{l_2})^T \mid \mathcal{A}_n} \]
+    as
+    \[ \frac{1}{n^d} \sum\limits_{\mathbf{a} \in B_{l_1, n}} \sum\limits_{\mathbf{b} \in B_{l_2, n}} \EE{\left(  \left( X_\mathbf{a}^{(k)} - \hat{\mu}^{(k)}(\mathbf{a}) \right) V_{n, j}(\mathbf{a}) \right) \left(  \left( X_\mathbf{b}^{(k)} - \hat{\mu}^{(k)}(\mathbf{b}) \right) V_{n, j}(\mathbf{b}) \right)^T \mid \mathcal{A}_n}. \]
+    Once more using the fact that the factors $X_{\mathbf{i}}^{(k)} - \hat{\mu}^{(k)}(\mathbf{i})$ are $\mathcal{A}_n$-measurable and that $V_{n, j}(\mathbf{b})$ is independent of $\mathcal{A}_n$, the above equals
+    \[ \frac{1}{n^d} \sum\limits_{\mathbf{a} \in B_{l_1, n}} \sum\limits_{\mathbf{b} \in B_{l_2, n}} \left( X_\mathbf{a}^{(k)} - \hat{\mu}^{(k)}(\mathbf{a}) \right) \left( X_\mathbf{b}^{(k)} - \hat{\mu}^{(k)}(\mathbf{b}) \right)^T \EE{ V_{n, j}(\mathbf{a}) V_{n, j}(\mathbf{b})}. \]
+    By Assumption \eqref{dependent multiplier field covariance omega} of the dependent multiplier field, we have
+    \[ \EE{ V_{n, j}(\mathbf{a}) V_{n, j}(\mathbf{b})} = \omega\left(\frac{1}{q_n} (\mathbf{a} - \mathbf{b})\right). \]
+    Using this together with Lemma \ref{lemma regarding set product double sum}, we deduce that $\EE{U_1 U_2^T \mid \mathcal{A}_n}$ equals
+    \[ \sum\limits_{\mathbf{h} \in B_{l_2, n} \circleddash B_{l_1, n}} \omega\left( \frac{\mathbf{h}}{q_n}\right) \frac{1}{n^d} \sum\limits_{\substack{\mathbf{a}:\\ \mathbf{a} \in B_{l_1, n},\\ \mathbf{a}+\mathbf{h} \in B_{l_2, n}}} \left(X_{\mathbf{a}}^{(k)} - \hat{\mu}^{(k)}(\mathbf{a})\right) \left(X_{\mathbf{a+h}}^{(k)} - \hat{\mu}^{(k)}(\mathbf{a+h})\right)^T. \]
+    For $l_1 = l_2$, we may apply Lemma \ref{lemma:7} to conclude that the above converges to $\lambda(B_{l_1}) \Gamma$ in probability.
+    We conclude
+    \begin{align*}
+        \lim\limits_{n \to \infty} \Cov\left( S_{n, j}^{\star, (k)}(B_{l_1}) \right)
+        & = \lim\limits_{n \to \infty} \EE{\Cov\left( S_{n, j}^{\star, (k)}(B_{l_1}) \mid \mathcal{A}_n \right)} \\
+        & = \EE{\lim\limits_{n \to \infty} \Cov\left( S_{n, j}^{\star, (k)}(B_{l_1}) \mid \mathcal{A}_n \right)} \\
+        & = \EE{\lambda(B_{l_1}) \Gamma} \\
+        & = \lambda(B_{l_1}) \Gamma.
+    \end{align*}
+    For $l_1 \neq l_2$, from
+    \begin{align*}
+        \Cov(U_1 + U_2 \mid \mathcal{A}_n)
+        & = \Cov\left( U_1 \mid \mathcal{A}_n \right) + 2 \Cov\left( U_1, U_2 \mid \mathcal{A}_n \right) + \Cov\left( U_2 \mid \mathcal{A}_n \right)
+    \end{align*}
+    it follows that
+    \begin{align*}
+        \Cov\left( U_1, U_2 \mid \mathcal{A}_n \right)
+        & = \frac{1}{2}\left( \Cov\left( U_1 \mid \mathcal{A}_n \right) + \Cov\left( U_2 \mid \mathcal{A}_n \right) - \Cov(U_1 + U_2 \mid \mathcal{A}_n) \right).
+    \end{align*}
+    We have calculated that the first two terms respectively converge to $\lambda(B_{l_1}) \Gamma$ and $\lambda(B_{l_2}) \Gamma$ in probability. Applying Lemma \ref{lemma:7}, it follows that the third term converges to
+    \[ \lambda(B_{l_1} \dot{\cup} B_{l_2} ) \Gamma = (\lambda(B_{l_1}) + \lambda(B_{l_2})) \Gamma \]
+    in probability. Hence 
+    \[  \Cov\left( U_1, U_2 \mid \mathcal{A}_n \right) = \Cov\left( S_{n, j}^{\star, (k)}(B_{l_1}), S_{n, j}^{\star, (k)}(B_{l_2}) \mid \mathcal{A}_n \right) \]
+    converges to $0$ in probability for $l_1 \neq l_2$. With the same argument as before, it follows that
+    \[ \lim\limits_{n \to \infty} \Cov\left( S_{n, j}^{\star, (k)}(B_{l_1}), S_{n, j}^{\star, (k)}(B_{l_2}) \right) = 0. \]
+    This means that we have shown \eqref{thm 2 proof convergence covariance} and thus finished to proof of Condition (i) of Lemma \ref{lemma:4}.
+    
+
+    Lemma \ref{lemma:4} Condition (ii)
+    \[ (W^{(k)}, W_1^{\star, (k)}, ..., W_K^{\star, (k)}) \stackrel{k}{\Rightarrow} (W, W_1^\star, ..., W_K^\star) \]
+    in $(D_H[0,1]^d)^{K+1}$ follows from the proof of Theorem \ref{theorem1}: The weak convergence $W^{(k)} \Rightarrow W$ was shown directly and $W_1^{\star, (k)}, ..., W_K^{\star, (k)}$ and $W_1^\star, ..., W_K^\star$ are independent copies of $W^{(k)}$ and $W$ respectively.
+
+    It only remains to prove Condition (iii). Let $r \coloneqq 2+\delta$. For two positive numbers $a$ and $b$, applying the triangle inequality and Jensen's inequality to the convex function $\cdot^r$ (with domain $\RR_{\geq 0}$) gives
+    \[ \sqrt{a^2 + b^2}^r \leq \left(a + b\right)^r = 2^r \left(\frac{a+b}{2}\right)^r \leq 2^r \frac{a^r+b^r}{2} = 2^{r-1}(a^r+b^r). \]
+    Applying the above $K$ times, we get
+    \begin{align*}
+        & \EE{\sup\limits_{\mathbf{s}, \mathbf{t}_1, ..., \mathbf{t}_K \in [0,1]^d} \left\| \begin{pmatrix} S_n(\mathbf{s}) \\ S_{n, 1}^{\star}(\mathbf{t}_1) \\ ... \\ S_{n, K}^\star(\mathbf{t}_K) \end{pmatrix} - \begin{pmatrix} S^{(k)}_n(\mathbf{s}) \\ S_{n, 1}^{\star, (k)}(\mathbf{t}_1) \\ ... \\ S_{n, K}^{\star, (k)}(\mathbf{t}_K) \end{pmatrix} \right\|^r} \\
+        & \leq 2^{r-1} \EE{\sup\limits_{\mathbf{s}, \mathbf{t}_1, ..., \mathbf{t}_K \in [0,1]^d} \left\| S_n(\mathbf{s}) - S^{(k)}_n(\mathbf{s}) \right\|^r + \left\| \begin{pmatrix} S_{n, 1}^{\star}(\mathbf{t}_1) \\ ... \\ S_{n, K}^\star(\mathbf{t}_K) \end{pmatrix} - \begin{pmatrix} S_{n, 1}^{\star, (k)}(\mathbf{t}_1) \\ ... \\ S_{n, K}^{\star, (k)}(\mathbf{t}_K) \end{pmatrix} \right\|^r} \\
+        & \leq 2^{r-1} \EE{\sup\limits_{\mathbf{s} \in [0,1]^d} \left\| S_n(\mathbf{s}) - S^{(k)}_n(\mathbf{s}) \right\|^r}
+        + 2^{K(r-1)} \sum\limits_{j=1}^K \EE{\sup\limits_{\mathbf{t}\in [0,1]^d} \left\|  S_{n, j}^{\star}(\mathbf{t}) - S_{n, j}^{\star, (k)}(\mathbf{t}) \right\|^r}.
+    \end{align*}
+    We have shown in the proof of Theorem \ref{theorem1} that the first time converges to $0$ for $k \to \infty$. 
+    Continuing the notation $h^{(-k)} \coloneqq h - h^{(k)}$ for a vector $h \in H$ from the proof of Theorem \ref{theorem1}, the second term is equal to
+    \begin{align*}
+        & 2^{K(r-1)} \sum\limits_{j=1}^K \EE{\sup\limits_{\mathbf{t}\in [0,1]^d} \left\| \frac{1}{n^{d/2}} \sum\limits_{\usbf[1] \leq \mathbf{i} \leq \floor{n \mathbf{t}}} V_{n, j}(\mathbf{i}) \left(X_\mathbf{i}^{(-k)} - \hat{\mu}^{(-k)}(\mathbf{i}) \right) \right\|^r} \\
+        & \leq 2^{(K+1)(r-1)} \sum\limits_{j=1}^K \EE{\sup\limits_{\mathbf{t}\in [0,1]^d} \left\| \frac{1}{n^{d/2}} \sum\limits_{\usbf[1] \leq \mathbf{i} \leq \floor{n \mathbf{t}}} V_{n, j}(\mathbf{i}) \left(X_\mathbf{i}^{(-k)} - \mu^{(-k)} \right) \right\|^r} \\
+        & + 2^{(K+1)(r-1)} \sum\limits_{j=1}^K \EE{\sup\limits_{\mathbf{t}\in [0,1]^d} \left\| \frac{1}{n^{d/2}} \sum\limits_{\usbf[1] \leq \mathbf{i} \leq \floor{n \mathbf{t}}} V_{n, j}(\mathbf{i}) \left(\mu^{(-k)} - \hat{\mu}^{(-k)}(\mathbf{i}) \right) \right\|^r}.
+    \end{align*}
+    The convergence to $0$ of the above first term on the right-hand side of the inequality follows in the same way as the one of the non-bootstrapped version when one replaced Lemma \ref{lemma:1} with Lemma \ref{lemma:6} in the proof of Theorem \ref{theorem1}. To show the convergence of the second term, consider
+    \begin{align*}
+        & \EE{\sup\limits_{\mathbf{t}\in [0,1]^d} \left\| \frac{1}{n^{d/2}} \sum\limits_{\usbf[1] \leq \mathbf{i} \leq \floor{n \mathbf{t}}} V_{n, j}(\mathbf{i}) \left(\mu^{(-k)} - \hat{\mu}^{(-k)}(\mathbf{i}) \right) \right\|^r} \\
+        & \leq \EE{\sup\limits_{\mathbf{t}\in [0,1]^d} \left( \frac{1}{n^{d/2}} \sum\limits_{\usbf[1] \leq \mathbf{i} \leq \floor{n \mathbf{t}}} \left\| V_{n, j}(\mathbf{i}) \left(\mu^{(-k)} - \hat{\mu}^{(-k)}(\mathbf{i}) \right) \right\| \right)^r} \\
+        & \leq \EE{\sup\limits_{\mathbf{t}\in [0,1]^d} \left( \max\limits_{\usbf[1] \leq \mathbf{i} \leq \floor{n \mathbf{t}}} \left\| \mu^{(-k)} - \hat{\mu}^{(-k)}(\mathbf{i}) \right\| \right)^r \left( \frac{1}{n^{d/2}} \sum\limits_{\usbf[1] \leq \mathbf{i} \leq \floor{n \mathbf{t}}} |V_{n, j}(\mathbf{i})| \right)^r} \\
+        & \leq \EE{ n^{rd/2} \max\limits_{\usbf[1] \leq \mathbf{i} \leq \usbf[n]} \left\| \mu^{(-k)} - \hat{\mu}^{(-k)}(\mathbf{i}) \right\|^r \left( \frac{1}{n^{d}} \sum\limits_{\usbf[1] \leq \mathbf{i} \leq \usbf[n]} |V_{n, j}(\mathbf{i})| \right)^r}.
+    \end{align*}
+    Due to independence, this is equal to
+    \begin{align*}
+        \EE{ n^{rd/2} \max\limits_{\usbf[1] \leq \mathbf{i} \leq \usbf[n]} \left\| \mu^{(-k)} - \hat{\mu}^{(-k)}(\mathbf{i}) \right\|^r} \EE{ \left(\frac{1}{n^{d}} \sum\limits_{\usbf[1] \leq \mathbf{i} \leq \usbf[n]} |V_{n, j}(\mathbf{i})| \right)^r}.
+    \end{align*}
+    As the second factor is dominated by
+    \[ \frac{1}{n^{dr}} C_r n^{dr} = C_r \]
+    for some constant $C_r$, it is bounded uniformly in $n$ and $k$. 
+    %Examining the definition of the mean estimator $\hat{\mu}$,
+    Since the sizes of the two sets on which the mean estimator $\hat{\mu}$ takes different values are both asymptotically proportional to $n^d$ (and we find a subblock in both sets whose size is proportional to $n^d$ as well), 
+    we see that for sufficiently large $n$, the first factor is dominated by
+    \begin{align*}
+        & C \EE{n^{rd/2} \max\limits_{\usbf[1] \leq \mathbf{l} < \mathbf{u} \leq \usbf[n]} \left\| \frac{1}{n^d} \sum\limits_{\mathbf{l} < \mathbf{i} \leq \mathbf{u}} \left(X_{\mathbf{i}}^{(-k)}-\mu^{(-k)}\right) \right\|^r} \\
+        & = C \EE{ \frac{1}{n^{rd/2}}\max\limits_{\usbf[1] \leq \mathbf{l} < \mathbf{u} \leq \usbf[n]} \left\| \sum\limits_{\mathbf{l} < \mathbf{i} \leq \mathbf{u}} \left(X_{\mathbf{i}}^{(-k)}-\mu^{(-k)}\right) \right\|^r}
+    \end{align*}
+    for some constant $C$.
+    By Lemma \ref{lemma:1}, the above is uniformly bounded in $n$ and approaches $0$ as $k \to \infty$, see also the proof of Theorem \ref{theorem1}.
+    Condition (iii) is now shown and the proof is completed.
+\end{proof}

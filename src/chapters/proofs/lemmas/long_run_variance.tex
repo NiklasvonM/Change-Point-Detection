@@ -1,0 +1,8 @@
+The following lemma explains the rationale behind the term "long-run variance"
+\begin{lemma} \label{lemma long-run variance equation}
+    Let $X = (X_\mathbf{j})_{j \in \RR^d}$ be an $\RR$-valued, weakly stationary, centered random field. Assume that the long-run variance $\Gamma$ of $X$ exists. Then it is given by
+    \[ \Gamma = \lim\limits_{n \to \infty} \frac{1}{n^d} \EE{\left( \sum\limits_{\usbf[1] \leq \mathbf{j} \leq \usbf[n]} X_\mathbf{j} \right)^2} = \lim\limits_{n \to \infty} \frac{1}{n^d} \mathrm{Var}\left( \sum\limits_{\usbf[1] \leq \mathbf{j} \leq \usbf[n]} X_\mathbf{j} \right). \]
+\end{lemma}
+\begin{proof}
+    Setting $\mathbf{t} = \usbf[1]$, we have essentially shown this in the proof of Lemma \ref{lemma:3} in the part involving $\Gamma(n, \mathbf{t})$.
+\end{proof}

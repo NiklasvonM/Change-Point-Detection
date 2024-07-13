@@ -1,0 +1,25 @@
+The following result is \cite{[0]BUCCHIA2017344} Lemma 5.
+\begin{lemma} \label{lemma:5}
+    Let $X$ and $Y$ be $\mathcal{F}$- and $\mathcal{G}$-measurable random variables respectively that live in some Hilbert space $H_1$. Let $V$ be another random variable that takes values in a Hilbert space $H_2$ and is independent of $\sigma(\mathcal{F}, \mathcal{G})$. Let $g, h: H_1 \times H_2 \to H$ be measurable functions satisfying 
+    \[  \EE{g(X, V)\mid V} = \EE{h(Y, V) \mid V} = 0 \ \text{a.s.}\]
+    Assume $\rho(\mathcal{F}, \mathcal{G}) < 1$.
+    
+    Then for any $p > 1$ for which $\EE{\| g(X, V)\|^p}$ and $ \EE{\|h(Y, V)\|^p}$ exist, there is a constant $C = C(\rho(\mathcal{F}, \mathcal{G}), p)$ such that
+    \[ \EE{\| g(X, V)\|^p} \leq C \EE{\| g(X, V) + h(Y, V) \|^p}. \]
+\end{lemma}
+\begin{proof}
+    For almost all $v \in H_2$, we may apply \cite{[56]zhang1998rosenthal} Theorem 1 to the $H$-valued random variables $g(X, v)$ and $h(Y, v)$ to get
+    \begin{align*}
+        \EE{\|g(X, V)\|^p \mid V = v} 
+        & = \EE{\|g(X, v)\|^p} \\
+        & \leq C \EE{\| g(X, v) + h(Y, v) \|^p} \\
+        & = C \EE{\| g(X, V) + h(Y, V) \|^p \mid V = v}. 
+    \end{align*}
+    Using iterated expectation, this shows
+    \begin{align*}
+        \EE{\|g(X, V) \|^p}
+        & = \EE{\EE{\|g(X, V)\|^p \mid V}} \\
+        & \leq \EE{C \EE{\| g(X, V) + h(Y, V) \|^p}} \\
+        & = C \EE{\| g(X, V) + h(Y, V) \|^p}.
+    \end{align*}
+\end{proof}

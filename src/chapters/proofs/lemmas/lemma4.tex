@@ -1,0 +1,51 @@
+The following theorem is \cite{billingsley1999convergence} Theorem 3.2. It is needed in order to prove Lemma \ref{lemma:4}.
+\begin{thm} \label{theorem billingsley double convergence}
+    Let $(M, g)$ be a metric space. Suppose that $(X_{k, n}, X_n)$ are elements of $M \times M$. If
+    \begin{equation} \label{for lemma 4: double weak convergence}
+        X_{k, n} \Rightarrow_n Z_k \Rightarrow_k X 
+    \end{equation}
+    and
+    \begin{equation} \label{for lemma 4: kind of convergence in probability}
+        \lim\limits_{k \to \infty} \limsup\limits_{n \to \infty} \PP(g(X_{k, n}, X_n) \geq \epsilon) = 0
+    \end{equation}
+    for each $\epsilon > 0$, then $X_n \Rightarrow X$.
+\end{thm}
+
+
+The following lemma, formulated in \cite{[0]BUCCHIA2017344} as Lemma 4, is an adaptation of \cite{chen_white_1998} Lem\-ma 4.1 in which stochastic processes are replaced with vectors of random fields and the space of continuous functions is replaced with the Skorokhod space $D_H[0, 1]^d$.
+\begin{lemma} \label{lemma:4} 
+    Let $K \in \NN$ be some natural number and let 
+    \[ ((X_{n, 1}, ..., X_{n, K}))_{n \in \NN} \] 
+    be a sequence of random elements with values in $\left(D_H[0, 1]^d\right)^K$. For each $k \in \NN$, let 
+    \[ X^k_1, ..., X_K^k \] 
+    be independent Brownian sheets in
+    \[ H_k = P_k H = \spn(e_1, ..., e_k) \subset H \]
+    with covariance operators $S_i^k$, $i = 1, ..., K$ and $\EE{X_i^k(\usbf[1])} = 0$. Assume the following:
+    \begin{aufzii}
+        \item 
+        \begin{equation} \label{lemma 4: first convergence}
+            \begin{pmatrix}P_k X_{n, 1}\\ ...\\ P_k X_{n, K} \end{pmatrix} \stackrel{n}{\Rightarrow} \begin{pmatrix}X_1^k\\ ...\\ X_K^k \end{pmatrix}  
+        \end{equation}
+        in $\left(D_{H_k}[0, 1]^d\right)^K$ for all $k \in \NN$.
+        \item 
+        \begin{equation} \label{lemma 4: second convergence}
+                \begin{pmatrix}X_1^k\\ ...\\ X_K^k \end{pmatrix} \stackrel{k}{\Rightarrow} \begin{pmatrix} X_1\\ ...\\ X_K \end{pmatrix} 
+        \end{equation}
+        in $\left(D_{H}[0, 1]^d\right)^K$ for independent Brownian sheets $X_i$, $i = 1, ..., K$, in $H$ with covariance operators $S_i$.
+        \item There is some $r \geq 2$ such that
+        \begin{equation} \label{lemma 4: convergence of expected value}
+            \lim\limits_{k \to \infty} \limsup\limits_{n \to \infty} \EE{\sup\limits_{\mathbf{t}_1, ..., \mathbf{t}_K \in [0, 1]^d} \left\| 
+            \begin{pmatrix}X_{n, 1}(\mathbf{t}_1)\\...\\X_{n, K}(\mathbf{t}_K)\end{pmatrix}
+            - \begin{pmatrix}P_k X_{n, 1}(\mathbf{t}_1)\\...\\P_k X_{n, K}(\mathbf{t}_K)\end{pmatrix} \right\|_{H^K}^r } = 0.
+        \end{equation}
+    \end{aufzii}
+    Then
+    \begin{equation} \label{lemma 4: claim}
+        \begin{pmatrix}X_{n, 1}\\ ...\\ X_{n, K} \end{pmatrix} \stackrel{n}{\Rightarrow} \begin{pmatrix} X_1\\ ...\\ X_K \end{pmatrix}
+    \end{equation}
+    in $\left(D_H[0, 1]^d\right)^K$.
+\end{lemma}
+\begin{proof} 
+    \eqref{lemma 4: first convergence} and \eqref{lemma 4: second convergence} together are \eqref{for lemma 4: double weak convergence}.
+    Applying the fact that the Skorokhod metric is bounded from above by the supremum metric and using Markov's inequality, we see that \eqref{for lemma 4: kind of convergence in probability} follows from \eqref{lemma 4: convergence of expected value}. Hence Theorem \ref{theorem billingsley double convergence} shows \eqref{lemma 4: claim}.
+\end{proof}

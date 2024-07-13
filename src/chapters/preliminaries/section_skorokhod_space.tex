@@ -1,0 +1,50 @@
+\section{Skorokhod Space}
+
+In the univariate case, Skorokhod spaces consist of càdlàg functions, that is, functions which are continuous from the right with limits from the left. As "left" and "right" may be understood in each dimension, in order to extend this definition to functions on $[0, 1]^d$, we need to consider quadrants, which can be thought of as  sub-intervals of $[0, 1]^d$ which touch the boundary of $[0, 1]^d$ in each dimension.
+
+Skorokhod spaces are of interest as we will consider the partial sum fields as random elements in a Skorokhod space.
+
+\begin{defn}[Quadrant]
+    A \textit{quadrant in}  $[0, 1]^d$ is a set of the form
+    \[ Q(\mathbf{t}) = Q_{R_1, ..., R_d}(\mathbf{t}) \coloneqq \{ \mathbf{s} \in [0, 1]^d \mid \mathbf{s}_i R_i \mathbf{t}_i \ \forall i = 1, ..., d \} \]
+    with relations $R_i \in \{ <, \geq \}$ and corner point $\mathbf{t} \in [0, 1]^d$. 
+\end{defn}
+
+
+\begin{defn}[Càdlàg function]
+    We say that a function $f: [0, 1]^d \to H$ is \textit{càdlàg} if the limit
+    \[ \lim\limits_{\substack{\mathbf{s} \to \mathbf{t} \\ \mathbf{s} \in Q(\mathbf{t})}} f(\mathbf{s}) \]
+    exists for all $\mathbf{t} \in [0, 1]^d$ and quadrants $Q(\mathbf{t})$ in $[0, 1]^d$ and if $f$ is continuous from the right in the sense that
+    \[ f(\mathbf{t}) = \lim\limits_{\substack{\mathbf{s} \to \mathbf{t} \\ \mathbf{s} \in Q_{\geq, ..., \geq}(\mathbf{t})}} f(\mathbf{s}) \]
+    for all $\mathbf{t} \in [0, 1]^d$.
+\end{defn}
+
+\begin{defn}[Skorokhod space]
+    The \textit{Skorokhod space} $D_H[0, 1]^d$ is defined as the space of càdlàg functions $[0, 1]^d \to H$. We endow it with the so-called \textit{Skorokhod metric}
+    \[ d_S(f, g) \coloneqq \inf\limits_{\lambda \in \Lambda} \max( \| f - g \circ \lambda \|_\infty, \| \mathrm{id} - \lambda \|_\infty) \]
+    where $\Lambda$ denotes the $d$-times cartesian product of the set of increasing bijections of $[0, 1]$.
+
+    We consider the space of continuous functions $C_H[0, 1]^d$ a subset of this Skorokhod space.
+\end{defn}
+
+\begin{remark}
+    Unlike the supremum metric
+    \[ d_\infty: (f, g) \mapsto \sup\limits_{\mathbf{t}} \|f(\mathbf{t}) - g(\mathbf{t}) \|_H, \]
+    which only considers "distance in space", the Skorokhod metric $d_S$ also considers "distance in time". E.g. the distance of the indicator function of $[0.5, 1]$ and the one of $[0.5+1/n, 1]$ is $1$ under the supremum metric while the distance converges to $0$ under the Skorokhod metric, which can be seen by considering $\lambda$ of the form
+    \[ \lambda(x) = \left\{\begin{array}{ll} 
+        (1 + 2/2n)x, & x < 0.5 \\
+        (1-2/n)x + 2/n, & x \geq 0.5 \\
+        \end{array}
+        \right. . \]
+    This implies that these two metrics are not equivalent. This is important as the weak convergences we will show later on in general do not hold when considering weak convergence with respect to the supremum metric.
+\end{remark}
+
+\begin{defn}[Modulus of continuity] \label{defn:modulus of continuity}
+    % https://en.wikipedia.org/wiki/C%C3%A0dl%C3%A0g#Tightness_in_Skorokhod_space
+   We define the \textit{modulus of continuity} as the function
+   \[ \gls*{w} \coloneqq w_H: D_{H}([0, 1]^d) \times [0, \infty) \to [0, \infty], (f, \delta) \mapsto w_f(\delta) \coloneqq \sup\limits_{\| \mathbf{t} - \mathbf{s}\| \leq \delta} \| f(\mathbf{t}) - f(\mathbf{s})\|. \]
+\end{defn}
+
+\begin{remark}
+    It can be shown that $D_H[0, 1]^d$ is a complete and separable metric space (see \cite{neuhaus1971weak}). In particular, it is Polish, allowing us to use Prokhorov's theorem. One may argue as in \cite{[4]billingsley1968convergence} Theorem 8.1 to conclude that the convergence of the finite-dimensional distributions of probability measures $\mathbb{P}_n$ on $D_H[0, 1]^d$ to those of another probability measure $\mathbb{P}$ imply the convergence of $\mathbb{P}_n$ to $\mathbb{P}$ under the assumption that the collection $(\mathbb{P}_n)_n$ is tight. Tightness of measures will be assumed in \eqref{lemma2:tightness assumption} in the form of an assumption on the modulus of continuity, see also \cite{[11]bulinksi2007limittheorems} Chapter 5.
+\end{remark}

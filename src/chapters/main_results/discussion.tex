@@ -1,0 +1,41 @@
+\section{Discussion}
+
+\subsection{Model Limitations}
+
+While the test procedure investigated here exactly satisfies the asymptotic properties one wishes for, namely being able to detect any changes no matter how small they are while holding the significance level, in reality, the test will only be applied to samples of finite size. Therefore, in the following, we will outline some challenges one may face.
+
+In \cite{cressie1993spatialstatistics} Section 2.3 it is written: "[...] it is not typical to find data locations $\{s_1, ..., s_n\}$ on a regular grid nor is $n$ often very large. Thus, most modeling of geostatistical data occurs in the spatial domain rather than the frequency domain." This hints at some problems one might face when applying the model introduced in \cite{[0]BUCCHIA2017344} to real-world data:
+
+We assume that our observations are indexed by the set $\{1, ..., n\}^d$, i.e., we need the same number of observations in each dimension. When modeling purely spatial data, this may already not apply. When considering spatial-temporal data, i.e., the dimension $1$ represents time and the dimensions $2, ..., d$ represent space, this assumptions seems unnatural. However, this problem may be fixed using our approach as one can, for a given point in space, consider all observations in time to represent a single point in a function (Hilbert) space. This approach has been applied in \cite{[22]gromenko2012testing} where temperature and precipitation data from multiple weather stations was modeled as a Hilbert space valued random field.
+
+Even if one has the same number of observations in each dimension, the distance between two adjacent observations may not be constant. This problem is, however, not exclusive to our model, but it may rather appear whenever one deals with discrete time series or random fields.
+
+The Alternative Hypothesis \ref{hyp:a_general} assumes epidemic changes, i.e., that there are exactly two distributions which the observations may follow with a sudden leap between the two. In reality, this does often not seem to be the case: Climate change, death counts related to the COVID-19 pandemic and radioactivity related to nuclear warhead tests are some examples of changes which are (at least partially) not abrupt or constant. Hence it may be sensible to add a third region in which the observations follow neither the distribution $F$ nor $G = F + \Delta$ but rather, say, $F + \alpha(\mathbf{i}) \Delta$ with $\alpha(\mathbf{i}) \in (0, 1)$. These three regions can then, again under the assumption of rectangular change sets, be characterized by four (possibly coinciding) points.
+
+The assumptions that the change sets form rectangles is another assumption which may rarely apply in reality. Blocks are one way to generalize one-dimensional intervals. Yet one may also see one-dimensional intervals as exactly the connected subsets of $\RR$. However, detecting connected change sets in dimension $d>1$ is difficult as these can no longer be parametrized by a finite number of change points.
+
+
+\subsection{Hyper Parameters}
+
+While the asymptotic performance of the test does not depend on any of the chosen parameters, its performance under finite sample sizes does greatly. The parameters include:
+
+\begin{aufzi}
+    \item The significance level $\alpha$. How to choose this level depends on how sensitive one wants the test to be.
+    \item The weight function $w$. We refer to Remark \ref{remark:weight function w}.
+    \item The kernel function $\omega$ (and thereby the dependent multiplier fields $V_{n, j}$) and the bandwidth $q_n$. See Remark \ref{remark:kernel and dependent multiplier field}. As these paramters are used to implicitly estimate the long-run variance $\Gamma$, one may consult literature dealing with long-run variance estimation on how to choose these optimally, see, e.g., \cite{muller2007lrv}.
+    \item The number of bootstraps $K$. While less important under the Alternative \ref{hyp:a_general} given a large enough sample size, a higher number may increase the odds of holding the significance level under the Null Hypothesis \ref{hyp:0_general}.
+\end{aufzi}
+
+We also refer to the simulation study presented in \cite{[0]BUCCHIA2017344}.
+
+\subsection{Online Test}
+
+If one is interested in a so-called "online test" where a stream of data is analyzed, the Alternative \ref{hyp:a_general} may be altered such that one assumes that the upper index ${}_{n}\mathbf{u}$ of the change point set is $\usbf[n]$. In that case, one replaces the test statistic in \ref{definition:test statistic} with the following one:
+\[ T_n^o \coloneqq \frac{1}{n^{d/2}} \max\limits_{\usbf[0] \leq \mathbf{k} \leq \usbf[n]} \left\| \sum\limits_{\mathbf{k} < \mathbf{j} \leq \usbf[n]} {}_{n}X_\mathbf{j} - \frac{[\usbf[n] - \mathbf{k}]}{n^d} \sum\limits_{\usbf[1] \leq \mathbf{j} \leq \usbf[n]} {}_{n}X_\mathbf{j} \right\| \]
+This online test statistic converges weakly to the following distribution
+\[ T^o \coloneqq \sup\limits_{\usbf[0] \leq \mathbf{s} \leq \usbf[1]} \| W(\mathbf{s}, \usbf[1]] - [\usbf[1] - \mathbf{s}] W(\usbf[1]) \| \]
+where $W$ is the Brownian sheet defined in Theorem \ref{theorem1}. In the univariate case $d=1$ and $H=\RR$, this is exactly the Kolmogorov distribution, provided that the long-run variance of $X$ is $1$. See also Remark \ref{remark:onedim_KolmogorovSmirnov}. 
+
+As a closed form of the Kolmogorov distribution is known, one may therefore calculate critical values directly instead of using the dependent wild bootstrap approach introduced here, which may be very important if it is not feasable to bootstrap the test statistic, e.g., when observing some instrument in a machine in real-time. 
+
+One must, however, still know or approximate the long-run variance. Under a potential change set, a long-run variance estimator has been introduced in \cite{[8]BUCCHIA2015104}. It seems plausible that the long-run variance may be estimated from previous runs of the instrument for which one is sure that there was no change in the mean. In that case, any estimator of the long-run variance for random fields/stochastic processes may be used, see, e.g., \cite{muller2007lrv}.

@@ -1,0 +1,53 @@
+\input{setup}
+
+
+
+\begin{document}
+	\frontmatter %for \documentclass{book} (?)
+	\pagestyle{headings}
+	\pagenumbering{roman}
+	\include{chapters/title/title}
+
+	\tableofcontents
+	%\listoffigures
+	%\listoftables
+	
+    %\include{acronym}
+    
+	\include{chapters/introduction/chapter_introduction}	
+
+	\mainmatter
+	\pagestyle{plain}
+	\pagenumbering{arabic}
+	%\setlength{\headsep}{5pt}
+
+	\include{chapters/onedimensional/chapter_onedimensional}
+
+	\include{chapters/preliminaries/chapter_preliminaries}
+
+	\include{chapters/main_results/chapter_main_results}
+
+	\include{chapters/proofs/chapter_proofs}
+
+	%\include{chapters/simulations/chapter_simulations}
+
+	\pagenumbering{Roman}
+	\include{chapters/appendix/chapter_appendix}
+
+	\backmatter
+
+	\pagestyle{empty}
+
+	% To print all glossaries, even the ones not referenced by \gls{}; unfortunately adds blank page
+	%\glsaddallunused%\glsaddall
+	\printglossary[type=symbols,style=long,title={List of Symbols}]
+
+	\bibliography{References}
+
+
+	\newpage
+	\include{chapters/erklaerung/erklaerung}
+
+
+\end{document}
+

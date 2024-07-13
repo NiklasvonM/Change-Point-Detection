@@ -1,0 +1,189 @@
+\section{Model}
+
+In this section, we introduce the model for the multivariate case hinted at in Section \ref{section:onedim:generalization}. In order to continue the ideas of Chapter \ref{chapter:onedim}, we need to translate the problem of detecting changes in the distribution to a problem in which we only need to detect changes in the mean. Afterwards, we introduce some assumptions with which we will formulate the two hypotheses we will (be successfully able to) test. Lastly, the test procedure is defined.
+
+For technical reasons, the random fields we are examining, depending on the time $n \in \NN$, will be assumed to be indexed by the entire grid $\ZZ^d$ in each step. However, our test statistic will only use information up until time $n$, i.e., it will be $\sigma(X_{\mathbf{i}} \mid \usbf[1] \leq \mathbf{i} \leq \usbf[n])$-measurable if $X = (X_\mathbf{i})_{\mathbf{i} \in \ZZ^d}$ is the random field we are considering at time $n$.
+
+\subsection{Setup} \label{subsection:general setup}
+
+For a fixed positive, bounded, integrable weight function $w: \RR^p \to \RR$, the weighted Hilbert space $L^2(\RR^p, w)$ is defined as the space of measurable functions $f: \RR^p \to \RR$ with $\|f\|_w < \infty$, where the norm $\|\cdot \|_w$ is induced by the inner product
+\begin{equation} \label{defn:<>w}
+    \langle f, g \rangle_w \coloneqq \int\limits_{\RR^p} f(\mathbf{t})g(\mathbf{t})w(\mathbf{t}) d\mathbf{t}. 
+\end{equation}
+Example 4.5(b) in \cite{walter1974real} tells us that this indeed defines a Hilbert space and \cite{branishti2017some} tells us that it is separable.
+
+Let $X = (X_\mathbf{j})_{\mathbf{j} \in \ZZ^d}$ be a random field with observations in $\RR^p$. If $F$ is the distribution function of $X_\mathbf{j}$, then one has
+\[ \EE{\left\langle \mathbbm{1}_{X_\mathbf{j} \leq \cdot}, h \right\rangle} = \EE{\int\limits_{\RR^p} \mathbbm{1}_{X_\mathbf{j} \leq \mathbf{t}} h(\mathbf{t}) w(\mathbf{t}) d\mathbf{t}} = \int\limits_{\RR^p} F(\mathbf{t}) h(\mathbf{t}) w(\mathbf{t}) d\mathbf{t} = \langle F, h \rangle \]
+by Fubini's theorem. Therefore, we have
+\[ F = \mathbb{E}_{L^2(\RR^p, w)}\left[ \mathbbm{1}_{X_\mathbf{j} \leq \cdot} \right] \]
+by Riesz-Fréchet \ref{thm:riesz}. This lets us test for changes in the distribution of the $\RR^p$-valued random field $X$ by considering changes in the mean of the $L^2(\RR^p, w)$-valued random field $\left(\mathbbm{1}_{X_\mathbf{j} \leq \cdot}\right)_{\mathbf{j} \in \ZZ^d}$. Therefore, we will assume that the random field $X$ (or ${}_{n}X$ later on) takes values in some separable Hilbert space $H$ and we will only consider changes in the mean, making it possible to continue the ideas from Chapter \ref{chapter:onedim}.
+
+%One advantage of this approach is that it is equally simple for univariate and for multivariate random fields.
+
+
+\begin{remark} \label{remark:weight function w}
+    \begin{aufzi}
+        \item We consider the weighted Hilbert space $L^2(\RR^p, w)$ instead of $L^2(\RR^p)$ so that the norm of bounded functions (and in particular of empirical distribution functions) is finite.
+        \item \cite{[0]BUCCHIA2017344} only requires the weight function $w$ to be nonnegative. However, if $w$ vanishes on some interval $I$, then \ref{defn:<>w} does not define an inner product as one has $\langle f, f \rangle_w = 0$ for all functions $f$ with support in $I$. Therefore, it is necessary that $w$ only vanishes on a null set.
+        \item While in theory the test that will be described in the following works for every such weight function, the power for finite samples is greatly improved when the weight function is large at the points where the two distribution functions that arise under the alternative differ. One possible choice might be the densities of heavy-tailed distributions, e.g., of a multivariate Cauchy distribution, as these choices are less reliant on one already knowing where the two marginal distributions of the random field possibly differ, see Example \ref{example: two distribution function dependent on weight function}.
+        
+        One may also choose piecewise constant weight functions as these greatly simplifiy the calculations of \ref{defn:<>w} for empirical distribution functions since one then only has to calculate the integral of step functions.
+    \end{aufzi}
+\end{remark}
+
+\begin{ex} \label{example: two distribution function dependent on weight function}
+    We illustrate how much of a difference choosing different weight functions $w$ may make: Assume we want to detect changes in the distribution in the univariate case $d=p=1$ where the underlying random field has the two marginal cumulative distribution functions be given by
+    \begin{align*}
+        & F(t) = \mathbbm{1}_{\{t \geq 4\}}, \\
+        & G(t) = \mathbbm{1}_{\{t \geq 6\}}.
+    \end{align*}
+    For the weight function $w_0 \sim \mathcal{N}(0,\, 1)$, we have
+    \begin{align*}
+        \| F - G \|^2_{w_0} = \int\limits_{4}^6 w_0(t)dt \approx 0.00003,
+    \end{align*}
+    while the weight function $w_{5} \sim \mathcal{N}(5,\, 1)$ gives
+    \[  \| F - G \|^2_{w_{5}} \approx 0.683. \]
+    The "correct" choice of the location parameter amounts to an increased performance by a factor of about $21,556$ in this case.
+    Choosing a Cauchy distribution instead, one has
+    \[ \| F - G \|^2_{w'_{0}} \approx 0.025 \]
+    for $w'_0 \sim \mathrm{Cauchy}(0, 1)$ and
+    \[ \| F - G \|^2_{w'_{5}} = 0.5 \]
+    for $w'_{5} \sim \mathrm{Cauchy}(5, 1)$, which gives a factor of about $20$. This shows how much less sensitive the Cauchy distribution is.
+\end{ex}
+
+\subsection{Assumptions} \label{section:assumptions}
+
+In the following, we will be stating some assumptions which will be needed in order to precisely define the two hypotheses we are interested in testing. Note that we will indicate which assumptions will be used exactly in the respective results.
+Let $X = (X_\mathbf{j})_{\mathbf{j} \in \ZZ^d}$ denote an $H$-valued random field and $\delta > 0$ a fixed, positive constant.
+
+\begin{assumptionp}{A} \label{assumption:stationarity}
+    $X$ is strictly stationary.
+\end{assumptionp}
+
+\begin{assumptionp}{A'} \label{assumption:weak_stationarity}
+    $X$ is weakly stationary.
+\end{assumptionp}
+
+\begin{assumptionp}{B} \label{assumption:rho_mixing}
+    $X$ is $\rho$-mixing.
+\end{assumptionp}
+
+\begin{assumptionp}{B'} \label{assumption:rho limit smaller 1}
+    $ \lim\limits_{r \to \infty} \rho(r) < 1. $
+\end{assumptionp}
+
+\begin{assumptionp}{C} \label{assumption:4+2delta_moment}
+    $ \EE{\left\| X_{\usbf[1]} \right\|^{4+2\delta}} < \infty. $
+\end{assumptionp}
+
+\begin{assumptionp}{C'} \label{assumption:2+delta_moment}
+    $ \EE{\left\| X_{\usbf[1]} \right\|^{2+\delta}} < \infty. $
+\end{assumptionp}
+
+\begin{assumptionp}{C''} \label{assumption:2+delta_moment_sup}
+    $\sup\limits_{\mathbf{i}} \EE{\left\| X_{\mathbf{i}} \right\|^{2+\delta}} < \infty. $
+\end{assumptionp}
+
+\begin{assumptionp}{D} \label{assumption:alpha2_summability}
+    $ \sum\limits_{m \geq 1} m^{d-1} \alpha_{2, 2}(m)^{\frac{\delta}{2+\delta}} < \infty. $
+\end{assumptionp}
+
+\begin{assumptionp}{D'} \label{assumption:alpha1_summability}
+    $ \sum\limits_{m \geq 1} m^{d-1} \alpha_{1, 1}(m)^{\frac{\delta}{2+\delta}} < \infty. $
+\end{assumptionp}
+
+
+\begin{remark}
+    \begin{itemize}
+        \item Assumption \ref{assumption:weak_stationarity} is needed in order to define the covariogram.
+        \item Assumption \ref{assumption:rho limit smaller 1} regarding the $\rho$-mixing coefficient is used to show the Rosenthal type inequality in Lemma \ref{lemma:1}. The $\rho$-mixing Assumption \ref{assumption:rho_mixing} is used in Lemma \ref{lemma:3} to show the asymptotic independence of increments.
+        \item The Moment Assumption \ref{assumption:2+delta_moment} replaces Assumption \ref{assumption:2+delta_moment_sup} in case $X$ is strictly stationary, i.e., if Assumption \ref{assumption:stationarity} holds, and it is needed in order to show uniform integrability, see Lemma \ref{lemma:3}.
+        \item Assumption \ref{assumption:alpha1_summability} is used to ensure the existence of the long-run variance, see Lemma \ref{lemma:3}, and Assumption \ref{assumption:alpha2_summability} ensures the convergence of the implicit long-run variance estimators, see Lemma \ref{lemma:7}.
+    \end{itemize}
+\end{remark}
+
+\subsection{Hypotheses}
+
+Having stated the above assumptions, we are now able to define the exact two hypotheses we are able to test:
+
+For every $n \in \NN$, let ${}_{n}X = \left({}_{n}X_\mathbf{i}\right)_{\mathbf{i} \in \ZZ^d}$ be an $H$-valued random field.
+\begin{hyp}{\ensuremath{H_0}} \label{hyp:0_general} 
+    The random field ${}_{n}X$ does not depend on $n$, i.e., ${}_{n}X = X$ for all $n$. The random field $X$ satisfies the Assumptions \ref{assumption:stationarity}, \ref{assumption:rho_mixing}, \ref{assumption:4+2delta_moment} and \ref{assumption:alpha2_summability}.
+\end{hyp}
+\begin{hyp}{\ensuremath{H_A}} \label{hyp:a_general} 
+    There are change points ${}_{n}\mathbf{l} < {}_{n}\mathbf{u} \in \{0, ..., n\}^d$ and a shift $\Delta \in H \setminus \{0\}$ such that the $H$-valued random fields $\Tilde{X} = \prescript{}{n}{\Tilde{X}}$, $n \in \NN$, defined by 
+    \[ {}_{n}\Tilde{X}_\mathbf{j} \coloneqq \left\{
+        \begin{array}{ll}
+        {}_{n}X_\mathbf{j} - \Delta, & \mathbf{j} \in ({}_{n}\mathbf{l}, {}_{n}\mathbf{u}] \\
+        {}_{n}X_\mathbf{j}, & \mathbf{j} \notin ({}_{n}\mathbf{l}, {}_{n}\mathbf{u}] \\
+        \end{array}
+        \right.  \ \forall \mathbf{j} \in \ZZ^d \]
+    satisfy the assumptions of the Null Hypothesis \ref{hyp:0_general}. Additionally, the change set size
+    \[ c(n) \coloneqq [{}_{n}\mathbf{u} - {}_{n}\mathbf{l}] \]
+    is asymptotically proportional to the number of observations in the sense that
+    \begin{equation} \label{change set size restriction}
+        \lim\limits_{n \to \infty} \frac{c(n)}{n^d} = \gamma
+    \end{equation}
+    for a constant $0 < \gamma < 1$.
+\end{hyp}
+
+
+\begin{remark}
+     The translation of the change in the distribution problem to a change in the mean problem is vital in order to define the model as it is. It is currently not known whether or not the test has power if we do not assume stationarity of the random field $\Tilde{X}$. Without the translation of the problem, it is not clear how one would exploit stationarity under the alternative.
+\end{remark}
+
+\begin{remark}
+    \begin{aufzi}
+        \item The change set size restriction \eqref{change set size restriction} may be relaxed, only requiring \[ 0 < \alpha \leq \frac{c(n)}{n^d} \leq 1-\beta < 1 \] for sufficiently large $n$ and some constants $\alpha, \beta$. However, under this weaker requirement, $n^{-d/2} T_n$ does in general not converge under the Alternative \ref{hyp:a_general}, cf. Remark \ref{remark:convergence n-d2 Tn}.
+        \item The model may also be changed so that the shift $\Delta$ depends on the time $n$, as long as it satisfies $ \| \Delta_n \|_w n^{d/2} \to \infty$.
+    \end{aufzi}
+\end{remark}
+
+\subsection{Statistical Test} \label{section:statistical test}
+
+Analogously to the univariate case in \eqref{def:Tn onedim}, we define the test statistic
+\begin{equation} \label{definition:test statistic}
+        T_n \coloneqq T_n({}_{n}X) \coloneqq \frac{1}{n^{d/2}} \max\limits_{\usbf[0] \leq \mathbf{k} \leq \mathbf{m} \leq \usbf[n]} [\mathbf{m} - \mathbf{k}] \left\| \frac{1}{[\mathbf{m} - \mathbf{k}]} \sum\limits_{\mathbf{k} < \mathbf{j} \leq \mathbf{m}} {}_{n}X_\mathbf{j} - \frac{1}{n^d} \sum\limits_{\usbf[1] \leq \mathbf{j} \leq \usbf[n]} {}_{n}X_\mathbf{j} \right\| 
+\end{equation}
+
+In the univariate case, the asymptotic distribution of $T_n$ depends on the variance $\sigma^2$ of $X_1$. However, as we no longer assume that the observations are independent, the variance is replaced with the long-run variance. We will avoid estimating this long-run variance directly and rather employ the dependent wild bootstrap. 
+
+To this end, let ${}_{n}\hat{\mathbf{l}}$ and ${}_{n}\hat{\mathbf{u}}$ be those points maximizing the expression in \eqref{definition:test statistic}. Define the change set size estimator
+\begin{equation} \label{def:cn mean estimator}
+    \hat{c}(n) \coloneqq [{}_{n}\hat{\mathbf{u}} - {}_{n}\hat{\mathbf{l}}]
+\end{equation}
+and the mean estimator
+\begin{equation} \label{def:mean estimator}
+    \hat{\mu}(\mathbf{i}) \coloneqq \left\{
+        \begin{array}{ll}
+            \frac{1}{\hat{c}(n)} \sum\limits_{\substack{\mathbf{j} \in ({}_{n}\hat{\mathbf{l}}, {}_{n}\hat{\mathbf{u}}]}} {}_{n}X_\mathbf{j}, & \mathbf{i} \in ({}_{n}\hat{\mathbf{l}}, {}_{n}\hat{\mathbf{u}}] \\
+        \frac{1}{n^d - \hat{c}(n)} \sum\limits_{\substack{\mathbf{j} \in \{1,...,n\}^d \\ \mathbf{j} \notin ({}_{n}\hat{\mathbf{l}}, {}_{n}\hat{\mathbf{u}}]}} {}_{n}X_\mathbf{j}, & \mathbf{i} \notin ({}_{n}\hat{\mathbf{l}}, {}_{n}\hat{\mathbf{u}}]
+        \end{array}
+        \right. .
+\end{equation}
+For a number $K$ of bootstraps, let
+\[ (V_{n, j}(\mathbf{i}))_{\mathbf{i} \in \ZZ^d}, \, 1 \leq j \leq K, \]
+be dependent multiplier fields. Define the bootstrapped versions of ${}_{n}X$
+\[ {}_{n}X^{\star}_j \coloneqq \left({}_{n}X^{\star}_j(\mathbf{i})\right)_{\mathbf{i}} \coloneqq \left(V_{n, j}(\mathbf{i})({}_{n}X_\mathbf{i} - \hat{\mu}(\mathbf{i}))\right)_{\mathbf{i} \in \{1, ..., n\}^d}, \]
+the bootstrapped partial sum fields $S_{n, j}^{\star}$ by
+\begin{equation} \label{eq defn: bootstrapped partial sum field}
+    S_{n, j}^{\star}(\mathbf{t}) = \frac{1}{n^{d/2}} \sum\limits_{\usbf[1] \leq \mathbf{i} \leq \floor{n \mathbf{t}}} V_{n, j}(\mathbf{i})({}_{n}X_\mathbf{i} - \hat{\mu}(\mathbf{i})),
+\end{equation}
+and the bootstrapped test statistics
+\[ T_{n, j}^\star \coloneqq T_n({}_{n}X^{\star}_j). \]
+
+By \eqref{partial sum field increment}, we may write them as
+\[ T_{n, j}^\star = \max\limits_{\usbf[0] \leq \mathbf{k} < \mathbf{m} \leq \usbf[n]} [\mathbf{m}-\mathbf{k}] \left\| \frac{1}{[\mathbf{m}-\mathbf{k}]} S_{n, j}^{\star}\left(\frac{\mathbf{k}}{n}, \frac{\mathbf{m}}{n}\right] - \frac{1}{n^d} S_{n, j}^{\star}(\usbf[1]) \right\|. \]
+
+Let $\hat{F}_{n, K}$ be the empirical c.d.f. computed from $T_{n, 1}^\star, ..., T_{n, K}^\star$ and define the sample quantile 
+\begin{equation} \label{defn:sample quantile}
+    q_{n, K}^\star \coloneqq \hat{F}_{n, K}^{-1}: (0, 1) \to \RR, y \mapsto \inf \{x \in \RR \mid \hat{F}_{n, K}(x) \geq y\}. 
+\end{equation}
+
+For a given significance level $\alpha \in (0, 1)$, we then reject the Null Hypothesis \ref{hyp:0_general} if $T_n \geq q_{n, K}^\star(1-\alpha)$.
+
+\begin{remark}
+    The change set estimator
+    \[ ({}_{n}\hat{\mathbf{l}}, {}_{n}\hat{\mathbf{u}}] \]
+    need not necessarily be derived from the definition of the test statistic $T_n$. For some discussion see \cite{[8]BUCCHIA2015104} Section 3 and 4.
+\end{remark}

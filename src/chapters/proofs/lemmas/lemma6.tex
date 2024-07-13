@@ -1,0 +1,24 @@
+The following lemma is \cite{[0]BUCCHIA2017344} Lemma 6.
+\begin{lemma} \label{lemma:6}
+    Assume Assumptions \ref{assumption:stationarity}, \ref{assumption:rho_mixing}, \ref{assumption:4+2delta_moment} and \ref{assumption:alpha2_summability}. Let 
+    \[ (V_{n, 1}(\mathbf{i})_{\usbf[1] \leq \mathbf{i} \leq \usbf[n]}), \ldots, (V_{n, K}(\mathbf{i})_{\usbf[1] \leq \mathbf{i} \leq \usbf[n]}), \ K \in \NN, \]
+    be independent copies of the same dependent multiplier field.
+    Finally assume that the bandwidth $q = q_n$ fulfills $q_n \to \infty$ and $q_n = o(\sqrt{n})$.
+
+    Then, for any $r \geq 2$, there is a positive constant $B(d, r)$ such that for any finite subset $S \subset \NN^d$ and any $i \in \{1, ..., K\}$
+    \begin{align*}
+        & \frac{1}{B(d, r)} \EE{\left\| \sum\limits_{\mathbf{k} \in S^{(n)}} (X_{\mathbf{k}} - \mu) V_{n, i}(\mathbf{k}) \right\|^r} \\ \leq &
+         \sum\limits_{\mathbf{k} \in S^{(n)}} \EE{\| X_{\mathbf{k}} - \mu \|^r} \EE{\| V_{n, i}(\mathbf{k}) \|^r} + 
+        \left( \sum\limits_{\mathbf{k} \in S^{(n)}} \EE{\| X_\mathbf{k} - \mu \|^2} \EE{\| V_{n, i}(\mathbf{k}) \|^2} \right)^{r/2}
+    \end{align*}
+    where $S^{(n)} \coloneqq S \cap \{1, ..., n\}^d$ and $\mu \coloneqq \EE{X_{\usbf[0]}}$.
+
+    If $r \in (2, 2+\delta]$, where $\delta$ is the constant from Assumptions \ref{assumption:4+2delta_moment} and \ref{assumption:alpha2_summability}, then for any discrete block $U \subseteq \{1, ..., n\}^d$ and 
+    \[ M^{\star}(U) \coloneqq \max\limits_{W \triangleleft U} \left\| \sum\limits_{\mathbf{j} \in W} (X_{\mathbf{j}} - \mu) V_{n, i}(\mathbf{j}) \right\|, \]
+    it is true that
+    \[ \EE{M^\star(U)^r} \leq C(r) |U|^{\frac{r}{2}} \]
+    for some positive constant $C(r)$ that does not depend on $U$ or $n$.
+\end{lemma}
+\begin{proof}
+    As noted in \cite{[0]BUCCHIA2017344}, this inequality follows in the same way as \cite{[56]zhang1998rosenthal} Theorem 2 and Lemma \ref{lemma:1}, using Lemma \ref{lemma:5} instead of \cite{[56]zhang1998rosenthal} Theorem 1.
+\end{proof}

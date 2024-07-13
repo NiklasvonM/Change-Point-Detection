@@ -1,0 +1,35 @@
+\chapter{Introduction}
+
+\begin{figure}
+    \centering
+    \def\svgwidth{0.5\columnwidth} 
+    \input{Graphiken/Random Field Change Point Problem Example.pdf_tex}
+    \caption{Simulation of a $2$-parameter random field with change set.}
+\end{figure}
+
+In this master thesis, we will be exploring detection of epidemic changes in the distribution of weakly dependent random fields, in particular through the nonparametric test procedure introduced in \cite{[0]BUCCHIA2017344}. That test is designed to detect changes in the mean in rectangular-shaped subsets and can, via a translation of $\RR^p$-valued random fields to Hilbert space-valued ones, detect any changes in the distribution. 
+For time series data, epidemic change sets can be represented as intervals. Rectangular-shaped change sets, being characterized by two points just like intervals, are the easier of the two natural extensions, the other being connected subsets of the index set.
+
+In order to derive asymptotic results, a functional central limit theorem (FCLT) under the null hypothesis, in particular under stationarity, is proven. As the asymptotic test statistic arising under this FCLT is difficult to calculate and depends on the, in general unknown, long-run variance of the random field, critical values are estimated via a dependent wild bootstrap.
+
+While this thesis almost exclusively mirrors the approach of \cite{[0]BUCCHIA2017344}, the results are supplemented with a formulation of and theoretical results under the alternative which have not been presented previously. Additionally, some minor errors are pointed out and gaps in the proofs are filled. The original definition of strongly separated blocks turns out to be particularly problematic.
+As the reader is not assumed to have knowledge on Hilbert space valued random elements, concepts such as their covariance are covered relatively indepth.
+
+We start by motivating the problem of detecting epidemic changes in Chapter 1 where we consider the simple case of independent time series. It turns out that the asymptotic test distribution is closely related to the Kolmogorov distribution and that its derivation is not much more than an application of Donsker's theorem.
+
+In the second chapter, fundamental concepts and conventions needed to grasp the main results presented in Chapter 3 are introduced. If one wishes, one may start with Chapter 3 and go back to Chapter 2 when definitions are unclear. Additionally, a short list of symbols is found at the end.
+
+A discussion on the limitations and possible extensions of the results is found at the end of Chapter 3.
+
+For the sake of readability, most of the proofs have been deferred to Chapter 4. That chapter begins by introducing and proving the necessary technical lemmas. The proofs of the main results are found at the very end.
+
+All figures found in this thesis were created by the author.
+
+\newpage
+\section{Deutsche Zusammenfassung}
+
+In dieser Masterarbeit wird das Problem der Strukturbrucherkennung in Zufallsfeldern behandelt. Dabei arbeiten wir im Wesentlichen genau die Ergebnisse aus \cite{[0]BUCCHIA2017344} auf. Genauer behandeln wir das dort eingeführte statistische Testverfahren und dessen asymptotischen Eigenschaften, welches dazu ausgelegt ist, epidemische Änderungen im Erwartungswert Hilbertraum-wertiger Zufallsfelder und als Anwendung davon beliebige epidemische Änderungen in der Verteilung $\RR^p$-wertiger Zufallsfelder zu erkennen.
+
+In diesem Zuge werden zwei Sätze bewiesen: Der erste stellt einen funktionalen zentralen Grenzwertsatz dar und der zweite Satz erweitert den ersten um die gemeinsame Konvergenz der Partialsummenprozesse zusammen mit deren Boot\-strap-Ver\-si\-o\-nen. Die Anwendung dieser beiden Sätze beschreibt die asymptotischen Fehlerraten des statistischen Tests.
+
+Ergänzend zu den Ergebnissen aus \cite{[0]BUCCHIA2017344} werden die beiden Hypothesen "keine Än\-de\-rung im Erwartungswert" und "epidemische Än\-de\-rung im Er\-war\-tungs\-wert" präzise formuliert und das Verhalten unter der Alternativ\-hypothese be\-schrieben. Außerdem werden einige Fehler ausgebessert.

@@ -1,0 +1,309 @@
+\documentclass[12pt, a4paper, oneside]{book} %book, report, thesis % oneside, twoside
+%\documentclass[12pt, a4paper,twoside, openany]{memoir}
+
+
+% https://tex.stackexchange.com/questions/8458/making-the-bibliography-appear-in-the-table-of-contents
+\usepackage[nottoc,numbib]{tocbibind}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+
+%to set the page margin:
+\usepackage[a4paper]{geometry} %[scale=0.75,top=1cm] [a4paper]
+
+
+% Packages
+%\usepackage[latin1]{inputenc}
+\usepackage{graphicx} % for \includegraphics
+%\usepackage{dsfont}
+\usepackage{amsmath}
+\usepackage{mathtools}
+\usepackage{bbm} % for \mathbbm{1}
+\usepackage{mathrsfs} % \mathscr{S} old German letters
+%\usepackage[ansinew]{inputenc}
+%\usepackage[round, sort, comma, numbers]{natbib}
+%\usepackage[dvipsnames]{xcolor}
+\usepackage{amssymb}
+% linguistic package
+%\usepackage[ngerman]{babel}
+\usepackage[english]{babel}
+\usepackage{csquotes} %The "csquotes" package is also used to provide proper formatting of quotes in the bibliography. With these commands in place, you should be able to use the \bibliographystyle{alphadin} in English in your LaTeX document.
+%\usepackage{float}
+%\usepackage{bbm}
+%\usepackage{gensymb}
+%\usepackage{makeidx}
+%\usepackage{showidx} %makes indices appear at the top right, don't use
+\usepackage{amsthm} % for environment proof (\begin{proof})
+\usepackage{xfrac} % for diagonal lines in factor groups (\sfrac)
+\usepackage{faktor} % for diagonal lines in factor groups (\faktor)
+\usepackage[noadjust]{cite} % BibTeX https://www.youtube.com/watch?v=KS9GvK7cvmo
+\usepackage{svg} % https://tex.stackexchange.com/questions/122871/include-svg-images-with-the-svg-package
+\usepackage{import} %\import{}
+\usepackage[noadjust]{cite} % BibTeX https://www.youtube.com/watch?v=KS9GvK7cvmo
+
+\usepackage{tikz} % for diagrams
+\usepackage{tikz-cd}
+ % to not start arrows in the middle 
+ % https://tex.stackexchange.com/questions/483035/having-arrows-enter-and-leave-from-different-parts-of-a-node-in-tikzcd
+\tikzstyle{start}=[to path={(\tikztostart.#1) -- (\tikztotarget)}]
+
+
+\usepackage{hyperref}% http://ctan.org/pkg/hyperref
+% (\cref) https://tex.stackexchange.com/questions/58367/reference-lemma-from-the-same-document
+%\usepackage{cleveref} % for reference within document
+%\usepackage{showlabels} % to show labels. TODO for final version: comment out/remove! %[inline]
+
+\usepackage{lmodern}% http://ctan.org/pkg/lm remove warning "Size substitutions with differences..."
+
+\usepackage[toc,page]{appendix}
+
+
+
+\newcommand{\comment}[1]{}
+
+\DeclareMathOperator{\Ima}{Im} % Im()
+
+
+%\usetikzlibrary{babel} % for compability between ngerman babel and tikz-cd
+
+%%% For incscape
+%\usepackage{import}
+%\usepackage{xifthen}
+%\usepackage{pdfpages}
+%\usepackage{transparent}
+
+\newcommand{\incfig}[1]{%
+	\def\svgwidth{0.7\columnwidth}
+	\import{./Graphiken/}{#1.pdf_tex}
+}
+%%%
+
+
+%%% https://be-jo.net/2013/08/latex-welchen-bibliographystyle-wahlen/
+%\bibliographystyle{alphadin} % Gut, aber deutsch mit S.233
+%\bibliographystyle{unsrt} % [1], keine Links
+%\bibliographystyle{chicago} % führt zu Fehlern
+%\bibliographystyle{apalike} % [Adler, 2021], keine Links
+%\bibliographystyle{plain} % zu wenig Informationen, [1]
+\bibliographystyle{alpha} % 'Gut, aber keine Links
+%\bibliographystyle{natbib} % Fehler
+
+
+\newcommand{\TODO}{\textcolor{blue}{TODO\ }}
+\newcommand{\open}[1]{
+	\overset{\circ}{#1}
+}
+
+% 3 dimensional row vector
+\newcommand{\vct}[3]{\begin{pmatrix} #1 \\ #2 \\ #3 \end{pmatrix}}
+
+
+
+% tikz { http://ctan.math.washington.edu/tex-archive/graphics/pgf/contrib/tikz-cd/tikz-cd-doc.pdf
+
+%\usetikzlibrary{cd}
+
+% tikz }
+
+\usepackage{adjustbox} % \adjustbox{scale = ...}{}
+
+
+
+
+
+
+
+% Definitionen
+\def\n{\newline}
+
+\makeindex
+
+\theoremstyle{plain}
+\newtheorem{thm}{Theorem}[section] % reset theorem numbering for each chapter
+\newtheorem{lemma}[thm]{Lemma}
+\newtheorem{corollary}[thm]{Corollary}
+\newtheorem{proposition}[thm]{Proposition}
+
+\theoremstyle{definition}
+\newtheorem{defn}[thm]{Definition} % definition numbers are dependent on theorem numbers
+%\newtheorem{satzdef}[thm]{Satz und Definition}
+
+\theoremstyle{remark}
+\newtheorem{ex}[thm]{Example} % same for example numbers
+\newtheorem{remark}[thm]{Remark}
+\newtheorem{conv}[thm]{Convention}
+
+% https://tex.stackexchange.com/questions/21598/how-to-color-math-symbols
+\makeatletter
+\def\mathcolor#1#{\@mathcolor{#1}}
+\def\@mathcolor#1#2#3{%
+  \protect\leavevmode
+  \begingroup
+    \color#1{#2}#3%
+  \endgroup
+}
+\makeatother
+
+% Section name on top of each page
+%\pagestyle{headings}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Without this, the page number for \documentclass{thesis} is not showing at the first page of a chapter.
+% https://tex.stackexchange.com/questions/527589/page-numbering-not-on-first-page-of-each-chapter
+%\usepackage{fancyhdr} 
+%\pagestyle{headings} % options: fancy, headings, myheadings
+%\fancypagestyle{plain}{
+%    \fancyhf{} % clear all header and footer fields 
+%    \fancyhead[RO,LE]{\thepage} % Right Odd, Left Even => Outside
+    % Some examples
+    %\fancyhead[R]{\thepage} % Right side has the page number
+    %\fancyhead[L]{\leftmark} % Left side has the \chapter{title} 
+%    \renewcommand{\headrulewidth}{0pt} % remove line between header and main text 
+%}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Change chapter command to show page number also on the first page of a chapter
+% https://tex.stackexchange.com/questions/103567/how-to-remove-page-numbers-from-first-page-of-chapters
+\makeatletter
+\renewcommand\chapter{\if@openright\cleardoublepage\else\clearpage\fi
+                    \thispagestyle{plain}%
+                    \global\@topnum\z@
+                    \@afterindentfalse
+                    \secdef\@chapter\@schapter}
+\makeatother
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+% (a), (b), (c)
+\newcounter{aufzi}
+\newenvironment{aufzi}{\begin{list}{ {\upshape\alph{aufzi})}}{
+        \usecounter{aufzi}
+        \topsep1ex
+%        \partopsep
+        \parsep0cm
+        \itemsep1ex
+        \leftmargin0.8cm
+%        \rightmargin
+%        \listparindent
+        \labelwidth0.5cm
+        \labelsep0.3cm
+        %\itemindent-0.3cm
+}}
+{\end{list}}
+
+% (i), (ii), (iii)
+\newcounter{aufzii}
+\newenvironment{aufzii}{\begin{list}{\hfill {\upshape 
+(\roman{aufzii})}}{
+        \usecounter{aufzii}
+        \topsep1ex
+%        \partopsep
+        \parsep0cm
+        \itemsep1ex
+        \leftmargin0.8cm
+%        \rightmargin
+%        \listparindent
+        \labelwidth0.5cm
+        \labelsep0.3cm
+         %\itemindent0.3cm
+}}
+{\end{list}}
+
+
+%\allowdisplaybreaks
+
+
+% https://tex.stackexchange.com/questions/118173/how-to-write-ceil-and-floor-in-latex
+\DeclarePairedDelimiter\ceil{\lceil}{\rceil}
+\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
+
+\newcommand{\RR}{\mathbb{R}}
+\newcommand{\NN}{\mathbb{N}}
+\newcommand{\ZZ}{\mathbb{Z}}
+\newcommand{\QQ}{\mathbb{Q}}
+\newcommand{\CC}{\mathbb{C}}
+
+%\newcommand{\EE}{\mathbb{E}}
+\newcommand{\EE}[1]{\mathbb{E}\left[#1\right]}
+\newcommand{\PP}{\mathbb{P}}
+\newcommand{\Var}{\mathrm{Var}}
+\newcommand{\Cov}{\mathrm{Cov}}
+\newcommand{\spn}{\mathrm{span}} 
+
+\newcommand{\limToInf[1]}{\lim\limits_{#1 \to \infty}}
+
+\newcommand{\usbf[1]}{\ensuremath{\mathbf{\underline{#1}}}}
+
+
+
+% Hypothesis testing
+\newtheorem{innerhyp}{Hypothesis}
+\newenvironment{hyp}[1]{%
+  \renewcommand\theinnerhyp{#1}\innerhyp
+}{\endinnerhyp}
+
+%%%%%%%%%%%%%% Assumptions
+\newtheorem{assumption}{Assumption}
+
+% Alternative Assumption!
+\newtheorem{assumptionalt}{Assumption}[assumption]
+
+% New environment
+\newenvironment{assumptionp}[1]{
+  \renewcommand\theassumptionalt{#1}
+  \assumptionalt
+}{\endassumptionalt}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%% Glossaries %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\usepackage{glossaries}
+\usepackage[symbols,nogroupskip]{glossaries-extra} %,nonumberlist
+
+
+\makeglossaries
+
+\glsxtrnewsymbol[description={Long-run variance}]{Gamma}{\ensuremath{\Gamma}}
+\glsxtrnewsymbol[description={auto-covariance function}]{gamma}{\ensuremath{\gamma}}
+\glsxtrnewsymbol[description={dimension of the index set}]{d}{\ensuremath{d}}
+\glsxtrnewsymbol[description={random field}]{X}{\ensuremath{X}}
+\glsxtrnewsymbol[description={separable Hilbert space}]{H}{\ensuremath{H}}
+\glsxtrnewsymbol[description={expected value}]{EE}{\ensuremath{\mathbb{E}}}
+\glsxtrnewsymbol[description={set of integers}]{ZZ}{\ensuremath{\ZZ}}
+\glsxtrnewsymbol[description={set of natural numbers (without $0$)}]{NN}{\ensuremath{\NN}}
+\glsxtrnewsymbol[description={$\alpha$-mixing coefficient}]{alpha}{\ensuremath{\alpha}}
+\glsxtrnewsymbol[description={$\rho$-mixing coefficient}]{rho}{\ensuremath{\rho}}
+\glsxtrnewsymbol[description={probability measure}]{PP}{\ensuremath{\PP}}
+\glsxtrnewsymbol[description={sample mean $\frac{1}{n} \sum_{i=1}^n X_i$}]{Xbar}{\ensuremath{\overline{X}_n}}
+\glsxtrnewsymbol[description={Gaussian brackets $\floor*{x}=\max\{j \in \ZZ \mid j \leq x\}$}]{floor}{\ensuremath{\floor*{\cdot}}}
+\glsxtrnewsymbol[description={convergence in distribution, weak convergence}]{weakconvergence}{\ensuremath{\Rightarrow}}
+%\glsxtrnewsymbol[description={Skhorokod space (of càdlàg functions $[0, 1] \to H$)}]{D01}{\ensuremath{\mathcal{D}_H[0,1]}}
+\glsxtrnewsymbol[description={expected value}]{mu}{\ensuremath{\mu}}
+\glsxtrnewsymbol[description={Lebesgue measure}]{lambda}{\ensuremath{\lambda}}
+\glsxtrnewsymbol[description={Kronecker delta}]{deltaij}{\ensuremath{\delta_{i, j}}}
+\glsxtrnewsymbol[description={number of elements in a set}]{hashtag}{\ensuremath{\#}}
+\glsxtrnewsymbol[description={set of bounded linear operators $V \to W$}]{LVW}{\ensuremath{\mathcal{L}(V, W)}}
+\glsxtrnewsymbol[description={vector containing x in each of its components}]{usbfx}{\ensuremath{\usbf[x]}}
+\glsxtrnewsymbol[description={\ensuremath{\prod_i \mathbf{x}_i}}]{multiplicationx}{\ensuremath{[x]}}
+\glsxtrnewsymbol[description={operator norm of $\varphi$}]{operatornormvarphi}{\ensuremath{\| \varphi \|_{\mathrm{op}}}}
+\glsxtrnewsymbol[description={belonging standardly to}]{lhd}{\ensuremath{\lhd}}
+\glsxtrnewsymbol[description={(algebraic) tensor product}]{otimes}{\ensuremath{\otimes}}
+\glsxtrnewsymbol[description={(complete) tensor product}]{hatotimes}{\ensuremath{\hat{\otimes}}}
+\glsxtrnewsymbol[description={modulus of continuity}]{w}{\ensuremath{w}}
+\glsxtrnewsymbol[description={dash-product of sets}]{circleddash}{\ensuremath{\circleddash}}
+
+
+% https://ctan.joethei.xyz/macros/latex/contrib/glossaries/glossaries-user.pdf page 66
+%\renewcommand*{\glsclearpage}{}
+%\renewcommand*{\glsclearpage}{\clearpage}
+
+% https://tex.stackexchange.com/questions/10924/underfull-hbox-in-bibliography
+\usepackage{etoolbox}
+\apptocmd{\thebibliography}{\raggedright}{}{}
